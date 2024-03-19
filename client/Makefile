@@ -16,7 +16,6 @@ UTILS_LIB = $(UTILS_DIR)/libutils.a
 GTK_LIBS = -rdynamic `pkg-config --cflags --libs gtk+-3.0`
 GTK_INC = `pkg-config --cflags gtk+-3.0`
 
-
 INCLUDE_HEADER_DIRS = $(addprefix -I, $(HEADER_DIRS))
 INCLUDE_UTILS_HEADER_DIRS = $(addprefix -I, $(UTILS_HEADER_DIRS))
 INCLUDE_ALL_HEADER_DIRS = $(INCLUDE_HEADER_DIRS) $(INCLUDE_UTILS_HEADER_DIRS)
@@ -30,7 +29,8 @@ $(BINNAME): $(OBJS)
 	@printf "\033[32;1m$@ created\033[0m\n"
 
 $(OBJS): $(OBJDIR)/%.o: $(SRCDIR)/%.c Makefile | $(OBJDIR)
-	@$(CC) $(INCLUDE_ALL_HEADER_DIRS) $(GTK_INK) $(CFLAGS) -c $< -o $@
+	@mkdir -p $(@D)
+	@$(CC) $(INCLUDE_ALL_HEADER_DIRS) $(GTK_INC) $(CFLAGS) -c $< -o $@
 	@printf "\033[32mcompiled: \033[0m$(notdir $<)\n"
 
 $(OBJDIR):

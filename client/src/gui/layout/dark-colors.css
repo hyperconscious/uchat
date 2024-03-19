@@ -1,0 +1,11 @@
+/*background*/
+@define-color background_color: #343543;
+/*surface*/
+@define-color _surface_color: #414255;
+@define-color _surface_secondary_color: #4D4E62;
+@define-color _on_surface_secondary_color: white;
+/*primary*/
+@define-color _primary_color: #6A57E4;
+@define-color _on_primary_color: white;
+/*error*/
+@define-color _error_color: #F44336;

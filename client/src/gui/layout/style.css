@@ -1,0 +1,83 @@
+/*core*/
+* {
+    font-family: "Roboto", "Open Sans", system-ui;
+    font-weight: 500;
+    font-size: x-large;
+}
+
+window {
+    background-color: #343543;
+}
+
+button {
+    padding: 9px 0;
+    box-shadow: 0 0;
+    text-shadow: none;
+}
+
+.button_primary {
+    background-image: none;
+    background-color: #6A57E4;
+    border-radius: 25px;
+    color: white;
+}
+
+.button_primary:active {
+    background-color: #5A56E4;
+}
+
+entry {
+    color: white;
+    padding: 6px 12px;
+}
+
+entry:focus {
+    border: 1px solid #343543;
+    box-shadow: 0 0;
+}
+
+.error_label {
+    color: #F44336;
+    font-size: 14px;
+}
+
+/*auth*/
+#auth_notebook {
+    background-color: #414255;
+    padding: 40px;
+    border-radius: 25px;
+    box-shadow: 0 0 2px black, 0 0 2px #131415, 0 0 2px #464B4E;
+}
+
+#auth_notebook header {
+    background-color: transparent;
+    border: none;
+}
+
+#auth_notebook header tabs tab {
+    padding: 0;
+    margin: 0;
+    box-shadow: 0 1px 0 0 black;
+}
+
+#auth_notebook header tabs tab:checked {
+    box-shadow: 0 2px 0 0 #6A57E4;
+}
+
+#auth_notebook header tabs tab:hover {
+    background-color: #343543;
+}
+
+.auth_tab_label {
+    color: white;
+}
+
+.auth_box {
+    background-color: #414255;
+}
+
+.auth_entry {
+    background-color: #4D4E62;
+    border-radius: 25px;
+    border: 1px solid transparent;
+}
