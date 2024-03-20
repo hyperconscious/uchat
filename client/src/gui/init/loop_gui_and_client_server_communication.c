@@ -4,6 +4,6 @@
 void loop_gui_and_client_server_communication(void) {
     pthread_t thread = create_thread(client_server_communication_thread, NULL);
     gtk_main();
-    join_thread(thread, NULL);
+    cancel_thread(thread);
     g_object_unref(Builder);
 }

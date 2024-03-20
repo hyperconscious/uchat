@@ -16,3 +16,6 @@ void join_thread(pthread_t thread, void **retval) {
     }
 }
 
+void cancel_thread(pthread_t thread) {
+    pthread_cancel(thread);
+}
