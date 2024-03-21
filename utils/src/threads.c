@@ -15,7 +15,3 @@ void join_thread(pthread_t thread, void **retval) {
         exit(EXIT_FAILURE);
     }
 }
-
-void cancel_thread(pthread_t thread) {
-    pthread_cancel(thread);
-}

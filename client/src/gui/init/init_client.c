@@ -5,5 +5,7 @@ void init_client(int argc, char **argv) {
     apply_css_theme();
     set_up_gtk_builder();
     open_window(AUTH_WINDOW_ID);
-    loop_gui_and_client_server_communication();
+    handle_client_server_communication();
+    gtk_main();
+    g_object_unref(Builder);
 }

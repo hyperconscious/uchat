@@ -13,6 +13,4 @@ void apply_css_theme(void);
 void init_client(int argc,
                  char **argv);
 
-void *client_server_communication_thread(void *arg);
-
-void loop_gui_and_client_server_communication(void);
+void handle_client_server_communication(void);
