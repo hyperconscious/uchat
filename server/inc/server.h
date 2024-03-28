@@ -5,6 +5,5 @@
 #include "threads.h"
 #include "handle_client.h"
 
-#define PORT 34540
 #define MAX_CLIENTS 7
 

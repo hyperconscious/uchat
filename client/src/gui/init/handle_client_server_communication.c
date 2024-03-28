@@ -3,7 +3,7 @@
 
 char *get_login(void);
 
-void *client_server_communication_thread(void *arg);
+/*void *client_server_communication_thread(void *arg);
 
 void handle_client_server_communication(void) {
     int client_socket = Socket(AF_INET, SOCK_STREAM, 0);
@@ -51,7 +51,7 @@ void handle_client_server_communication(void) {
 void *client_server_communication_thread(void *arg) {
     handle_client_server_communication();
     return arg;
-}
+}*/
 
 char *get_login(void) {
     char *login = mx_strnew(20);
