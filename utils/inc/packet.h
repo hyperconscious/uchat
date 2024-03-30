@@ -8,6 +8,7 @@
 #include <stdint.h>
 
 typedef enum e_packet_type {
+    PACKET_TYPE_INVALID,
     PACKET_TYPE_STRING,
     PACKET_TYPE_UINT8,
     PACKET_TYPE_UINT16,
@@ -31,5 +32,5 @@ t_packet create_packet(t_packet_type type, const void *data);
 void send_packet(int socket_fd, t_packet *packet);
 t_packet receive_packet(int socket_fd);
 void free_packet(t_packet *packet);
-void send_and_release_pocket(int socket_fd, t_packet *packet);
+void send_and_release_packet(int socket_fd, t_packet *packet);
 

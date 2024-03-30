@@ -1,13 +1,20 @@
 #include "auth.h"
 
 void on_log_in_button_clicked(void) {
-   // char *username = get_entry_text(LOG_IN_USERNAME_ENTRY_ID);
-   // char *password = get_entry_text(LOG_IN_PASSWORD_ENTRY_ID);
+   char *username = get_entry_text(LOG_IN_USERNAME_ENTRY_ID);
+   char *password = get_entry_text(LOG_IN_PASSWORD_ENTRY_ID);
 
 	int client_socket = create_and_connect_socket(serverAddress, Port);
 
-	t_client_codes send_code = AUTH_LOGIN;
-	send(client_socket, &send_code, sizeof(send_code), 0);	
+    t_client_codes mode = AUTH_LOGIN;
+
+    t_packet login_request = create_packet(PACKET_TYPE_UINT8, &mode);
+    t_packet user = create_packet(PACKET_TYPE_STRING, username);
+    t_packet pass = create_packet(PACKET_TYPE_STRING, password);
+
+    send_and_release_packet(client_socket, &login_request);
+    send_and_release_packet(client_socket, &user);
+    send_and_release_packet(client_socket, &pass);
 
 	close(client_socket);
 
@@ -22,8 +29,11 @@ void on_sign_up_button_clicked(void) {
 	
 	int client_socket = create_and_connect_socket(serverAddress, Port);
 
-	t_client_codes send_code = AUTH_SIGN_UP;
-	send(client_socket, &send_code, sizeof(send_code), 0);	
+    t_client_codes mode = AUTH_SIGN_UP; 
+    t_packet login_request = create_packet(PACKET_TYPE_UINT8, &mode);
+    send_and_release_packet(client_socket, &login_request);
+
+    close(client_socket);
 }
 
 void on_auth_input_change(void) {

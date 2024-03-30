@@ -3,7 +3,6 @@
 t_packet create_packet(t_packet_type type, const void *data) {
     t_packet packet;
     packet.type = type;
-
     switch (type) {
         case PACKET_TYPE_STRING:
             packet.u_payload.s_data.length = strlen((const char *)data);
@@ -159,7 +158,7 @@ void free_packet(t_packet *packet) {
     }
 }
 
-void send_and_release_pocket(int socket_fd, t_packet *packet) {
+void send_and_release_packet(int socket_fd, t_packet *packet) {
     send_packet(socket_fd, packet);
     free_packet(packet);
 }
