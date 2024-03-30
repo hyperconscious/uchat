@@ -1,9 +1,8 @@
 #include "client.h"
-#include "init.h"
 
 GtkBuilder *Builder = NULL;
 int Port = -1;
-char* ServerAddress = NULL;
+char* serverAddress = NULL;
 
 int main(int argc, char **argv) {
 	if (argc != 3) {
@@ -12,7 +11,7 @@ int main(int argc, char **argv) {
 	}
 
 	Port = atoi(argv[2]);
-	ServerAddress = argv[1];
+	serverAddress = argv[1];
 
     init_client(argc, argv);
     return 0;

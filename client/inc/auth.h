@@ -12,7 +12,7 @@
 #define AUTH_ERROR_LABEL_ID "auth_error_label"
 
 extern int Port;
-extern char *ServerAddress;
+extern char *serverAddress;
 
 bool is_username_valid(char *username);
 
