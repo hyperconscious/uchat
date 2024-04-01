@@ -25,7 +25,7 @@ INCLUDE_UTILS = -L$(dir $(UTILS_LIB)) -l$(patsubst lib%.a,%,$(notdir $(UTILS_LIB
 all: $(BINNAME)
 
 $(BINNAME): $(OBJS)
-	@$(CC) -fsanitize=address -o $@ $^ $(UTILS_LIB) $(GTK_LIBS)
+	@$(CC) -o $@ $^ $(UTILS_LIB) $(GTK_LIBS)
 	@printf "\033[32;1m$@ created\033[0m\n"
 
 $(OBJS): $(OBJDIR)/%.o: $(SRCDIR)/%.c Makefile | $(OBJDIR)

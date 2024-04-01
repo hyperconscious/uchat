@@ -5,9 +5,9 @@ t_packet create_packet(t_packet_type type, const void *data) {
     packet.type = type;
     switch (type) {
         case PACKET_TYPE_STRING:
-            packet.u_payload.s_data.length = strlen((const char *)data);
-            packet.u_payload.s_data.value = malloc(packet.u_payload.s_data.length + 1);
-            strcpy(packet.u_payload.s_data.value, (const char *)data);
+            packet.u_payload.s_string.length = strlen((const char *)data);
+            packet.u_payload.s_string.data = malloc(packet.u_payload.s_string.length + 1);
+            strcpy(packet.u_payload.s_string.data, (const char *)data);
             break;
         case PACKET_TYPE_UINT8:
             packet.u_payload.uint8_data = *(const uint8_t *)data;
@@ -30,8 +30,8 @@ void send_packet(int socket_fd, t_packet *packet) {
     size_t data_size;
     switch (packet->type) {
         case PACKET_TYPE_STRING:
-            data_size = sizeof(packet->type) + sizeof(packet->u_payload.s_data.length)
-                        + packet->u_payload.s_data.length;
+            data_size = sizeof(packet->type) + sizeof(packet->u_payload.s_string.length)
+                        + packet->u_payload.s_string.length;
             break;
         case PACKET_TYPE_UINT8:
             data_size = sizeof(packet->type) + sizeof(packet->u_payload.uint8_data);
@@ -57,10 +57,10 @@ void send_packet(int socket_fd, t_packet *packet) {
 
     switch (packet->type) {
         case PACKET_TYPE_STRING:
-            memcpy(buffer + sizeof(packet->type), &(packet->u_payload.s_data.length),
-                    sizeof(packet->u_payload.s_data.length));
-            memcpy(buffer + sizeof(packet->type) + sizeof(packet->u_payload.s_data.length),
-                    packet->u_payload.s_data.value, packet->u_payload.s_data.length);
+            memcpy(buffer + sizeof(packet->type), &(packet->u_payload.s_string.length),
+                    sizeof(packet->u_payload.s_string.length));
+            memcpy(buffer + sizeof(packet->type) + sizeof(packet->u_payload.s_string.length),
+                    packet->u_payload.s_string.data, packet->u_payload.s_string.length);
             break;
         case PACKET_TYPE_UINT8:
             memcpy(buffer + sizeof(packet->type), &(packet->u_payload.uint8_data),
@@ -103,20 +103,20 @@ t_packet receive_packet(int socket_fd) {
 
     switch (packet.type) {
         case PACKET_TYPE_STRING:
-            bytes_received = recv(socket_fd, &(packet.u_payload.s_data.length),
-                                    sizeof(packet.u_payload.s_data.length), 0);
-            if (bytes_received != sizeof(packet.u_payload.s_data.length)) {
+            bytes_received = recv(socket_fd, &(packet.u_payload.s_string.length),
+                                    sizeof(packet.u_payload.s_string.length), 0);
+            if (bytes_received != sizeof(packet.u_payload.s_string.length)) {
                 fprintf(stderr, "Failed to receive string length\n");
                 exit(EXIT_FAILURE);
             }
-            packet.u_payload.s_data.value = malloc(packet.u_payload.s_data.length + 1);
-            bytes_received = recv(socket_fd, packet.u_payload.s_data.value,
-                                    packet.u_payload.s_data.length, 0);
-            if (bytes_received != (ssize_t)packet.u_payload.s_data.length) {
+            packet.u_payload.s_string.data = malloc(packet.u_payload.s_string.length + 1);
+            bytes_received = recv(socket_fd, packet.u_payload.s_string.data,
+                                    packet.u_payload.s_string.length, 0);
+            if (bytes_received != (ssize_t)packet.u_payload.s_string.length) {
                 fprintf(stderr, "Failed to receive string data\n");
                 exit(EXIT_FAILURE);
             }
-            packet.u_payload.s_data.value[packet.u_payload.s_data.length] = '\0';
+            packet.u_payload.s_string.data[packet.u_payload.s_string.length] = '\0';
             break;
         case PACKET_TYPE_UINT8:
             bytes_received = recv(socket_fd, &(packet.u_payload.uint8_data),
@@ -154,7 +154,7 @@ t_packet receive_packet(int socket_fd) {
 
 void free_packet(t_packet *packet) {
     if (packet->type == PACKET_TYPE_STRING) {
-        free(packet->u_payload.s_data.value);
+        free(packet->u_payload.s_string.data);
     }
 }
 

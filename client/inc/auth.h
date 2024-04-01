@@ -1,9 +1,7 @@
 #pragma once
 
 #include "gui_util.h"
-#include "client_codes.h"
-#include "socket_operations.h"
-#include "packet.h"
+#include "user_authentication.h"
 
 #define LOG_IN_USERNAME_ENTRY_ID "log_in_username_entry"
 #define LOG_IN_PASSWORD_ENTRY_ID "log_in_password_entry"

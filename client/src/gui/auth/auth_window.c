@@ -1,23 +1,27 @@
 #include "auth.h"
 
 void on_log_in_button_clicked(void) {
-   char *username = get_entry_text(LOG_IN_USERNAME_ENTRY_ID);
-   char *password = get_entry_text(LOG_IN_PASSWORD_ENTRY_ID);
+    char *username = get_entry_text(LOG_IN_USERNAME_ENTRY_ID);
+    char *password = get_entry_text(LOG_IN_PASSWORD_ENTRY_ID);
 
-	int client_socket = create_and_connect_socket(serverAddress, Port);
-
-    t_client_codes mode = AUTH_LOGIN;
-
-    t_packet login_request = create_packet(PACKET_TYPE_UINT8, &mode);
-    t_packet user = create_packet(PACKET_TYPE_STRING, username);
-    t_packet pass = create_packet(PACKET_TYPE_STRING, password);
-
-    send_and_release_packet(client_socket, &login_request);
-    send_and_release_packet(client_socket, &user);
-    send_and_release_packet(client_socket, &pass);
-
-	close(client_socket);
-
+    t_client_status_code server_response = process_user_authentication(serverAddress, Port,
+                                                        username, password, AUTH_LOGIN);
+    switch(server_response) {
+        case NO_CONNECTION_WITH_SERVER:
+            //add_label;
+            break;
+        case WRONG_PASSWORD:
+            //add label;
+            break;
+        case LOGIN_DOESNT_EXIST:
+            //add label;
+            break;
+        case SUCCESS_LOGIN:
+            //uchat window open();
+            break;
+        default:
+            break;
+    }
 }
 
 void on_sign_up_button_clicked(void) {
@@ -26,14 +30,24 @@ void on_sign_up_button_clicked(void) {
     char *confirm_password = get_entry_text(SIGN_UP_CONFIRM_PASSWORD_ENTRY_ID);
 
 	validate_sign_up_input(username, password, confirm_password);
-	
-	int client_socket = create_and_connect_socket(serverAddress, Port);
 
-    t_client_codes mode = AUTH_SIGN_UP; 
-    t_packet login_request = create_packet(PACKET_TYPE_UINT8, &mode);
-    send_and_release_packet(client_socket, &login_request);
-
-    close(client_socket);
+    t_client_status_code server_response = process_user_authentication(serverAddress, Port,
+                                                        username, password, AUTH_SIGN_UP);
+    switch(server_response) {
+        case NO_CONNECTION_WITH_SERVER:
+            //add_label;
+            break;
+        case LOGIN_ALREADY_EXIST:
+            //add label;
+            break;
+        case SUCCESS_REGISTRATION:
+            //uchat window open();
+            mx_printstr("success reg");
+            break;
+        default:
+            break;
+    }
+    
 }
 
 void on_auth_input_change(void) {

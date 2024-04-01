@@ -27,6 +27,7 @@ $(BINNAME): $(OBJS)
 	@printf "\033[32;1m$@ created\033[0m\n"
 
 $(OBJS): $(OBJDIR)/%.o: $(SRCDIR)/%.c Makefile | $(OBJDIR)
+	@mkdir -p $(@D)
 	@$(CC) $(INCLUDE_ALL_HEADER_DIRS) $(CFLAGS) -c $< -o $@
 	@printf "\033[32mcompiled: \033[0m$(notdir $<)\n"
 

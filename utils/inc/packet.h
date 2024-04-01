@@ -20,8 +20,8 @@ typedef struct {
     union {
         struct {
             size_t length;
-            char* value;
-        } s_data;
+            char* data;
+        } s_string;
         uint8_t uint8_data;
         uint16_t uint16_data;
         uint32_t uint32_data;

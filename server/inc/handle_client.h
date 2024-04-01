@@ -6,8 +6,9 @@
 #include <stdlib.h>
 #include <sys/socket.h>
 #include "string_utils.h"
-#include "client_codes.h"
+#include "handle_client_codes.h"
 #include "packet.h"
+#include "handle_registration.h"
 
 typedef struct {
     int client_socket;
