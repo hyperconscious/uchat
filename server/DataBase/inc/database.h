@@ -1,9 +1,9 @@
-#include "../sqlite3.h"
+#include "../SQLite/sqlite3.h"
 #include <stdlib.h>
 #include <stdio.h> 
 #include <crypt.h>
 
-#define TRY_FUNCTION(f, res) res = f; if(res) return res;
+#define MX_TRY_FUNCTION(f, res) res = f; if(res) return res;
 
 
 typedef struct database_info
@@ -43,7 +43,6 @@ int mx_init_add_chat_participant(sqlite3 *db, sqlite3_stmt **statement);
 
 int mx_init_sub_chat_participant(sqlite3 *db, sqlite3_stmt **statement);
 
-
 //db_info
 int mx_init_db_info(const char *db, t_db_info **info);
 
@@ -68,10 +67,15 @@ int mx_sub_message(t_db_info *info, int id);
 int mx_add_chat(t_db_info *info, char *name, int owner_id);
 
 int mx_sub_chat(t_db_info *info, int id);
-
+    
 
 //chat_partipicant
 int mx_add_usr_to_chat(t_db_info *info, int user_id, int chat_id);
 
 int mx_sub_usr_from_chat(t_db_info *info, int user_id, int chat_id);
 
+//selectors
+
+
+//utils
+const char *get_last_error(t_db_info *info);
