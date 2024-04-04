@@ -1,34 +1,38 @@
 /*core*/
-* {
-    font-family: "Roboto", "Open Sans", system-ui;
-    font-weight: 500;
-    font-size: x-large;
-}
-
 window {
     background-color: #343543;
 }
 
+label, entry {
+    font-family: "Roboto", "Open Sans", system-ui;
+    font-weight: 500;
+    font-size: x-large;
+    color: white;
+}
+
 button {
-    padding: 9px 0;
+    background-image: none;
     box-shadow: 0 0;
     text-shadow: none;
 }
 
 .button_primary {
-    background-image: none;
+    padding: 9px 0;
     background-color: #6A57E4;
     border-radius: 25px;
-    color: white;
 }
 
 .button_primary:active {
-    background-color: #5A56E4;
+    background-color: #5A57E4;
+}
+
+.text_button, .icon_button {
+    border: none;
 }
 
 entry {
-    color: white;
-    padding: 6px 12px;
+    background-color: #4D4E62;
+    border: 1px solid transparent;
 }
 
 entry:focus {
@@ -36,9 +40,25 @@ entry:focus {
     box-shadow: 0 0;
 }
 
-.error_label {
+.list {
+    background-color: transparent;
+}
+
+.list row {
+    padding: 0;
+}
+
+.label_title {
+    font-size: 24px;
+}
+
+.label_error {
     color: #F44336;
     font-size: 14px;
+}
+
+.separator {
+    background-color: #343543;
 }
 
 /*auth*/
@@ -68,16 +88,58 @@ entry:focus {
     background-color: #343543;
 }
 
-.auth_tab_label {
-    color: white;
-}
-
 .auth_box {
     background-color: #414255;
 }
 
 .auth_entry {
-    background-color: #4D4E62;
+    padding: 6px 12px;
     border-radius: 25px;
-    border: 1px solid transparent;
+}
+
+/*home*/
+#home_header {
+    background-color: #6A57E4;
+    border-radius: 0 0 25px 25px;
+}
+
+#inbox_box {
+    background-color: #353644;
+}
+
+#chat_box {
+    background-color: #414255;
+    padding: 0 16px;
+}
+
+#search_message_entry {
+    border-radius: 12px;
+}
+
+.chat_list_item_selected *,
+.unread_chat_list_item *,
+.read_chat_list_item * {
+}
+
+.chat_list_item_selected,
+.unread_chat_list_item,
+.read_chat_list_item {
+    border-radius: 12px;
+    margin-top: 12px;
+}
+
+.chat_list_item_selected {
+    background-color: #6A57E4;
+}
+
+.unread_chat_list_item {
+    background-color: #414255;
+}
+
+.read_chat_list_item {
+
+}
+
+#message_entry {
+    background-color: transparent;
 }

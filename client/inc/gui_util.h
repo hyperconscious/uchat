@@ -19,6 +19,8 @@ GtkLabel *get_label(char *id);
 
 GtkEntry *get_entry(char *id);
 
+GtkListBox *get_list_box(char *id);
+
 char *get_entry_text(char *id);
 
 void hide_widget(char *id);
@@ -31,3 +33,26 @@ void toggle_entry_visibility(char *id);
 void open_window(char *id);
 
 void close_window(char *id);
+
+void set_class(GtkWidget *widget,
+               char *class);
+
+void update_class(GtkWidget *widget,
+                  char *old_class,
+                  char *new_class);
+
+int count_list_box_items(GtkListBox *list_box);
+
+void list_box_for_each(GtkListBox *list_box,
+                       void (*ptr)(GtkListBoxRow *row));
+
+GtkListBoxRow *list_box_append(char *id,
+                               GtkWidget *widget);
+
+void add_widget_to_box(GtkBox *box,
+                       GtkWidget *widget,
+                       int padding);
+
+GtkImage *image_new(char *path);
+
+GtkImage *get_image(char *id);
