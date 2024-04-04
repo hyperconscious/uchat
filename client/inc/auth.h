@@ -20,9 +20,12 @@ bool is_password_valid(char *password);
 bool is_confirm_password_valid(char *password,
                                char *confirm_password);
 
-void validate_sign_up_input(char *username,
+bool is_sign_up_input_valid(char *username,
                             char *password,
                             char *confirm_password);
+
+bool is_log_in_input_valid(char *username,
+                           char *password);
 
 void show_auth_error(char *error);
 
