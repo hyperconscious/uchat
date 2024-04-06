@@ -64,4 +64,18 @@ void Inet_pton(int af, const char *src, void *dst) {
     }
 }
 
+int create_and_connect_socket(const char* server_address, int port) {
+    int socket = Socket(AF_INET, SOCK_STREAM, 0);
+
+    struct sockaddr_in server_addr = {0};
+    server_addr.sin_family = AF_INET;
+    server_addr.sin_port = htons(port);
+
+    Inet_pton(AF_INET, server_address,
+              &server_addr.sin_addr); // need to be optimize
+    Connect(socket, (struct sockaddr *)&server_addr,
+            sizeof(server_addr));
+
+    return socket;
+}
 

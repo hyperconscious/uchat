@@ -14,4 +14,4 @@ void Listen (int sockfd, int backlog);
 int Accept(int sockfd);
 void Connect(int sockfd, const struct sockaddr *addr, socklen_t addrlen);
 void Inet_pton(int af, const char *src, void *dst);
-
+int create_and_connect_socket(const char* server_address, int port);

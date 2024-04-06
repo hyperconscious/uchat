@@ -3,26 +3,25 @@
 void *handle_client(void *arg) {
     t_client_info *client_info = (t_client_info *)arg;
     int client_socket = client_info->client_socket;
-    char login[50];
-    mx_strcpy(login, client_info->login);
     free(client_info);
 
-
-    // in message case :
-    ssize_t nread;
-    char buf[256];
-
-    while ((nread = read(client_socket, buf, 256)) > 0) {
-        mx_printstr(login); mx_printstr(" : "); mx_printstr(buf);
-        mx_printstr("\n");
-        write(client_socket, buf, nread);
+    t_packet request = receive_packet(client_socket);
+    
+    if (request.type != PACKET_TYPE_UINT8) {
+        fprintf(stderr, "Failed to receive packet from client\n");
+        close(client_socket);
+        pthread_exit(NULL);
     }
 
-    if (nread == -1) {
-        perror("read failed");
-        exit(EXIT_FAILURE);
-    }
-
+	switch(request.u_payload.uint8_data) {
+		case AUTH_LOGIN:
+			break;
+		case AUTH_SIGN_UP:
+			handle_sign_up(client_socket);
+            break;
+        default:
+            break;
+	}
     close(client_socket);
 
     pthread_exit(NULL);

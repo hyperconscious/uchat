@@ -1,43 +1,65 @@
 /*core*/
+* {
+    font-family: "Helvetica Neue", system-ui
+}
+
 window {
+    font-size: x-large;
+    color: white;
     background-color: #343543;
 }
 
-label, entry {
-    font-family: "Roboto", "Open Sans", system-ui;
-    font-weight: 500;
-    font-size: x-large;
-    color: white;
-}
-
 button {
+    border: none;
     background-image: none;
     box-shadow: 0 0;
     text-shadow: none;
+}
+
+button:hover {
+    opacity: 0.7;
 }
 
 .button_primary {
     padding: 9px 0;
     background-color: #6A57E4;
     border-radius: 25px;
+    color: white;
 }
 
 .button_primary:active {
     background-color: #5A57E4;
 }
 
-.text_button, .icon_button {
+.image-button {
     border: none;
+}
+
+image {
+    -gtk-icon-shadow: none;
 }
 
 entry {
     background-color: #4D4E62;
     border: 1px solid transparent;
+    color: white;
 }
 
 entry:focus {
-    border: 1px solid #343543;
     box-shadow: 0 0;
+}
+
+scrolledwindow {
+    border: none;
+}
+
+scrollbar slider {
+    background-color: #6A57E4;
+}
+
+scrollbar:hover {
+    border: none;
+    border-radius: 8px;
 }
 
 .list {
@@ -63,6 +85,7 @@ entry:focus {
 
 /*auth*/
 #auth_notebook {
+    margin: 100px;
     background-color: #414255;
     padding: 40px;
     border-radius: 25px;
@@ -78,6 +101,7 @@ entry:focus {
     padding: 0;
     margin: 0;
     box-shadow: 0 1px 0 0 black;
+    color: white;
 }
 
 #auth_notebook header tabs tab:checked {
@@ -93,6 +117,7 @@ entry:focus {
 }
 
 .auth_entry {
+    border: 1px solid #343543;
     padding: 6px 12px;
     border-radius: 25px;
 }
@@ -101,35 +126,42 @@ entry:focus {
 #home_header {
     background-color: #6A57E4;
     border-radius: 0 0 25px 25px;
+    box-shadow: 20px 0 #414255;
+}
+
+.home_header_button {
+    border: none;
+    font-size: large;
+    color: white;
+}
+
+.home_header_button_selected {
+    text-shadow: 0.5px 0 0 white;
 }
 
 #inbox_box {
     background-color: #353644;
 }
 
-#chat_box {
-    background-color: #414255;
-    padding: 0 16px;
-}
-
 #search_message_entry {
+    padding: 2px 8px;
     border-radius: 12px;
 }
 
-.chat_list_item_selected *,
-.unread_chat_list_item *,
-.read_chat_list_item * {
+#chat_list row {
+    margin-top: 12px;
+    border-radius: 12px;
 }
 
-.chat_list_item_selected,
 .unread_chat_list_item,
 .read_chat_list_item {
-    border-radius: 12px;
-    margin-top: 12px;
+    padding: 16px;
 }
 
-.chat_list_item_selected {
-    background-color: #6A57E4;
+.unread_chat_list_item,
+#selected_chat_list_item {
+    border-bottom: 1px solid transparent;
+    border-radius: 12px;
 }
 
 .unread_chat_list_item {
@@ -137,9 +169,112 @@ entry:focus {
 }
 
 .read_chat_list_item {
+    border-bottom: 1px solid grey;
+}
 
+#selected_chat_list_item {
+    background-color: #6A57E4;
+}
+
+.default_avatar {
+    background-color: #6A57E4;
+    background-size: cover;
+    color: white;
+    font-weight: bold;
+    border: 1px solid white;
+}
+
+#chat_list_item_default_avatar {
+    border-radius: 20px;
+    font-size: 24px;
+}
+
+#chat_default_avatar {
+    border-radius: 50%;
+    font-size: 24px;
+}
+
+#chat_list_item_name {
+    margin-left: 8px;
+    color: white;
+}
+
+#chat_list_item_last_message {
+    margin-left: 8px;
+    color: #9d9fac;
+}
+
+#chat_list_item_unread_messages {
+    margin-left: 8px;
+    background-color: #6A57E4;
+    border-radius: 50%;
+    padding: 3px 0;
+    font-size: large;
+    color: white;
+}
+
+#chat_not_selected_box {
+    background-color: #414255;
+}
+
+#select_chat_label {
+    font-size: large;
+    background-color: #353644;
+    border-radius: 10px;
+    padding: 4px 8px;
+}
+
+#chat_box {
+    background-color: #414255;
+    padding: 0 16px;
+}
+
+#chat_messages_list row {
+    background-color: transparent;
+    box-shadow: none;
+}
+
+.message_date_label {
+    color: white;
+    margin-bottom: 16px;
+}
+
+.message_time_label {
+    margin: 2px 0;
+    color: white;
+    font-size: 12px;
+}
+
+.message_text_label_mine,
+.message_text_label_not_mine {
+    padding: 8px;
+    background-color: #353644;
+    color: white;
+    margin-bottom: 12px;
+}
+
+.message_text_label_mine:hover,
+.message_text_label_not_mine:hover {
+    background-color: transparent;
+}
+
+.message_text_label_mine {
+    border-radius: 10px 10px 0 10px;
+}
+
+.message_text_label_not_mine {
+    border-radius: 10px 10px 10px 0;
 }
 
 #message_entry {
     background-color: transparent;
+    padding: 16px 20px 16px 4px;
+}
+
+#send_message_button {
+    padding: 16px 0;
+}
+
+#send_image {
+    -gtk-icon-effect: none;
 }

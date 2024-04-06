@@ -10,6 +10,12 @@ char *get_entry_text(char *id) {
     return (char *)gtk_entry_get_text(entry);
 }
 
+void set_entry_text(char *id,
+                    char *text) {
+    GtkEntry *entry = get_entry(id);
+    gtk_entry_set_text(entry, text);
+}
+
 void toggle_entry_visibility(char *id) {
     GtkEntry *entry = get_entry(id);
     bool is_visible = gtk_entry_get_visibility(entry);

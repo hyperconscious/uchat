@@ -1,17 +1,45 @@
 #include "home.h"
 
-void on_home_window_show(void) {
-    Chat chat;
-    chat.image_path = "client/src/gui/layout/img/ic_person.png";
-    chat.name = "John";
-    chat.last_message = "Hi. How are you?";
-    chat.unread_message_count = 2;
+GListStore *all_chats_list_store = NULL;
+GListStore *visible_chats_list_store = NULL;
 
-    for (int i = 0; i < 3; i++) {
-        create_new_chat_list_item(chat);
-    }
+void on_home_window_show(void) {
+    set_home_header_button_active_style(CHATS_BUTTON_ID);
+    connect_chat_list_box_row_activated_signal();
+    t_list *chats = get_chats();
+    show_chats(chats);
 }
 
-void on_chat_list_item_select(void) {
-    set_selected_chat_style();
+void on_chats_button_clicked(void) {
+    set_home_header_button_active_style(CHATS_BUTTON_ID);
+    show_widget(CHATS_CONTENT_BOX_ID);
+}
+
+void on_discover_button_clicked(void) {
+    set_home_header_button_active_style(DISCOVER_BUTTON_ID);
+    hide_widget(CHATS_CONTENT_BOX_ID);
+}
+
+void on_settings_button_clicked(void) {
+    set_home_header_button_active_style(SETTINGS_BUTTON_ID);
+    hide_widget(CHATS_CONTENT_BOX_ID);
+}
+
+void on_log_out_button_clicked(void) {
+}
+
+void on_search_message_entry_changed(void) {
+    filter_chats();
+}
+
+void on_chat_list_item_activated(GtkListBox *listbox,
+                                 GtkListBoxRow *row,
+                                 gpointer user_data) {
+    if (listbox == NULL || user_data == NULL) {}
+    select_chat(row);
+}
+
+
+void on_send_message_button_clicked(void) {
+    add_message_to_selected_chat();
 }
