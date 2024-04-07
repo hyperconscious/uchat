@@ -6,6 +6,8 @@ void on_log_in_button_clicked(void) {
 
     t_client_status_code server_response = process_user_authentication(serverAddress, Port,
                                                         username, password, AUTH_LOGIN);
+    printf("%d", server_response);
+    printf("%d", SUCCESS_LOGIN);
     switch(server_response) {
         case NO_CONNECTION_WITH_SERVER:
             //add_label;
@@ -18,8 +20,10 @@ void on_log_in_button_clicked(void) {
             break;
         case SUCCESS_LOGIN:
             //uchat window open();
+            mx_printstr("succ login");
             break;
         default:
+            mx_printstr("default login button clicked");
             break;
     }
 }

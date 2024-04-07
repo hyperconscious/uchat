@@ -10,8 +10,8 @@ int main(int argc, char **argv) {
 		return 1;
 	}
 
-	Port = atoi(argv[2]);
-	serverAddress = argv[1];
+    Port = atoi(argv[2]);
+    serverAddress = argv[1];
 
     init_client(argc, argv);
     return 0;
