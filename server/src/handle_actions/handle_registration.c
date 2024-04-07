@@ -11,8 +11,12 @@ void handle_sign_up(int client_socket) {
 
     char* username = user.u_payload.s_string.data;
     char* password = pass.u_payload.s_string.data;
-    (void)username;
-    (void)password;
+
+    int id = -1;
+    t_db_info *info;
+    mx_init_db_info(DATABASE, &info);
+    mx_add_user(info, username, password, &id);
+    mx_destroy_db_info(&info);
 
     t_client_status_code result_code = SUCCESS_REGISTRATION; // LOGIN_ALREADY_EXIST or SUCCESS_REGISTRATION;
     t_packet packet_to_send = create_packet(PACKET_TYPE_UINT8, &result_code);

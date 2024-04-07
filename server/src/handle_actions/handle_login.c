@@ -11,8 +11,13 @@ void handle_login(int client_socket) {
 
     char* username = user.u_payload.s_string.data;
     char* password = pass.u_payload.s_string.data;
+
     (void)username;
     (void)password;
+   /* t_db_info *info;
+    mx_init_db_info(DATABASE, &info);
+    mx_check_password(info, username, pass, &id);
+    mx_destroy_db_info(&info);*/
 
     t_client_status_code result_code = SUCCESS_LOGIN; // WRONG_PASSWORD or
                                                       // LOGIN_DESNT_EXIST;

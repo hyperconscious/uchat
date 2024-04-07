@@ -5,25 +5,30 @@ CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic -pthread
 OBJDIR = obj
 SRCDIR = src
 UTILS_DIR = ../utils
+SQLITE_DIR = ../SQLite
 
 HEADER_DIRS = $(sort $(dir $(wildcard *.h) $(wildcard */*.h) $(wildcard */*/*.h) $(wildcard */*/*/*.h)))
 UTILS_HEADER_DIRS = $(sort $(dir $(wildcard $(UTILS_DIR)/*.h) $(wildcard $(UTILS_DIR)/*/*.h)))
+SQLITE_HEADER_DIRS = $(sort $(dir $(wildcard $(SQLITE_DIR)/*.h) $(wildcard $(SQLITE_DIR)/*/*.h)))
 
 SRCS = $(wildcard $(SRCDIR)/*.c) $(wildcard $(SRCDIR)/*/*.c) $(wildcard $(SRCDIR)/*/*/*.c)
 OBJS = $(patsubst $(SRCDIR)/%.c,$(OBJDIR)/%.o,$(SRCS))
 
 UTILS_LIB = $(UTILS_DIR)/libutils.a
+SQLITE_LIB = $(SQLITE_DIR)/libsqlite.a 
 
 INCLUDE_HEADER_DIRS = $(addprefix -I, $(HEADER_DIRS))
 INCLUDE_UTILS_HEADER_DIRS = $(addprefix -I, $(UTILS_HEADER_DIRS))
-INCLUDE_ALL_HEADER_DIRS = $(INCLUDE_HEADER_DIRS) $(INCLUDE_UTILS_HEADER_DIRS)
+INCLUDE_SQLITE_HEADER_DIRS = $(addprefix -I, $(SQLITE_HEADER_DIRS))
+INCLUDE_ALL_HEADER_DIRS = $(INCLUDE_HEADER_DIRS) $(INCLUDE_UTILS_HEADER_DIRS) $(INCLUDE_SQLITE_HEADER_DIRS)
 
 INCLUDE_UTILS = -L$(dir $(UTILS_LIB)) -l$(patsubst lib%.a,%,$(notdir $(UTILS_LIB)))
+INCLUDE_SQLITE = -L$(dir $(SQLITE_LIB)) -l$(patsubst lib%.a,%,$(notdir $(SQLITE_LIB)))
 
 all: $(BINNAME)
 
 $(BINNAME): $(OBJS)
-	@$(CC) -fsanitize=address -o $@ $^ $(UTILS_LIB)
+	@$(CC) -fsanitize=address -o $@ $^ $(UTILS_LIB) $(SQLITE_LIB)
 	@printf "\033[32;1m$@ created\033[0m\n"
 
 $(OBJS): $(OBJDIR)/%.o: $(SRCDIR)/%.c Makefile | $(OBJDIR)
