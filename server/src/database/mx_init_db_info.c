@@ -21,6 +21,8 @@ int mx_init_db_info(const char *db, t_db_info **info)
 
     MX_TRY_FUNCTION(mx_init_add_chat_participant(inf->database, &inf->submsg_stmt), result);
     MX_TRY_FUNCTION(mx_init_sub_chat_participant(inf->database, &inf->submsg_stmt), result);
+
+    MX_TRY_FUNCTION(mx_init_get_last_messages(inf->database, &inf->get_last_messages_stmt), result);
     
     return result;
 }
