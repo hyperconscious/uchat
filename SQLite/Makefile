@@ -1,7 +1,7 @@
 LIBNAME = libsqlite
 
 CC = clang
-CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic -lsqlite3 -lcrypto -lpthread -ldl 
+CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic# -lsqlite3 -lcrypto -lpthread -ldl 
 
 OBJDIR = obj
 SRCDIR = .

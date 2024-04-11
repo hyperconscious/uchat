@@ -22,10 +22,10 @@ void on_log_in_button_clicked(void) {
             break;
         case SUCCESS_LOGIN:
             //uchat window open();
-            mx_printstr("succ login");
+            mx_printstr("succ login\n");
             break;
         default:
-            mx_printstr("default login button clicked");
+            mx_printstr("default login button clicked\n");
             break;
     }
 }
@@ -46,11 +46,11 @@ void on_sign_up_button_clicked(void) {
             //add_label;
             break;
         case LOGIN_ALREADY_EXIST:
-            //add label;
+            mx_printstr("login already exists\n");
             break;
         case SUCCESS_REGISTRATION:
             //uchat window open();
-            mx_printstr("success reg");
+            mx_printstr("success reg\n");
             break;
         default:
             break;

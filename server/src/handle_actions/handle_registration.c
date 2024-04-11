@@ -13,16 +13,28 @@ void handle_sign_up(int client_socket) {
     char* password = pass.u_payload.s_string.data;
 
     int id = -1;
+    int code = 0;
+    t_client_status_code result_code;
     t_db_info *info;
+    
     mx_init_db_info(DATABASE, &info);
-    mx_add_user(info, username, password, &id);
+    code = mx_add_user(info, username, password, &id);
     mx_destroy_db_info(&info);
 
-    t_client_status_code result_code = SUCCESS_REGISTRATION; // LOGIN_ALREADY_EXIST or SUCCESS_REGISTRATION;
+    if (code == 0)
+    {
+        result_code = SUCCESS_REGISTRATION;
+    }
+    else if (code == 19)
+    {
+        result_code = LOGIN_ALREADY_EXIST;
+    }
+    else result_code = NO_CONNECTION_WITH_SERVER;
+    
     t_packet packet_to_send = create_packet(PACKET_TYPE_UINT8, &result_code);
     send_and_release_packet(client_socket, &packet_to_send);
 
     free_packet(&user);
     free_packet(&pass);
-
+  
 }
