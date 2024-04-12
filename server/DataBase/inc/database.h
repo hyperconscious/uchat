@@ -1,7 +1,7 @@
 #include "../SQLite/sqlite3.h"
 #include <stdlib.h>
 #include <stdio.h> 
-#include <crypt.h>
+//#include <crypt.h>
 
 #define MX_TRY_FUNCTION(f, res) res = f; if(res) return res;
 
