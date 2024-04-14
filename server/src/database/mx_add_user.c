@@ -1,4 +1,4 @@
-#include "../inc/database.h"
+#include "database.h"
 
 int mx_add_user(t_db_info *info, const char *name, const char *password, int *id_of_new_user)
 {

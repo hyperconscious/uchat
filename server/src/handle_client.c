@@ -15,11 +15,13 @@ void *handle_client(void *arg) {
 
 	switch(request.u_payload.uint8_data) {
 		case AUTH_LOGIN:
+            handle_login(client_socket);
 			break;
 		case AUTH_SIGN_UP:
 			handle_sign_up(client_socket);
             break;
         default:
+            fprintf(stderr, "wrong action from client\n");
             break;
 	}
     close(client_socket);

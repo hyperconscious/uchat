@@ -1,5 +1,4 @@
 #include "home.h"
-#include "string_utils.h"
 
 static void set_chat_list_item_image(GtkBox *root_box,
                                      char *path,
@@ -52,7 +51,7 @@ static void set_chat_list_item_unread_messages_indication(GtkBox *root_box,
         gtk_widget_set_name(label, "chat_list_item_unread_messages");
         add_widget_to_box(root_box, label, false, false, 0);
         set_class(GTK_WIDGET(root_box), "unread_chat_list_item");
-        mx_strdel(&unread_messages_count_str);
+        free(unread_messages_count_str);
     }
 }
 

@@ -1,5 +1,6 @@
 #pragma once
 
+#define _GNU_SOURCE
 #include "gui_util.h"
 #include "list.h"
 

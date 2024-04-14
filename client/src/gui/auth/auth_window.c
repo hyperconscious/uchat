@@ -48,7 +48,6 @@ void on_sign_up_button_clicked(void) {
             break;
         case SUCCESS_REGISTRATION:
             open_window(HOME_WINDOW_ID);
-            mx_printstr("success reg");
             break;
         default:
             break;
