@@ -27,8 +27,14 @@ INCLUDE_SQLITE = -L$(dir $(SQLITE_LIB)) -l$(patsubst lib%.a,%,$(notdir $(SQLITE_
 
 all: $(BINNAME)
 
+UNAME_S := $(shell uname -s)
+
+ifeq ($(UNAME_S),Linux)
+   SYSTEMDEPENDENT_LIBS += -lcrypt
+endif
+
 $(BINNAME): $(OBJS)
-	@$(CC) -o $@ $^ $(UTILS_LIB) $(SQLITE_LIB) -lcrypt
+	@$(CC) -o $@ $^ $(UTILS_LIB) $(SQLITE_LIB) $(SYSTEMDEPENDENT_LIBS)
 	@printf "\033[32;1m$@ created\033[0m\n"
 
 $(OBJS): $(OBJDIR)/%.o: $(SRCDIR)/%.c Makefile | $(OBJDIR)
