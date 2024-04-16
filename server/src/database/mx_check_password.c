@@ -8,4 +8,4 @@ int mx_check_password(t_db_info *info, long id, char *password)
     MX_TRY_FUNCTION(sqlite3_bind_text(info -> checkpass_stmt, 2, crypt(password, "pass"), -1, 0), result);
     MX_TRY_FUNCTION(sqlite3_step(info->checkpass_stmt), result);
     return sqlite3_column_count(info->checkpass_stmt);
-}
+} 

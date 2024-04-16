@@ -9,5 +9,6 @@ int mx_get_last_messages(t_db_info *info, int chat_id, int max_rows, void(*callb
     if(sqlite3_step(info->get_last_messages_stmt) != SQLITE_DONE) return sqlite3_errcode(info->database);
     callback(info->get_last_messages_stmt);
     return 0;
+    
 }
 
