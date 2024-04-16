@@ -23,6 +23,7 @@ int mx_init_db_info(const char *db, t_db_info **info)
     MX_TRY_FUNCTION(mx_init_sub_chat_participant(inf->database, &inf->subusrtochat_stmt), result);
 
     MX_TRY_FUNCTION(mx_init_get_last_messages(inf->database, &inf->get_last_messages_stmt), result);
+    MX_TRY_FUNCTION(mx_init_find_id_by_user(inf->database, &inf->get_user_id_by_login), result);
     
     return result;
 }

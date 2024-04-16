@@ -56,6 +56,9 @@ int mx_init_sub_chat_participant(sqlite3 *db, sqlite3_stmt **statement);
 
 int mx_init_get_last_messages(sqlite3 *db, sqlite3_stmt **statement);
 
+int mx_init_find_id_by_user(sqlite3 *db, sqlite3_stmt **statement);
+
+
 //db_info
 int mx_init_db_info(const char *db, t_db_info **info);
 
@@ -90,6 +93,9 @@ int mx_add_usr_to_chat(t_db_info *info, int user_id, int chat_id);
 int mx_sub_usr_from_chat(t_db_info *info, int user_id, int chat_id);
 
 //selectors
+
+long mx_find_id_by_user(t_db_info *info, char* username);
+
 
 int mx_get_last_messages(t_db_info *info, int chat_id, int max_rows,
                          void(*callback)(sqlite3_stmt *));

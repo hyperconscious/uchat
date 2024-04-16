@@ -16,12 +16,10 @@ void on_log_in_button_clicked(void) {
             printf("%s\n", "client: no connect");
             break;
         case WRONG_PASSWORD:
-            //add label;
-            printf("%s\n", "client: wrong pass");
+            printf("wrong pssword\n");
             break;
         case LOGIN_DOESNT_EXIST:
-            //add label;
-            printf("%s\n", "client: log dont exist");
+            printf("login gosnt exidt\n");
             break;
         case SUCCESS_LOGIN:
             open_window(HOME_WINDOW_ID);

@@ -13,14 +13,18 @@ void handle_login(int client_socket) {
         return;
     }
 
-
-    int id;//uint32_t
-    t_client_status_code result_code = SUCCESS_REGISTRATION;  
     t_db_info *info;
-    (void)username;
     mx_init_db_info(DATABASE, &info);
-    //need to find id by login
-    if (mx_check_password(info, 5, password)) {
+    int /*uint32_t*/ id = mx_find_id_by_user(info, username);
+    t_client_status_code result_code = SUCCESS_REGISTRATION;
+
+    if (id == -1)
+    {
+        result_code = LOGIN_DOESNT_EXIST;
+        t_packet packet_code = create_packet(PACKET_TYPE_UINT8, &result_code);
+        send_and_release_packet(client_socket, &packet_code);
+    }
+    else if (mx_check_password(info, id, password) == 100) {
         t_packet packet_code = create_packet(PACKET_TYPE_UINT8, &result_code);
         t_packet packet_id = create_packet(PACKET_TYPE_UINT32, &id);
         send_and_release_packet(client_socket, &packet_code);
@@ -29,7 +33,6 @@ void handle_login(int client_socket) {
         result_code = WRONG_PASSWORD; 
         t_packet packet_code = create_packet(PACKET_TYPE_UINT8, &result_code);
         send_and_release_packet(client_socket, &packet_code);
-    // LOGIN_DOESNT_EXIST;
     }
     mx_destroy_db_info(&info);
     free_packet(&user);
