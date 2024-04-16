@@ -1,6 +1,7 @@
 #include "database.h"
 
-int mx_add_user(t_db_info *info, const char *name, const char *password, int *id_of_new_user)
+int mx_add_user(t_db_info *info, const char *name, const char *password,
+                int *id_of_new_user)
 {
     int result = 0;
     MX_TRY_FUNCTION(sqlite3_reset(info->addusr_stmt), result);

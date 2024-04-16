@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
-
+#include <stdint.h>
 #ifdef __MACH__
 
 #include <unistd.h>
@@ -68,7 +68,7 @@ int mx_add_user(t_db_info *info, const char *name, const char *password,
 
 int mx_sub_user(t_db_info *info, long id);
 
-int mx_check_password(t_db_info *info, long id, char *password);
+int mx_check_password(t_db_info *info, int id, char *password);
 
 
 //message

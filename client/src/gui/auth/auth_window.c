@@ -5,7 +5,7 @@ void on_log_in_button_clicked(void) {
     char *password = get_entry_text(LOG_IN_PASSWORD_ENTRY_ID);
 
     if (!is_log_in_input_valid(username, password))
-        return;
+       return;
 
     t_client_status_code server_response = process_user_authentication(
             serverAddress, Port,
@@ -13,12 +13,15 @@ void on_log_in_button_clicked(void) {
     switch (server_response) {
         case NO_CONNECTION_WITH_SERVER:
             //add_label;
+            printf("%s\n", "client: no connect");
             break;
         case WRONG_PASSWORD:
             //add label;
+            printf("%s\n", "client: wrong pass");
             break;
         case LOGIN_DOESNT_EXIST:
             //add label;
+            printf("%s\n", "client: log dont exist");
             break;
         case SUCCESS_LOGIN:
             open_window(HOME_WINDOW_ID);
@@ -42,9 +45,11 @@ void on_sign_up_button_clicked(void) {
     switch (server_response) {
         case NO_CONNECTION_WITH_SERVER:
             //add_label;
+            printf("%s\n", "client: no connect");
             break;
         case LOGIN_ALREADY_EXIST:
             //add label;
+            printf("%s\n", "client: log exist");
             break;
         case SUCCESS_REGISTRATION:
             open_window(HOME_WINDOW_ID);
