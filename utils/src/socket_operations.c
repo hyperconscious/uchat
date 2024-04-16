@@ -6,6 +6,8 @@ int Socket(int domain, int type, int protocol) {
         perror("socket failed");
         exit(EXIT_FAILURE);
     }
+    if (setsockopt(res, SOL_SOCKET, SO_REUSEADDR, &(int){1}, sizeof(int)) < 0)
+        perror("setsockopt(SO_REUSEADDR) failed");
     return res;
 }
 

@@ -25,6 +25,7 @@ void on_log_in_button_clicked(void) {
             open_window(HOME_WINDOW_ID);
             break;
         default:
+            printf("%s%d", "wtf\n", server_response);
             break;
     }
 }
@@ -53,6 +54,7 @@ void on_sign_up_button_clicked(void) {
             open_window(HOME_WINDOW_ID);
             break;
         default:
+            printf("wtf\n");
             break;
     }
 }

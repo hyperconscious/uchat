@@ -16,7 +16,7 @@ void handle_login(int client_socket) {
     t_db_info *info;
     mx_init_db_info(DATABASE, &info);
     int /*uint32_t*/ id = mx_find_id_by_user(info, username);
-    t_client_status_code result_code = SUCCESS_REGISTRATION;
+    t_client_status_code result_code = SUCCESS_LOGIN;
 
     if (id == -1)
     {
