@@ -27,20 +27,24 @@ t_packet create_packet(t_packet_type type, const void *data) {
 }
 
 void send_packet(int socket_fd, t_packet *packet) {
-    size_t data_size;
+    if (socket_fd < 0) {
+        fprintf(stderr, "No connection, unable to send a packet\n");
+        return;
+    }
+    size_t data_size = sizeof(packet->type);
     switch (packet->type) {
         case PACKET_TYPE_STRING:
-            data_size = sizeof(packet->type) + sizeof(packet->u_payload.s_string.length)
+            data_size += sizeof(packet->u_payload.s_string.length)
                         + packet->u_payload.s_string.length;
             break;
         case PACKET_TYPE_UINT8:
             data_size = sizeof(packet->type) + sizeof(packet->u_payload.uint8_data);
             break;
         case PACKET_TYPE_UINT16:
-            data_size = sizeof(packet->type) + sizeof(packet->u_payload.uint16_data);
+            data_size += sizeof(packet->u_payload.uint16_data);
             break;
         case PACKET_TYPE_UINT32:
-            data_size = sizeof(packet->type) + sizeof(packet->u_payload.uint32_data);
+            data_size += sizeof(packet->u_payload.uint32_data);
             break;
         default:
             fprintf(stderr, "Unknown packet type\n");
@@ -94,6 +98,10 @@ void send_packet(int socket_fd, t_packet *packet) {
 
 t_packet receive_packet(int socket_fd) {
     t_packet packet;
+    if (socket_fd < 0) {
+        fprintf(stderr, "No connection, unable to send a packet\n");
+        return packet;
+    }
     
     ssize_t bytes_received = recv(socket_fd, &(packet.type), sizeof(packet.type), 0);
     if (bytes_received != sizeof(packet.type)) {

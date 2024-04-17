@@ -7,27 +7,16 @@ void on_log_in_button_clicked(void) {
     if (!is_log_in_input_valid(username, password))
        return;
 
-    t_client_status_code server_response = process_user_authentication(
-            serverAddress, Port,
-            username, password, AUTH_LOGIN);
-    switch (server_response) {
-        case NO_CONNECTION_WITH_SERVER:
-            //add_label;
-            printf("%s\n", "client: no connect");
-            break;
-        case WRONG_PASSWORD:
-            printf("wrong pssword\n");
-            break;
-        case LOGIN_DOESNT_EXIST:
-            printf("login gosnt exidt\n");
-            break;
-        case SUCCESS_LOGIN:
-            open_window(HOME_WINDOW_ID);
-            break;
-        default:
-            printf("%s%d", "wtf\n", server_response);
-            break;
+    char *result = process_user_authentication(serverAddress, Port, username,
+                                password, AUTH_LOGIN);
+    if (strcmp(result, SUCCESSFUL) == 0){
+        free(result);
+        open_window(HOME_WINDOW_ID);
+        close_window(AUTH_WINDOW_ID);
+        return;
     }
+    show_auth_error(result);
+    free(result);
 }
 
 void on_sign_up_button_clicked(void) {
@@ -38,25 +27,16 @@ void on_sign_up_button_clicked(void) {
     if (!is_sign_up_input_valid(username, password, confirm_password))
         return;
 
-    t_client_status_code server_response = process_user_authentication(
-            serverAddress, Port,
-            username, password, AUTH_SIGN_UP);
-    switch (server_response) {
-        case NO_CONNECTION_WITH_SERVER:
-            //add_label;
-            printf("%s\n", "client: no connect");
-            break;
-        case LOGIN_ALREADY_EXIST:
-            //add label;
-            printf("%s\n", "client: log exist");
-            break;
-        case SUCCESS_REGISTRATION:
-            open_window(HOME_WINDOW_ID);
-            break;
-        default:
-            printf("wtf\n");
-            break;
+    char *result = process_user_authentication(serverAddress, Port, username,
+                                password, AUTH_SIGN_UP);
+    if (strcmp(result, SUCCESSFUL) == 0){
+        free(result);
+        open_window(HOME_WINDOW_ID);
+        close_window(AUTH_WINDOW_ID);
+        return;
     }
+    show_auth_error(result);
+    free(result);
 }
 
 void on_auth_input_change(void) {

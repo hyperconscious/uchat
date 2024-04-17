@@ -29,7 +29,8 @@ void on_log_out_button_clicked(void) {
 }
 
 void on_search_message_entry_changed(void) {
-    filter_chats();
+  //  search_chats(get_entry_text(SEARCH_CHAT_ENTRY_ID), serverAddress, Port);
+ //   filter_chats();
 }
 
 void on_chat_list_item_activated(GtkListBox *listbox,

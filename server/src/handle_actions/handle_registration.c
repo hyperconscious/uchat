@@ -13,7 +13,7 @@ void handle_sign_up(int client_socket) {
         return;
     }
 
-    int id; //uint32_t
+    int id = -1; //uint32_t
     t_client_status_code result_code = SUCCESS_REGISTRATION;  
     t_db_info *info;
     

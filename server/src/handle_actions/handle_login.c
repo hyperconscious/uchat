@@ -3,8 +3,6 @@
 void handle_login(int client_socket) {
     t_packet user = receive_packet(client_socket);
     t_packet pass = receive_packet(client_socket);
-    char* username = user.u_payload.s_string.data;
-    char* password = pass.u_payload.s_string.data;
 
     if(user.type != PACKET_TYPE_STRING || pass.type != PACKET_TYPE_STRING) {
         fprintf(stderr, "Failed to receive packet from client\n");
@@ -12,6 +10,9 @@ void handle_login(int client_socket) {
         free_packet(&pass);
         return;
     }
+
+    char* username = user.u_payload.s_string.data;
+    char* password = pass.u_payload.s_string.data;
 
     t_db_info *info;
     mx_init_db_info(DATABASE, &info);

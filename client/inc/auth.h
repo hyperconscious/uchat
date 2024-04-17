@@ -9,6 +9,7 @@
 #define SIGN_UP_PASSWORD_ENTRY_ID "sign_up_password_entry"
 #define SIGN_UP_CONFIRM_PASSWORD_ENTRY_ID "sign_up_confirm_password_entry"
 #define AUTH_ERROR_LABEL_ID "auth_error_label"
+#define AUTH_WINDOW_ID "auth_window"
 #define HOME_WINDOW_ID "home_window"
 
 extern int Port;

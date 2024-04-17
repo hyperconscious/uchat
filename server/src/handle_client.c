@@ -6,9 +6,9 @@ void *handle_client(void *arg) {
     free(client_info);
 
     t_packet request = receive_packet(client_socket);
-    
+    printf("%d hyi", request.type); 
     if (request.type != PACKET_TYPE_UINT8) {
-        fprintf(stderr, "Failed to receive packet from client\n");
+        fprintf(stderr, "Failed to receive packet from client rq\n");
         close(client_socket);
         pthread_exit(NULL);
     }
@@ -19,6 +19,9 @@ void *handle_client(void *arg) {
             break;
         case AUTH_SIGN_UP:
             handle_sign_up(client_socket);
+            break;
+        case RQ_SEARCH_CHAT:
+            handle_search_chat(client_socket);
             break;
         default:
             fprintf(stderr, "wrong action from client\n");

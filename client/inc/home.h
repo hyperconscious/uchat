@@ -3,6 +3,7 @@
 #define _GNU_SOURCE
 #include "gui_util.h"
 #include "list.h"
+#include "user_search_rq.h"
 
 #define CHATS_BUTTON_ID "chats_button"
 #define DISCOVER_BUTTON_ID "discover_button"
@@ -20,6 +21,9 @@
 #define CHAT_MESSAGES_LIST_ID "chat_messages_list"
 #define CHAT_MESSAGE_ENTRY_ID "message_entry"
 #define SEND_MESSAGE_BUTTON_ID "send_message_button"
+
+extern int Port;
+extern char *serverAddress;
 
 typedef struct {
     char *text;

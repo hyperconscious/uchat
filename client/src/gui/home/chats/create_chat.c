@@ -10,7 +10,7 @@ Chat *create_chat(long id,
     if (chat != NULL) {
         chat->id = id;
         chat->image_path = image_path != NULL ? strdup(image_path) : NULL;
-        chat->name = strdup(name);
+        chat->name = name != NULL ? strdup(name) : NULL;
         chat->messages = messages;
         chat->unread_messages_count = unread_messages_count;
         chat->selected = false;

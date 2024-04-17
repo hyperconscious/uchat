@@ -6,10 +6,11 @@
 #include <stdlib.h>
 #include <sys/socket.h>
 #include "string_utils.h"
-#include "handle_client_codes.h"
+#include "client_requests.h"
 #include "packet.h"
 #include "handle_registration.h"
 #include "handle_login.h"
+#include "handle_search_chat.h"
 
 typedef struct {
     int client_socket;

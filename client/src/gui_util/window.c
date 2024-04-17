@@ -1,5 +1,10 @@
 #include "gui_util.h"
 
+static gboolean on_delete_event() {
+    gtk_main_quit();
+    return TRUE;
+}
+
 GtkWindow *get_window(char *id) {
     GObject *g_object = gtk_builder_get_object(Builder, id);
     return GTK_WINDOW(g_object);
@@ -7,11 +12,11 @@ GtkWindow *get_window(char *id) {
 
 void open_window(char *id) {
     GtkWindow *window = get_window(id);
-    g_signal_connect(window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
+    g_signal_connect(window, "delete-event", G_CALLBACK(on_delete_event), NULL);
     gtk_window_present(window);
 }
 
 void close_window(char *id) {
     GtkWindow *window = get_window(id);
-    gtk_window_close(window);
+    gtk_widget_destroy(GTK_WIDGET(window));
 }
