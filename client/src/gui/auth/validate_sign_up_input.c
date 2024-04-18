@@ -1,6 +1,6 @@
 #include "auth.h"
 
-bool is_sign_up_input_valid(char *username,
+bool validate_sign_up_input(char *username,
                             char *password,
                             char *confirm_password) {
     if (!is_username_valid(username)) {
@@ -16,7 +16,7 @@ bool is_sign_up_input_valid(char *username,
         );
         return false;
     }
-    else if (!is_confirm_password_valid(password, confirm_password)) {
+    else if (!is_password_match(password, confirm_password)) {
         show_auth_error(
                 "Your passwords are not the same.\n"
                 "Please enter matching passwords"

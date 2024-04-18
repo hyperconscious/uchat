@@ -2,6 +2,7 @@
 
 #include "gui_util.h"
 #include "user_authentication.h"
+#include "core.h"
 
 #define LOG_IN_USERNAME_ENTRY_ID "log_in_username_entry"
 #define LOG_IN_PASSWORD_ENTRY_ID "log_in_password_entry"
@@ -14,18 +15,11 @@
 extern int Port;
 extern char *serverAddress;
 
-bool is_username_valid(char *username);
-
-bool is_password_valid(char *password);
-
-bool is_confirm_password_valid(char *password,
-                               char *confirm_password);
-
-bool is_sign_up_input_valid(char *username,
+bool validate_sign_up_input(char *username,
                             char *password,
                             char *confirm_password);
 
-bool is_log_in_input_valid(char *username,
+bool validate_log_in_input(char *username,
                            char *password);
 
 void show_auth_error(char *error);
