@@ -4,12 +4,14 @@
 #include "gui_util.h"
 #include "list.h"
 #include "user_search_rq.h"
+#include "core.h"
 
+#define HOME_WINDOW_CONTENT_BOX_ID "home_window_content_box"
 #define CHATS_BUTTON_ID "chats_button"
 #define DISCOVER_BUTTON_ID "discover_button"
 #define SETTINGS_BUTTON_ID "settings_button"
 #define LOG_OUT_BUTTON_ID "log_out_button"
-#define CHATS_CONTENT_BOX_ID "chats_content_box"
+#define CHATS_BOX_ID "chats_box"
 #define CHAT_LIST_BOX_ID "chat_list"
 #define SEARCH_CHAT_ENTRY_ID "search_chat_entry"
 #define CHAT_NOT_SELECTED_BOX_ID "chat_not_selected_box"
@@ -21,6 +23,7 @@
 #define CHAT_MESSAGES_LIST_ID "chat_messages_list"
 #define CHAT_MESSAGE_ENTRY_ID "message_entry"
 #define SEND_MESSAGE_BUTTON_ID "send_message_button"
+#define SETTINGS_BOX_ID "settings_box"
 
 extern int Port;
 extern char *serverAddress;
@@ -94,13 +97,6 @@ struct _Chat *create_chat(long id,
 Message *create_message(const char *text,
                         bool mine,
                         long long time);
-
-GtkWidget *create_avatar_widget(
-        char letter,
-        int size,
-        char *widget_name,
-        char *path,
-        gboolean (*callback_function)(GtkWidget *, cairo_t *, gpointer *));
 
 Message *get_chat_last_message(struct _Chat *chat);
 

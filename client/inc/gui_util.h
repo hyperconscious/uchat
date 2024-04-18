@@ -67,12 +67,6 @@ void add_widget_to_box(GtkBox *box,
                        bool fill,
                        int padding);
 
-void add_widget_to_box_end(GtkBox *box,
-                           GtkWidget *widget,
-                           bool expand,
-                           bool fill,
-                           int padding);
-
 GtkImage *image_new(char *path);
 
 GtkImage *get_image(char *id);
@@ -88,11 +82,6 @@ gboolean draw_rounded_square_image(GtkWidget *widget,
 GtkDrawingArea *create_drawing_area(
         int width,
         int height,
-        gboolean (*callback_function)(GtkWidget *, cairo_t *, gpointer *),
-        gpointer *user_data);
-
-void connect_drawing_area_signal(
-        char *id,
         gboolean (*callback_function)(GtkWidget *, cairo_t *, gpointer *),
         gpointer *user_data);
 
@@ -113,3 +102,11 @@ void list_store_for_each(GListStore *list_store,
                          void (*ptr)(GObject *object));
 
 gboolean scroll_window_to_bottom(gpointer user_data);
+
+void remove_first_child_from_box(GtkBox *box);
+
+guint get_box_child_count(GtkBox *box);
+
+GtkFileChooser *get_file_chooser_button(char *id);
+
+char *get_file_chooser_button_set_file_name(char *id);

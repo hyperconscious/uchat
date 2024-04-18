@@ -6,7 +6,7 @@ static void set_chat_list_item_image(GtkBox *root_box,
     GtkWidget *avatar_widget = create_avatar_widget(
             first_name_letter,
             60,
-            "chat_list_item_default_avatar",
+            "circle_default_avatar",
             path,
             draw_rounded_square_image
     );
@@ -69,13 +69,8 @@ GtkWidget *create_chat_list_box_widget(gpointer item,
 
     GtkBox *name_and_message_box =
             GTK_BOX(gtk_box_new(GTK_ORIENTATION_VERTICAL, 2));
-    add_widget_to_box(
-            root_box,
-            GTK_WIDGET(name_and_message_box),
-            true,
-            true,
-            0
-    );
+    add_widget_to_box(root_box, GTK_WIDGET(name_and_message_box), true, true,
+                      0);
     gtk_widget_set_valign(GTK_WIDGET(name_and_message_box), GTK_ALIGN_CENTER);
 
     set_chat_list_item_name(name_and_message_box, chat->name);

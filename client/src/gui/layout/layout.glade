@@ -440,6 +440,365 @@
       </packing>
     </child>
   </object>
+  <object class="GtkBox" id="settings_box">
+    <property name="name">settings_box</property>
+    <property name="height-request">600</property>
+    <property name="visible">True</property>
+    <property name="can-focus">False</property>
+    <property name="orientation">vertical</property>
+    <signal name="show" handler="on_settings_screen_show" swapped="no"/>
+    <child>
+      <object class="GtkLabel">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <property name="halign">start</property>
+        <property name="margin-start">16</property>
+        <property name="margin-top">16</property>
+        <property name="label" translatable="yes">Settings</property>
+        <style>
+          <class name="label_title"/>
+        </style>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">True</property>
+        <property name="position">0</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkSeparator">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <property name="margin-start">16</property>
+        <property name="margin-end">6</property>
+        <property name="margin-top">8</property>
+        <style>
+          <class name="separator"/>
+        </style>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">True</property>
+        <property name="position">1</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkBox" id="settings_content_box">
+        <property name="name">settings_box_content</property>
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <property name="margin-start">16</property>
+        <property name="margin-end">16</property>
+        <property name="margin-top">8</property>
+        <property name="margin-bottom">16</property>
+        <property name="hexpand">True</property>
+        <property name="vexpand">True</property>
+        <child>
+          <object class="GtkBox" id="username_and_avatar_box">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="halign">start</property>
+            <property name="margin-start">16</property>
+            <property name="margin-top">16</property>
+            <property name="margin-bottom">16</property>
+            <property name="orientation">vertical</property>
+            <child>
+              <object class="GtkBox" id="change_avatar_box">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="halign">start</property>
+                <child>
+                  <object class="GtkBox">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="halign">start</property>
+                    <property name="valign">center</property>
+                    <property name="margin-start">12</property>
+                    <property name="orientation">vertical</property>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="halign">start</property>
+                        <property name="label" translatable="yes">Avatar</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="halign">start</property>
+                        <property name="label" translatable="yes">600 X 600 or larger recommended</property>
+                        <style>
+                          <class name="label_small"/>
+                        </style>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkFileChooserButton" id="avatar_file_chooser_button">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="halign">start</property>
+                        <property name="margin-top">8</property>
+                        <property name="resize-mode">queue</property>
+                        <property name="preview-widget-active">False</property>
+                        <property name="title" translatable="yes"/>
+                        <property name="width-chars">15</property>
+                        <signal name="file-set" handler="on_avatar_file_chooser_button_file_set" swapped="no"/>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
+                        <property name="position">3</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">False</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="halign">start</property>
+                <property name="margin-top">12</property>
+                <property name="label" translatable="yes">Username</property>
+                <style>
+                  <class name="label_small"/>
+                </style>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkEntry" id="change_username_entry">
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="halign">start</property>
+                <property name="margin-top">8</property>
+                <property name="max-length">30</property>
+                <property name="width-chars">35</property>
+                <property name="max-width-chars">35</property>
+                <property name="placeholder-text" translatable="yes">Username</property>
+                <signal name="changed" handler="on_change_username_entry_text_changed" swapped="no"/>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton">
+                <property name="label" translatable="yes">Change username</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+                <property name="margin-top">12</property>
+                <signal name="clicked" handler="on_change_username_button_clicked" swapped="no"/>
+                <style>
+                  <class name="button_primary"/>
+                </style>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">3</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="change_username_error_label">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="margin-top">8</property>
+                <style>
+                  <class name="label_error"/>
+                </style>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">4</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkBox" id="password_box">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="margin-start">16</property>
+            <property name="margin-end">16</property>
+            <property name="margin-top">148</property>
+            <property name="margin-bottom">16</property>
+            <property name="orientation">vertical</property>
+            <child>
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="halign">start</property>
+                <property name="label" translatable="yes">Change password</property>
+                <style>
+                  <class name="label_small"/>
+                </style>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkEntry" id="old_password_entry">
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="margin-top">8</property>
+                <property name="max-length">30</property>
+                <property name="visibility">False</property>
+                <property name="invisible-char">*</property>
+                <property name="width-chars">35</property>
+                <property name="max-width-chars">35</property>
+                <property name="secondary-icon-pixbuf">img/ic_show.png</property>
+                <property name="placeholder-text" translatable="yes">Old password</property>
+                <property name="input-purpose">password</property>
+                <signal name="changed" handler="on_change_password_entry_text_changed" swapped="no"/>
+                <signal name="icon-release" handler="on_change_password_visibility_icon_release" swapped="no"/>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkEntry" id="new_password_entry">
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="margin-top">12</property>
+                <property name="max-length">30</property>
+                <property name="visibility">False</property>
+                <property name="invisible-char">*</property>
+                <property name="secondary-icon-pixbuf">img/ic_show.png</property>
+                <property name="placeholder-text" translatable="yes">New password</property>
+                <property name="input-purpose">password</property>
+                <signal name="changed" handler="on_change_password_entry_text_changed" swapped="no"/>
+                <signal name="icon-release" handler="on_change_password_visibility_icon_release" swapped="no"/>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkEntry" id="confirm_new_password_entry">
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="margin-top">12</property>
+                <property name="max-length">30</property>
+                <property name="visibility">False</property>
+                <property name="invisible-char">*</property>
+                <property name="secondary-icon-pixbuf">img/ic_show.png</property>
+                <property name="placeholder-text" translatable="yes">New password</property>
+                <property name="input-purpose">password</property>
+                <signal name="changed" handler="on_change_password_entry_text_changed" swapped="no"/>
+                <signal name="icon-release" handler="on_change_password_visibility_icon_release" swapped="no"/>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">3</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton">
+                <property name="label" translatable="yes">Change password</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+                <property name="margin-top">12</property>
+                <signal name="clicked" handler="on_change_password_button_clicked" swapped="no"/>
+                <style>
+                  <class name="button_primary"/>
+                </style>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">4</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="change_password_error_label">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="margin-top">8</property>
+                <style>
+                  <class name="label_error"/>
+                </style>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">5</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSeparator" id="rest_width_separator">
+            <property name="name">rest_width_separator</property>
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="hexpand">True</property>
+          </object>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">True</property>
+        <property name="position">2</property>
+      </packing>
+    </child>
+  </object>
   <object class="GtkImage" id="settings_image">
     <property name="visible">True</property>
     <property name="can-focus">False</property>
@@ -452,7 +811,7 @@
     <property name="gravity">center</property>
     <signal name="show" handler="on_home_window_show" swapped="no"/>
     <child>
-      <object class="GtkBox">
+      <object class="GtkBox" id="home_window_content_box">
         <property name="height-request">600</property>
         <property name="visible">True</property>
         <property name="can-focus">False</property>
@@ -581,7 +940,7 @@
           </packing>
         </child>
         <child>
-          <object class="GtkBox" id="chats_content_box">
+          <object class="GtkBox" id="chats_box">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
             <property name="hexpand">True</property>
