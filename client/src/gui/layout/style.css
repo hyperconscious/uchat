@@ -31,12 +31,28 @@ button:hover {
     background-color: #5A57E4;
 }
 
+filechooserbutton button {
+    background-color: #6A57E4;
+    padding: 9px;
+    color: white;
+}
+
 .image-button {
     border: none;
 }
 
 image {
     -gtk-icon-shadow: none;
+}
+
+#circle_default_avatar {
+    border-radius: 20px;
+    font-size: 24px;
+}
+
+#circle_default_avatar {
+    border-radius: 50%;
+    font-size: 24px;
 }
 
 entry {
@@ -74,12 +90,16 @@ scrollbar:hover {
     font-size: 24px;
 }
 
+.label_small {
+    font-size: 13px;
+}
+
 .label_error {
     color: #F44336;
     font-size: 14px;
 }
 
-.separator {
+separator {
     background-color: #343543;
 }
 
@@ -184,16 +204,6 @@ scrollbar:hover {
     border: 1px solid white;
 }
 
-#chat_list_item_default_avatar {
-    border-radius: 20px;
-    font-size: 24px;
-}
-
-#chat_default_avatar {
-    border-radius: 50%;
-    font-size: 24px;
-}
-
 #chat_list_item_name {
     margin-left: 8px;
     color: white;
@@ -277,4 +287,33 @@ scrollbar:hover {
 
 #send_image {
     -gtk-icon-effect: none;
+}
+
+#settings_box {
+    background-color: #353644;
+    color: white;
+}
+
+#settings_box_content {
+    background-color: #414255;
+    border-radius: 20px;
+}
+
+#settings_box button {
+    border-radius: 10px;
+}
+
+#settings_box entry {
+    padding: 6px;
+    border-radius: 10px;
+    background-color: #353644;
+}
+
+#settings_box separator:not(#rest_width_separator) {
+    background-color: grey;
+}
+
+#rest_width_separator {
+    /*min-width: 100px;*/
+    background-color: transparent;
 }

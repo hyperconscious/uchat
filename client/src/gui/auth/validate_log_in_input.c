@@ -1,6 +1,6 @@
 #include "auth.h"
 
-bool is_log_in_input_valid(char *username,
+bool validate_log_in_input(char *username,
                            char *password) {
     if (!is_username_valid(username)) {
         show_auth_error("Username isn't valid");

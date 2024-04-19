@@ -1,4 +1,4 @@
-#include "auth.h"
+#include "core.h"
 
 bool is_password_valid(char *password) {
     bool contains_digit = false;

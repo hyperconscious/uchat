@@ -5,7 +5,7 @@ static void set_chat_image(char *path,
     GtkWidget *avatar_widget = create_avatar_widget(
             first_name_letter,
             50,
-            "chat_default_avatar",
+            "circle_default_avatar",
             path,
             draw_circle_image
     );
@@ -40,7 +40,7 @@ static void set_chat_messages(t_list *messages) {
 static void show_chat_box(void) {
     if (get_widget_visible(CHAT_BOX_ID) == false) {
         gtk_widget_destroy(get_widget(CHAT_NOT_SELECTED_BOX_ID));
-        GtkBox *chats_content_box = get_box(CHATS_CONTENT_BOX_ID);
+        GtkBox *chats_content_box = get_box(CHATS_BOX_ID);
         GtkWidget *chat_box = get_widget(CHAT_BOX_ID);
         add_widget_to_box(chats_content_box, chat_box, true, true, 0);
     }
