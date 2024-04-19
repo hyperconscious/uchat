@@ -47,7 +47,7 @@ struct _Chat {
 };
 
 extern GListStore *all_chats_list_store;
-t_list *chats_on_search; //temporary
+extern t_list *chats_on_search; //temporary
 extern GListStore *visible_chats_list_store;
 
 GtkWidget *create_chat_list_box_widget(gpointer item,

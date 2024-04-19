@@ -36,6 +36,12 @@ void on_log_out_button_clicked(void) {
 }
 
 void on_search_message_entry_changed(void) {
+    if(strlen(get_entry_text(SEARCH_CHAT_ENTRY_ID)) == 0){
+        t_list *chats = get_chats();
+        show_chats(chats);
+        return;
+    }
+
     t_list *curr = chats_on_search;
     while (curr != NULL) {
         if(curr->data != NULL){

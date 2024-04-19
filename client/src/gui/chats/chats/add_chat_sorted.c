@@ -41,15 +41,6 @@ guint add_chat_sorted_all_list_store(Chat *chat) {
     );
 }
 
-guint add_chat_sorted_all_list_store(Chat *chat) {
-    return g_list_store_insert_sorted(
-            all_chats_list_store,
-            chat,
-            compare_chats_last_message_time,
-            NULL
-    );
-}
-
 guint add_chat_sorted_to_visible_list_store(Chat *chat) {
     return g_list_store_insert_sorted(
             visible_chats_list_store,
