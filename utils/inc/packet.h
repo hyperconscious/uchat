@@ -6,11 +6,12 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <stdint.h>
+#include "list.h"
 
 typedef enum e_packet_type {
     PACKET_TYPE_INVALID,
     PACKET_TYPE_STRING,
-   // PACKET_TYPE_LIST,
+    PACKET_TYPE_LIST,
     PACKET_TYPE_UINT8,
     PACKET_TYPE_UINT16,
     PACKET_TYPE_UINT32
@@ -18,12 +19,13 @@ typedef enum e_packet_type {
 
 typedef struct {
     t_packet_type type;
+    int data_size;
     union {
         struct {
             size_t length;
             char* data;
         } s_string;
-     //   list_t* list_data;
+        t_list* list_data;
         uint8_t uint8_data;
         uint16_t uint16_data;
         uint32_t uint32_data;

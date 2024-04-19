@@ -16,10 +16,10 @@ void handle_login(int client_socket) {
 
     t_db_info *info;
     mx_init_db_info(DATABASE, &info);
-    int /*uint32_t*/ id = mx_find_id_by_user(info, username);
+    int id = mx_find_id_by_login(info, username);
     t_client_status_code result_code = SUCCESS_LOGIN;
 
-    if (id == -1)
+    if (id < 0)
     {
         result_code = LOGIN_DOESNT_EXIST;
         t_packet packet_code = create_packet(PACKET_TYPE_UINT8, &result_code);
