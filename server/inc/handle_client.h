@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <sys/socket.h>
 #include "string_utils.h"
-#include "client_requests.h"
+#include "client_request_codes.h"
 #include "packet.h"
 #include "handle_registration.h"
 #include "handle_login.h"
