@@ -5,6 +5,7 @@ Chat *create_chat(long id,
                   char *name,
                   t_list *messages,
                   int unread_messages_count,
+                  bool searching,
                   long long creation_time_in_millis) {
     Chat *chat = g_object_new(CHAT_TYPE, NULL);
     if (chat != NULL) {
@@ -13,6 +14,7 @@ Chat *create_chat(long id,
         chat->name = name != NULL ? strdup(name) : NULL;
         chat->messages = messages;
         chat->unread_messages_count = unread_messages_count;
+        chat->searching = searching;
         chat->selected = false;
         chat->creation_time_in_millis = creation_time_in_millis;
     }
