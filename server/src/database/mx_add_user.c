@@ -1,15 +1,12 @@
 #include "database.h"
 
-int mx_add_user(t_db_info *info, const char *name, const char *password,
-                int *id_of_new_user)
+int mx_add_user(sqlite3_stmt *stmt, const char *name, const char *password)
 {
     int result = 0;
-    MX_TRY_FUNCTION(sqlite3_reset(info->addusr_stmt), result);
-    MX_TRY_FUNCTION(sqlite3_bind_text(info->addusr_stmt, 1, name, -1, SQLITE_STATIC), result);
-    MX_TRY_FUNCTION(sqlite3_bind_text(info->addusr_stmt, 2, crypt(password, "pass"), -1, SQLITE_STATIC), result);
-    if( sqlite3_step(info->addusr_stmt) != SQLITE_DONE) return sqlite3_step(info->addusr_stmt);
-
-    *id_of_new_user = sqlite3_last_insert_rowid(info->database);
-
+    MX_TRY_FUNCTION(sqlite3_reset(stmt), result);
+    MX_TRY_FUNCTION(sqlite3_bind_text(stmt, 1, name, -1, SQLITE_STATIC), result);
+    MX_TRY_FUNCTION(sqlite3_bind_text(stmt, 2, crypt(password, name), -1, SQLITE_STATIC), result);
+    int res = sqlite3_step(stmt);
+    if(res != SQLITE_DONE) return res;
     return 0;
 }

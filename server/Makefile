@@ -34,7 +34,7 @@ ifeq ($(UNAME_S),Linux)
 endif
 
 $(BINNAME): $(OBJS)
-	@$(CC) -o $@ $^ $(UTILS_LIB) $(SQLITE_LIB) $(SYSTEMDEPENDENT_LIBS)
+	@$(CC) -o $@ $^ $(UTILS_LIB) -pthread -ldl $(SQLITE_LIB) $(SYSTEMDEPENDENT_LIBS) 
 	@printf "\033[32;1m$@ created\033[0m\n"
 
 $(OBJS): $(OBJDIR)/%.o: $(SRCDIR)/%.c Makefile | $(OBJDIR)

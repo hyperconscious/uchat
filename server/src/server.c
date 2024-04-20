@@ -1,12 +1,13 @@
 #include "server.h"
+#include "database.h"
 
 int main(int argc, char* argv[]) {
-	if (argc != 2) {
+    if (argc != 2) {
 		fprintf(stderr, "Usage: %s <port>\n", argv[0]);
 		return 1;
 	}
     // db processing...
-
+    mx_test_db_all();
     int server_socket = Socket(AF_INET, SOCK_STREAM, 0);
     Bind(server_socket, atoi(argv[1]));
     Listen(server_socket, MAX_CLIENTS);

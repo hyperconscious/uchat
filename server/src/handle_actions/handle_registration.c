@@ -15,10 +15,14 @@ void handle_sign_up(int client_socket) {
 
     int id = -1; //uint32_t
     t_client_status_code result_code = SUCCESS_REGISTRATION;  
-    t_db_info *info;
-    
-    mx_init_db_info(DATABASE, &info);
-    if (mx_add_user(info, username, password, &id) == 0) {
+
+    sqlite3 *db;
+    sqlite3_stmt *stmt;
+    sqlite3_open(DATABASE, &db);
+    mx_init_add_user(db, &stmt);
+
+    if (mx_add_user(stmt, username, password) == 0) {
+        id = sqlite3_last_insert_rowid(db);
         t_packet packet_code = create_packet(PACKET_TYPE_UINT8, &result_code);
         t_packet packet_id = create_packet(PACKET_TYPE_UINT32, &id);
         send_and_release_packet(client_socket, &packet_code);
@@ -28,7 +32,7 @@ void handle_sign_up(int client_socket) {
         t_packet packet_code = create_packet(PACKET_TYPE_UINT8, &result_code);
         send_and_release_packet(client_socket, &packet_code);
     }
-    mx_destroy_db_info(&info);
+    sqlite3_close(db);
     free_packet(&user);
     free_packet(&pass);
 }
