@@ -98,8 +98,9 @@ int mx_sub_user_from_chat(sqlite3_stmt *stmt, int user_id, int chat_id);
 
 //selectors
 long mx_find_id_by_user(sqlite3_stmt *stmt, char* username);
+long mx_get_user_id_by_login(sqlite3_stmt *stmt, char *login);
 
-int mx_find_id_by_login(t_db_info *info, char* username);
+//int mx_find_id_by_login(t_db_info *info, char* username);
 
 int *mx_find_users_by_login(sqlite3 *db, const char *name, uint16_t *count);
 
