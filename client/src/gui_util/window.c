@@ -1,6 +1,6 @@
 #include "gui_util.h"
 
-static gboolean on_delete_event() {
+static gboolean on_delete_event(void) {
     gtk_main_quit();
     return TRUE;
 }

@@ -1,6 +1,6 @@
 #include "database.h"
 
-void mx_test_db_add_user()
+void mx_test_db_add_user(void)
 {
     fprintf(stderr, "\nAdd user to db test...\n");
     sqlite3_stmt *stmt;
@@ -22,7 +22,7 @@ void mx_test_db_add_user()
     sqlite3_close(db);
 }
 
-void mx_test_db_remove_user()
+void mx_test_db_remove_user(void)
 {
     fprintf(stderr, "\nRemove user from db test...\n");
     sqlite3_stmt *remove_stmt;
@@ -51,7 +51,7 @@ void mx_test_db_remove_user()
     sqlite3_close(db);
 }
 
-void mx_test_db_add_chat()
+void mx_test_db_add_chat(void)
 {
     fprintf(stderr, "\nAdd chat to db test...\n");
     sqlite3_stmt *stmt;
@@ -72,7 +72,7 @@ void mx_test_db_add_chat()
     sqlite3_close(db);
 }
 
-void mx_test_db_all()
+void mx_test_db_all(void)
 {
     mx_test_db_add_user();
     mx_test_db_add_chat();
