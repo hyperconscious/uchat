@@ -1,6 +1,6 @@
-#include "user_authentication.h"
+#include "requests.h"
 
-char* process_user_authentication(char* server_address, int port, char* username, char* password,
+char* rq_process_user_authentication(char* server_address, int port, char* username, char* password,
                                                  t_client_rq authentication_code) {
 	int client_socket = create_and_connect_socket(server_address, port);
 

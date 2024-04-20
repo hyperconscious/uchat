@@ -1,7 +1,7 @@
 #pragma once
 
 #include "gui_util.h"
-#include "user_authentication.h"
+#include "requests.h"
 #include "core.h"
 
 #define LOG_IN_USERNAME_ENTRY_ID "log_in_username_entry"

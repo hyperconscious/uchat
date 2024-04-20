@@ -1,6 +1,6 @@
-#include "user_search_rq.h"
+#include "requests.h"
 
-char** search_chats(char* searching_chat, uint16_t *count,  char* server_address, int port){
+char** rq_search_chats(char* searching_chat, uint16_t *count,  char* server_address, int port){
     if(strlen(searching_chat) == 0) return NULL;
     int client_socket = create_and_connect_socket(server_address, port);
 

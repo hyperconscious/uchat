@@ -84,7 +84,7 @@ void on_search_message_entry_changed(void) {
     }
 
     uint16_t count = 0;
-    char **founded_chats = search_chats(get_entry_text(SEARCH_CHAT_ENTRY_ID),
+    char **founded_chats = rq_search_chats(get_entry_text(SEARCH_CHAT_ENTRY_ID),
                             &count, serverAddress, Port);
     for (uint16_t i = 0; i < count; i++) {
         create_searching_chat(founded_chats[i]);

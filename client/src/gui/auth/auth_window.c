@@ -7,7 +7,7 @@ void on_log_in_button_clicked(void) {
     if (!validate_log_in_input(username, password))
        return;
 
-    char *result = process_user_authentication(serverAddress, Port, username,
+    char *result = rq_process_user_authentication(serverAddress, Port, username,
                                 password, AUTH_LOGIN);
     if (strcmp(result, SUCCESSFUL) == 0){
         free(result);
@@ -27,7 +27,7 @@ void on_sign_up_button_clicked(void) {
     if (!validate_sign_up_input(username, password, confirm_password))
         return;
 
-    char *result = process_user_authentication(serverAddress, Port, username,
+    char *result = rq_process_user_authentication(serverAddress, Port, username,
                                 password, AUTH_SIGN_UP);
     if (strcmp(result, SUCCESSFUL) == 0){
         free(result);

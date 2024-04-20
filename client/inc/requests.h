@@ -11,14 +11,16 @@
 #include <string.h>
 #include "packet.h"
 #include "socket_operations.h"
-#include "client_requests.h"
+#include "client_request_codes.h"
 #include "client_status_code.h"
+#include "packet.h"
 
 #define AUTH_WINDOW_ID "auth_window"
 #define HOME_WINDOW_ID "home_window"
 #define SUCCESSFUL "success"
 
-char* process_user_authentication(char* server_address, int port,
+char* rq_process_user_authentication(char* server_address, int port,
                                                  char* username, char* password,
                                                  t_client_rq authentication_code);
 
+char** rq_search_chats(char* searching_chat, uint16_t *count, char* server_address, int port);

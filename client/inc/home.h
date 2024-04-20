@@ -3,7 +3,7 @@
 #define _GNU_SOURCE
 #include "gui_util.h"
 #include "list.h"
-#include "user_search_rq.h"
+#include "requests.h"
 #include "local_time.h"
 #include "core.h"
 
