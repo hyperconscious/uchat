@@ -1,7 +1,7 @@
 #include "packet.h"
 
 t_packet create_packet(t_packet_type type, const void *data) {
-    t_packet packet;
+    t_packet packet = {0};
     packet.type = type;
     packet.data_size = sizeof(packet.type);
     switch (type) {

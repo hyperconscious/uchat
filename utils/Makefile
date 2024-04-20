@@ -1,5 +1,5 @@
 LIBNAME = libutils
-CC = gcc
+CC = clang
 CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic
 OBJDIR = obj
 SRCDIR = src

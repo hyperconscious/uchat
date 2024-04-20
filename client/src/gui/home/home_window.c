@@ -1,4 +1,5 @@
 #include "home.h"
+#include "soup.h"
 
 GListStore *all_chats_list_store = NULL;
 GListStore *visible_chats_list_store = NULL;
@@ -35,6 +36,30 @@ void on_settings_button_clicked(void) {
 void on_log_out_button_clicked(void) {
 }
 
+gboolean remove_chat_with_null(GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gpointer data) {
+    // Получаем данные элемента
+    Chat *chat = NULL;
+    (void)path;
+    (void)data;
+    gtk_tree_model_get(model, iter, 0, &chat, -1);
+    
+    // Проверяем, есть ли у чата сообщения
+    if (chat != NULL && chat->messages == NULL) {
+        // Удаляем найденный чат
+ //       gtk_list_store_remove(GTK_LIST_STORE(model), iter);
+             remove_chat(chat);
+        // Возвращаем TRUE, чтобы остановить поиск после удаления чата
+        return TRUE;
+    }
+    
+    // Возвращаем FALSE, чтобы продолжить поиск
+    return FALSE;
+}
+
+void remove_chats_with_null_messages(GListStore *list_store) {
+    gtk_tree_model_foreach(GTK_TREE_MODEL(list_store), remove_chat_with_null, NULL);
+}
+
 void on_search_message_entry_changed(void) {
     if(strlen(get_entry_text(SEARCH_CHAT_ENTRY_ID)) == 0){
         t_list *chats = get_chats();
@@ -42,13 +67,14 @@ void on_search_message_entry_changed(void) {
         return;
     }
 
-    t_list *curr = chats_on_search;
+    remove_chats_with_null_messages(all_chats_list_store);
+   /* t_list *curr = chats_on_search;
     while (curr != NULL) {
         if(curr->data != NULL){
             remove_chat((Chat*)curr->data);
         }
         curr = curr->next; 
-    }
+    }*/
   //  if(chats_on_search != NULL)
   //      free(chats_on_search);
 

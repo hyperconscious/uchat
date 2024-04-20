@@ -1,0 +1,3 @@
+[submodule "libs/libsoup"]
+	path = libs/libsoup
+	url = git@github.com:frida/libsoup.git

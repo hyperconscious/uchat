@@ -1,6 +1,6 @@
 #include "../inc/database.h"
 
-int mx_destroy_db_info(t_db_info **info)
+/*int mx_destroy_db_info(t_db_info **info)
 {
 
     int result = 0;
@@ -18,4 +18,4 @@ int mx_destroy_db_info(t_db_info **info)
     (*info) = 0;
 
     return result;
-}
+}*/
