@@ -11,8 +11,8 @@ SQLITE_DIR = SQLite
 all:
 	@make -sC $(SQLITE_DIR)
 	@make -sC $(UTILS_DIR)
-	@make -sC $(SERVER_DIR)
 	@make -sC $(CLIENT_DIR)
+	@make -sC $(SERVER_DIR)
 
 clean:
 	@make -sC $(SQLITE_DIR) $@
@@ -21,10 +21,10 @@ clean:
 	@make -sC $(CLIENT_DIR) $@
 
 uninstall:
-	@make -sC $(SQLITE_DIR) $@
 	@make -sC $(UTILS_DIR) $@
 	@make -sC $(SERVER_DIR) $@
 	@make -sC $(CLIENT_DIR) $@
+	@make -sC $(SQLITE_DIR) $@
 	
 reinstall:
 	@make -sC $(SQLITE_DIR) $@

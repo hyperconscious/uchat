@@ -14,9 +14,8 @@ char* process_user_authentication(char* server_address, int port, char* username
     send_and_release_packet(client_socket, &login_request);
     send_and_release_packet(client_socket, &user);
     send_and_release_packet(client_socket, &pass);
-
     t_client_status_code status_code = receive_packet(client_socket).u_payload.uint8_data;
-    uint32_t id;
+    int id;
     switch (status_code) {
         case WRONG_PASSWORD:
             return strdup("Wrong password");

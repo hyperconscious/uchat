@@ -21,14 +21,19 @@ static void set_chat_name(char *name) {
 }
 
 static void set_chat_messages(t_list *messages) {
+    if (messages == NULL) {
+        return;
+    }
     int messages_count = mx_list_size(messages);
     clear_list_box(CHAT_MESSAGES_LIST_ID);
 
     Message *previous_message = NULL;
     for (int i = 0; i < messages_count; i++) {
         Message *message = mx_get_element_by_index(messages, i);
-        add_messages_list_box_row(message, previous_message);
-        previous_message = message;
+        if (message != NULL) {
+            add_messages_list_box_row(message, previous_message);
+            previous_message = message;
+        }
     }
 }
 

@@ -23,7 +23,7 @@ void handle_login(int client_socket) {
     int /*uint32_t*/ id = mx_find_id_by_user(stmt, username);
     t_client_status_code result_code = SUCCESS_LOGIN;
 
-    if (id == -1)
+    if (id < 0)
     {
         result_code = LOGIN_DOESNT_EXIST;
         t_packet packet_code = create_packet(PACKET_TYPE_UINT8, &result_code);

@@ -3,7 +3,7 @@
 static int compare_chats_last_message_time(const void *a,
                                            const void *b,
                                            void *user_data) {
-    if (user_data == NULL) {}
+   /* if (user_data == NULL) {}
 
     Chat *first_chat = (Chat *)a;
     Chat *second_chat = (Chat *)b;
@@ -25,7 +25,11 @@ static int compare_chats_last_message_time(const void *a,
         Message *first_chat_last_message = get_chat_last_message(first_chat);
         return second_chat_creation_time -
                first_chat_last_message->time_in_millis;
-    }
+    }*/
+    (void)a;
+    (void)b;
+    (void)user_data;
+    return 1;
 }
 
 guint add_chat_sorted_all_list_store(Chat *chat) {

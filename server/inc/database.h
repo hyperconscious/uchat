@@ -1,9 +1,13 @@
 #pragma once
-#include <stdlib.h>
-#include "sqlite3.h"
+
+#ifndef _POSIX_C_SOURCE
+#define _POSIX_C_SOURCE 200809L
+#endif
+
+#include "../SQLite/sqlite3.h"
 #include <stdlib.h>
 #include <stdio.h>
-#include <unistd.h>
+#include <string.h>
 #include <stdint.h>
 #ifdef __MACH__
 
@@ -95,11 +99,15 @@ int mx_sub_user_from_chat(sqlite3_stmt *stmt, int user_id, int chat_id);
 //selectors
 long mx_find_id_by_user(sqlite3_stmt *stmt, char* username);
 
+int mx_find_id_by_login(t_db_info *info, char* username);
+
+int *mx_find_users_by_login(sqlite3 *db, const char *name, uint16_t *count);
+
+char *mx_get_login_by_id(sqlite3 *db, const int id);
 
 int mx_get_last_messages(sqlite3_stmt *stmt, int chat_id, int max_rows,
                          void(*callback)(sqlite3_stmt *));
 
-long mx_get_user_id_by_login(sqlite3_stmt *stmt, char *login);
 
 //utils
 const char *get_last_error(sqlite3_stmt *stmt);

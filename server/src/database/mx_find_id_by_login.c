@@ -11,8 +11,6 @@ long mx_find_id_by_user(sqlite3_stmt *stmt, char* username)
     while ((sqlite3_step(stmt)) == SQLITE_ROW) {
         id = sqlite3_column_int64(stmt, 0); // Get the value of the 'id' column  
     }
-
-
     return id;
     
 }

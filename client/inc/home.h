@@ -4,6 +4,7 @@
 #include "gui_util.h"
 #include "list.h"
 #include "user_search_rq.h"
+#include "local_time.h"
 #include "core.h"
 
 #define HOME_WINDOW_CONTENT_BOX_ID "home_window_content_box"
@@ -46,6 +47,7 @@ struct _Chat {
 };
 
 extern GListStore *all_chats_list_store;
+extern t_list *chats_on_search; //temporary
 extern GListStore *visible_chats_list_store;
 
 GtkWidget *create_chat_list_box_widget(gpointer item,
@@ -60,6 +62,8 @@ void select_chat(GtkListBoxRow *selected_row);
 void filter_chats(void);
 
 int get_chat_index_by_id(long id);
+
+guint add_chat_sorted_all_list_store(struct _Chat *chat);
 
 void add_chat_sorted(struct _Chat *chat);
 
