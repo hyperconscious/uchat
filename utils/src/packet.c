@@ -1,7 +1,13 @@
 #include "packet.h"
 
 t_packet create_packet(t_packet_type type, const void *data) {
-    t_packet packet = {0};
+
+    t_packet packet = {
+        .type = PACKET_TYPE_INVALID,
+        .data_size = 0,
+        .u_payload = {{0}}
+    };
+
     packet.type = type;
     packet.data_size = sizeof(packet.type);
     switch (type) {

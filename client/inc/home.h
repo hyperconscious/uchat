@@ -43,11 +43,11 @@ struct _Chat {
     t_list *messages;
     int unread_messages_count;
     bool selected;
+    bool searching;
     long long creation_time_in_millis;
 };
 
 extern GListStore *all_chats_list_store;
-extern t_list *chats_on_search; //temporary
 extern GListStore *visible_chats_list_store;
 
 GtkWidget *create_chat_list_box_widget(gpointer item,
@@ -63,13 +63,13 @@ void filter_chats(void);
 
 int get_chat_index_by_id(long id);
 
-guint add_chat_sorted_all_list_store(struct _Chat *chat);
+guint add_chat_sorted_to_all_list_store(struct _Chat *chat);
 
 void add_chat_sorted(struct _Chat *chat);
 
 guint add_chat_sorted_to_visible_list_store(struct _Chat *chat);
 
-void remove_chat(struct _Chat *chat);
+void remove_chat(struct _Chat *chat, GListStore *list);
 
 void add_messages_list_box_row(Message *message,
                                Message *previous_message);
@@ -96,6 +96,7 @@ struct _Chat *create_chat(long id,
                           char *name,
                           t_list *messages,
                           int unread_messages_count,
+                          bool searching,
                           long long creation_time_in_millis);
 
 Message *create_message(const char *text,

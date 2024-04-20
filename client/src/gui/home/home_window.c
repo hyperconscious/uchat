@@ -1,9 +1,7 @@
 #include "home.h"
-#include "soup.h"
 
 GListStore *all_chats_list_store = NULL;
 GListStore *visible_chats_list_store = NULL;
-t_list *chats_on_search = NULL; //temporary
 
 void on_home_window_show(void) {
     set_home_header_button_active_style(CHATS_BUTTON_ID);
@@ -36,58 +34,62 @@ void on_settings_button_clicked(void) {
 void on_log_out_button_clicked(void) {
 }
 
-gboolean remove_chat_with_null(GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gpointer data) {
-    // Получаем данные элемента
-    Chat *chat = NULL;
-    (void)path;
-    (void)data;
-    gtk_tree_model_get(model, iter, 0, &chat, -1);
-    
-    // Проверяем, есть ли у чата сообщения
-    if (chat != NULL && chat->messages == NULL) {
-        // Удаляем найденный чат
- //       gtk_list_store_remove(GTK_LIST_STORE(model), iter);
-             remove_chat(chat);
-        // Возвращаем TRUE, чтобы остановить поиск после удаления чата
-        return TRUE;
+void delete_searched_chats() {
+    int size = g_list_model_get_n_items(G_LIST_MODEL(all_chats_list_store));
+
+    for (int i = 0; i < size; i++) {
+        Chat *chat = get_list_store_item_by_index(all_chats_list_store, i);
+        if (chat && chat->searching && chat->messages == NULL)
+            remove_chat(chat, all_chats_list_store);
     }
-    
-    // Возвращаем FALSE, чтобы продолжить поиск
-    return FALSE;
+    size = g_list_model_get_n_items(G_LIST_MODEL(visible_chats_list_store));
+
+    for (int i = 0; i < size; i++) {
+        Chat *chat = get_list_store_item_by_index(visible_chats_list_store, i);
+        if (chat && chat->searching && chat->messages == NULL)
+            remove_chat(chat, visible_chats_list_store);
+    }
 }
 
-void remove_chats_with_null_messages(GListStore *list_store) {
-    gtk_tree_model_foreach(GTK_TREE_MODEL(list_store), remove_chat_with_null, NULL);
+static void create_searching_chat(char* name) {
+    int size = g_list_model_get_n_items(G_LIST_MODEL(all_chats_list_store));
+    for (int i = 0; i < size; i++) {
+        Chat *chat = get_list_store_item_by_index(all_chats_list_store, i);
+        if (chat && strcmp(chat->name, name) == 0) {
+            return;
+        }
+    }
+    Chat* chat = create_chat(0, NULL, name, NULL, 0, true, 
+                                get_current_time_millis());
+    add_chat_sorted_to_all_list_store(chat);
+}
+
+ void show_chats_am_in(){
+    int size = g_list_model_get_n_items(G_LIST_MODEL(all_chats_list_store));
+
+    for (int i = 0; i < size; i++) {
+        Chat *chat = get_list_store_item_by_index(all_chats_list_store, i);
+        if (chat) {
+            add_chat_sorted_to_visible_list_store(chat);
+        }
+    }
+    
 }
 
 void on_search_message_entry_changed(void) {
     if(strlen(get_entry_text(SEARCH_CHAT_ENTRY_ID)) == 0){
-        t_list *chats = get_chats();
-        show_chats(chats);
+      //  delete_searched_chats();
+      //  show_chats_am_in();
         return;
     }
-
-    remove_chats_with_null_messages(all_chats_list_store);
-   /* t_list *curr = chats_on_search;
-    while (curr != NULL) {
-        if(curr->data != NULL){
-            remove_chat((Chat*)curr->data);
-        }
-        curr = curr->next; 
-    }*/
-  //  if(chats_on_search != NULL)
-  //      free(chats_on_search);
 
     uint16_t count = 0;
     char **founded_chats = search_chats(get_entry_text(SEARCH_CHAT_ENTRY_ID),
                             &count, serverAddress, Port);
     for (uint16_t i = 0; i < count; i++) {
-        Chat* chat = create_chat(0, NULL,
-                                founded_chats[i], NULL, 0,
-                                get_current_time_millis());
-        mx_push_back(&chats_on_search, chat);
-        add_chat_sorted_all_list_store(chat);
+        create_searching_chat(founded_chats[i]);
     }
+        
     filter_chats();
 
     for (uint16_t i = 0; i < count; i++) {

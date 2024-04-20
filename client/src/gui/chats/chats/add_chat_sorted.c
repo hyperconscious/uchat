@@ -32,7 +32,7 @@ static int compare_chats_last_message_time(const void *a,
     return 1;
 }
 
-guint add_chat_sorted_all_list_store(Chat *chat) {
+guint add_chat_sorted_to_all_list_store(Chat *chat) {
     return g_list_store_insert_sorted(
             all_chats_list_store,
             chat,
@@ -52,10 +52,5 @@ guint add_chat_sorted_to_visible_list_store(Chat *chat) {
 
 void add_chat_sorted(Chat *chat) {
     add_chat_sorted_to_visible_list_store(chat);
-    g_list_store_insert_sorted(
-            all_chats_list_store,
-            chat,
-            compare_chats_last_message_time,
-            NULL
-    );
+    guint add_chat_sorted_to_all_list_store(Chat *chat);
 }

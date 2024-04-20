@@ -18,7 +18,6 @@ char** search_chats(char* searching_chat, uint16_t *count,  char* server_address
     char **users_array = malloc(*count * sizeof(char*));
     for (uint16_t i = 0; i < *count; i++) {
         users_array[i] = receive_packet(client_socket).u_payload.s_string.data;
-        printf("%s\n", users_array[i]);
     }
     
     close(client_socket);
