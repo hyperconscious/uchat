@@ -38,7 +38,7 @@ void on_search_message_entry_changed(void) {
     if(strlen(get_entry_text(SEARCH_CHAT_ENTRY_ID)) == 0){
         g_list_store_remove_all(visible_chats_list_store);
         delete_searched_chats();
-        show_chats_am_in();
+        show_chats_i_am_in();
         return;
     }
 

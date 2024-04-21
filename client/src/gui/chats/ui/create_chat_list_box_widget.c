@@ -8,6 +8,7 @@ static void set_chat_list_item_image(GtkBox *root_box,
             60,
             "circle_default_avatar",
             path,
+            false,
             draw_rounded_square_image
     );
     add_widget_to_box(root_box, avatar_widget, false, false, 0);

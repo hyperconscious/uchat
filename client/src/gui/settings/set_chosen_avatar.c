@@ -11,6 +11,7 @@ void set_chosen_avatar(char user_name_first_letter,
             120,
             "circle_default_avatar",
             image_path,
+            true,
             draw_circle_image
     );
     add_widget_to_box(change_avatar_box, avatar_widget, false, false, 0);

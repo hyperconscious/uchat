@@ -44,7 +44,7 @@ void add_message_to_selected_chat(void) {
                                               serverAddress, Port);
             chat->searching = false;
             delete_searched_chats();
-            show_chats_am_in();
+            show_chats_i_am_in();
         }
 
         Message *previous_message = (Message *)mx_get_last_element(

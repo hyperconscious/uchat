@@ -2,13 +2,11 @@ CLIENT = uchat
 SERVER = uchat_server
 UTILS = libutils
 SQLITE = libsqlite
-#SOUP = libsoap
 
 CLIENT_DIR = client
 SERVER_DIR = server
 UTILS_DIR = utils
 SQLITE_DIR = SQLite
-#SOUP_DIR = libs/libsoup/libsoup
 
 all:
 	@+make -sC $(SQLITE_DIR)
