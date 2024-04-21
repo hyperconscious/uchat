@@ -15,3 +15,10 @@ void join_thread(pthread_t thread, void **retval) {
         exit(EXIT_FAILURE);
     }
 }
+
+void detach_thread(pthread_t thread) {
+    if (pthread_detach(thread) != 0) {
+        perror("detach_thread failed");
+        exit(EXIT_FAILURE);
+    }
+}

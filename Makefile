@@ -11,28 +11,24 @@ SQLITE_DIR = SQLite
 #SOUP_DIR = libs/libsoup/libsoup
 
 all:
-	 #make -sC $(SOUP_DIR)
 	@make -sC $(SQLITE_DIR)
 	@make -sC $(UTILS_DIR)
 	@make -sC $(SERVER_DIR)
 	@make -sC $(CLIENT_DIR)
 
 clean:
-	 #make -sC $(SOUP_DIR)
 	@make -sC $(SQLITE_DIR) $@
 	@make -sC $(UTILS_DIR) $@
 	@make -sC $(SERVER_DIR) $@
 	@make -sC $(CLIENT_DIR) $@
 
 uninstall:
-	 #make -sC $(SOUP_DIR)
+	@make -sC $(SQLITE_DIR) $@
 	@make -sC $(UTILS_DIR) $@
 	@make -sC $(SERVER_DIR) $@
 	@make -sC $(CLIENT_DIR) $@
-	@make -sC $(SQLITE_DIR) $@
 	
 reinstall:
-	 #make -sC $(SOUP_DIR)
 	@make -sC $(SQLITE_DIR) $@
 	@make -sC $(UTILS_DIR) $@
 	@make -sC $(SERVER_DIR) $@

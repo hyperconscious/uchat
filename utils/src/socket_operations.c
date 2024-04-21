@@ -130,7 +130,7 @@ int create_and_connect_socket(const char* server_address, int port) {
     Inet_pton(AF_INET, server_address,
               &server_addr.sin_addr); // need to be optimize
     if(connect_with_timeout(socket, (struct sockaddr *)&server_addr,
-            sizeof(server_addr), 50) == 1)
+            sizeof(server_addr), 5000) == 1)
         return socket;
 
     close(socket);

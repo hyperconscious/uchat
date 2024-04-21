@@ -9,3 +9,4 @@ typedef void*(*FunctionPointer)(void *);
 
 pthread_t create_thread(FunctionPointer handler, void *arg);
 void join_thread(pthread_t thread, void **retval);
+void detach_thread(pthread_t thread);
