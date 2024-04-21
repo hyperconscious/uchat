@@ -4,7 +4,7 @@
 #define _POSIX_C_SOURCE 200809L
 #endif
 
-#include "../SQLite/sqlite3.h"
+#include "sqlite3.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>

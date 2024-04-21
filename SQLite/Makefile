@@ -29,7 +29,6 @@ clean:
 	@rm -rf $(OBJDIR)
 	@printf "\033[31;37mdeleted: SQLite/$(OBJDIR)\033[0m\n"
 
-reinstall: uninstall all
+reinstall: uninstall $(LIBNAME)
 
 .PHONY: all uninstall clean reinstall
-

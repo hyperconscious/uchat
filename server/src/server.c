@@ -18,7 +18,8 @@ int main(int argc, char* argv[]) {
         t_client_info *client_info = malloc(sizeof(t_client_info));
         client_info->client_socket = client_socket;
 
-        create_thread(handle_client, (void *)client_info);
+        pthread_t thread = create_thread(handle_client, (void *)client_info);
+        detach_thread(thread);
     }
     
     close(server_socket);
