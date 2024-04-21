@@ -34,7 +34,7 @@ void on_settings_button_clicked(void) {
 void on_log_out_button_clicked(void) {
 }
 
-void delete_searched_chats() {
+static void delete_searched_chats() {
     int size = g_list_model_get_n_items(G_LIST_MODEL(all_chats_list_store));
 
     for (int i = 0; i < size; i++) {
@@ -64,7 +64,7 @@ static void create_searching_chat(char* name) {
     add_chat_sorted_to_all_list_store(chat);
 }
 
- void show_chats_am_in(){
+static void show_chats_am_in(){
     int size = g_list_model_get_n_items(G_LIST_MODEL(all_chats_list_store));
 
     for (int i = 0; i < size; i++) {
@@ -78,8 +78,8 @@ static void create_searching_chat(char* name) {
 
 void on_search_message_entry_changed(void) {
     if(strlen(get_entry_text(SEARCH_CHAT_ENTRY_ID)) == 0){
-      //  delete_searched_chats();
-      //  show_chats_am_in();
+        delete_searched_chats();
+        show_chats_am_in();
         return;
     }
 

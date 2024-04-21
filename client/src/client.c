@@ -3,6 +3,7 @@
 GtkBuilder *Builder = NULL;
 int Port = -1;
 char* serverAddress = NULL;
+uint32_t user_id = 0;
 
 int main(int argc, char **argv) {
     if (argc != 3) {

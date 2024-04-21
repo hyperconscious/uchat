@@ -21,11 +21,11 @@ static void set_chat_name(char *name) {
 }
 
 static void set_chat_messages(t_list *messages) {
+    clear_list_box(CHAT_MESSAGES_LIST_ID);
     if (messages == NULL) {
         return;
     }
     int messages_count = mx_list_size(messages);
-    clear_list_box(CHAT_MESSAGES_LIST_ID);
 
     Message *previous_message = NULL;
     for (int i = 0; i < messages_count; i++) {

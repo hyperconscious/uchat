@@ -1,4 +1,4 @@
-#include "handle_registration.h"
+#include "handle_requests.h"
 
 void handle_sign_up(int client_socket) {
     t_packet user = receive_packet(client_socket);

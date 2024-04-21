@@ -8,7 +8,7 @@ void on_log_in_button_clicked(void) {
        return;
 
     char *result = rq_process_user_authentication(serverAddress, Port, username,
-                                password, AUTH_LOGIN);
+                                password, AUTH_LOGIN, &user_id);
     if (strcmp(result, SUCCESSFUL) == 0){
         free(result);
         open_window(HOME_WINDOW_ID);
@@ -28,7 +28,7 @@ void on_sign_up_button_clicked(void) {
         return;
 
     char *result = rq_process_user_authentication(serverAddress, Port, username,
-                                password, AUTH_SIGN_UP);
+                                password, AUTH_SIGN_UP, &user_id);
     if (strcmp(result, SUCCESSFUL) == 0){
         free(result);
         open_window(HOME_WINDOW_ID);

@@ -12,8 +12,8 @@ void add_message(int chat_index,
         mx_push_back(&chat->messages, message);
     }
 
-    remove_chat(chat, all_chats_list_store);
-    add_chat_sorted(chat);
+  //  remove_chat(chat, all_chats_list_store);
+  //  add_chat_sorted(chat);
 
     if (chat->selected) {
         GtkListBoxRow *added_row = gtk_list_box_get_row_at_index(
@@ -38,6 +38,12 @@ void add_message_to_selected_chat(void) {
 
         Chat *chat = get_list_store_item_by_index(all_chats_list_store,
                                                   selected_chat_index);
+        if (chat->searching) {
+            chat->id = rq_create_chat(chat->name, user_id, 
+                                              serverAddress, Port);
+            chat->searching = false;
+        }
+
         Message *previous_message = (Message *)mx_get_last_element(
                 chat->messages);
 
