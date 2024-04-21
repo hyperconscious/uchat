@@ -1,4 +1,5 @@
 #include "handle_requests.h"
+#include "handle_db_chat.h"
 
 void handle_add_chat(int client_socket) {
     t_packet owner_id_packet = receive_packet(client_socket);
@@ -13,7 +14,6 @@ void handle_add_chat(int client_socket) {
    // int chat_id = sqlite3_get_last_inserted_row_id(db);
     t_packet chat_id_packet = create_packet(PACKET_TYPE_UINT32, &chat_id);
     send_and_release_packet(client_socket, &chat_id_packet);
-
     sqlite3_finalize(stmt);
     sqlite3_close(db);
     free_packet(&owner_id_packet);

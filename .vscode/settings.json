@@ -62,6 +62,9 @@
     "string_utils.h": "c",
     "stdlib.h": "c",
     "sqlite3.h": "c",
-    "*.removed": "c"
+    "*.removed": "c",
+    "handle_db_chat.h": "c",
+    "algorithm": "c",
+    "handle_requests.h": "c"
   }
 }

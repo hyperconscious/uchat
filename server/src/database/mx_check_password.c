@@ -1,4 +1,4 @@
-#include "../inc/database.h"
+#include "database.h"
 
 int mx_check_password(sqlite3_stmt *stmt, char *login, char *password)
 {

@@ -1,4 +1,4 @@
-#include "../inc/database.h"
+#include "database.h"
 
 int mx_init_add_user_to_chat(sqlite3 *db, sqlite3_stmt **statement)
 {
