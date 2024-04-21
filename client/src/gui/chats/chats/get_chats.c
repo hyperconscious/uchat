@@ -4,11 +4,9 @@ t_list *get_chats(void) {
     Chat *chat1 = create_chat(0, "client/src/gui/layout/img/ic_person2.png",
                               "Doe", NULL, 10, false, 1712957612439);
     t_list *chats = mx_create_node(chat1);
-  /*  uint16_t count = 0;
+    uint16_t count = 0;
     char **my_chats = rq_get_chats(user_id, &count, serverAddress, Port);
-    printf("%hu = ", count);
     for (uint16_t i = 0; i < count; i++) {
-        printf("%s\n", my_chats[i]);
         Chat *chat = create_chat(i + 3, NULL, my_chats[i],
                                  NULL, 1, false, 1712957612439);
         mx_push_back(&chats, chat);
@@ -16,8 +14,8 @@ t_list *get_chats(void) {
     for (uint16_t i = 0; i < count; i++) {
         free(my_chats[i]);
     }
-    free(my_chats);*/
-
+    free(my_chats);
+/*
     Message *chat2_message1 = create_message("Hi", false, 1712957652439);
     Message *chat2_message2 = create_message("How are you?", true,
                                              1712957682439);
@@ -41,7 +39,7 @@ t_list *get_chats(void) {
 
     mx_push_back(&chats, chat1);
     mx_push_back(&chats, chat2);
-    mx_push_back(&chats, chat3);
+    mx_push_back(&chats, chat3);*/
 
     return chats;
 }

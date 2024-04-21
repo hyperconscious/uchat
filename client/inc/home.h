@@ -69,6 +69,9 @@ guint add_chat_sorted_to_all_list_store(struct _Chat *chat);
 void add_chat_sorted(struct _Chat *chat);
 
 guint add_chat_sorted_to_visible_list_store(struct _Chat *chat);
+void show_chats_am_in();
+void create_searching_chat(char* name);
+void delete_searched_chats();
 
 void remove_chat(struct _Chat *chat, GListStore *list);
 
