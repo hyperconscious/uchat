@@ -12,8 +12,9 @@ void add_message(int chat_index,
         mx_push_back(&chat->messages, message);
     }
 
-  //  remove_chat(chat, all_chats_list_store);
-  //  add_chat_sorted(chat);
+    remove_chat(chat, all_chats_list_store);
+    remove_chat(chat, visible_chats_list_store);
+    add_chat_sorted(chat);
 
     if (chat->selected) {
         GtkListBoxRow *added_row = gtk_list_box_get_row_at_index(

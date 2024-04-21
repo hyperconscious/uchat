@@ -20,6 +20,7 @@ void handle_login(int client_socket) {
 
     mx_init_find_id_by_user(db, &stmt);
     int /*uint32_t*/ id = mx_find_id_by_user(stmt, username);
+    sqlite3_finalize(stmt);
     t_client_status_code result_code = SUCCESS_LOGIN;
     mx_init_check_password(db, &stmt);
     if (id < 0)
@@ -38,7 +39,7 @@ void handle_login(int client_socket) {
         t_packet packet_code = create_packet(PACKET_TYPE_UINT8, &result_code);
         send_and_release_packet(client_socket, &packet_code);
     }
-    //mx_destroy_db_info(&info);
+    sqlite3_finalize(stmt);
     sqlite3_close(db);
     free_packet(&user);
     free_packet(&pass);
