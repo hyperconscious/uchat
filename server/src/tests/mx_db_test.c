@@ -85,7 +85,7 @@ void mx_test_db_remove_chat(void)
     mx_init_get_chats_id_by_name(db, &get_chat_stmt);
 
     t_chat *chats;
-    int chats_count;
+    uint16_t chats_count;
     if(mx_get_chats_by_name(get_chat_stmt, "test chat", 1, &chats, &chats_count))
     {
         fprintf(stderr, "error\n");

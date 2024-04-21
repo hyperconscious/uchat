@@ -28,7 +28,7 @@ void handle_search_chat(int client_socket){
         send_and_release_packet(client_socket, &chat_id);
         send_and_release_packet(client_socket, &chat_owner_id);
         send_and_release_packet(client_socket, &chat_name);
-        free(chats + i);
+       // free(chats + i);
     }
     free(chats);
     sqlite3_close(db);
