@@ -1,14 +1,7 @@
 #pragma once
 
 #include "database.h"
-
-typedef struct chat_s{
-    long id;
-    const unsigned char *name;
-    long owner_id;
-    const unsigned char *creation_time;
-} t_chat;
-
+#include "types.h"
 
 //chat
 int mx_add_chat(sqlite3_stmt *stmt, char *name, int owner_id);
