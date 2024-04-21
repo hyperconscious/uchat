@@ -32,6 +32,17 @@ button:hover {
     background-color: #5A57E4;
 }
 
+.button_secondary {
+    background-color: #4D4E62;
+    color: white;
+    border-radius: 25px;
+    padding: 6px 0;
+}
+
+#button_secondary_selected {
+    background-color: #6A57E4;
+}
+
 filechooserbutton button {
     background-color: #6A57E4;
     padding: 9px;
@@ -124,7 +135,6 @@ notebook header tabs tab:hover {
     background-color: #343543;
 }
 
-
 /*auth*/
 #auth_notebook {
     margin: 100px;
@@ -142,6 +152,11 @@ notebook header tabs tab:hover {
     border: 1px solid #343543;
     padding: 6px 12px;
     border-radius: 25px;
+}
+
+#label_learn_language {
+    color: lightgrey;
+    font-size: 14px;
 }
 
 /*home*/
