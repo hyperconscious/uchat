@@ -1,4 +1,7 @@
 #include "auth.h"
+#include "types.h"
+#include "serializer.h"
+#include "string.h"
 
 void on_auth_window_show(void) {
     set_selected_language_button_style(ENGLISH_LANGUAGE_BUTTON_ID);

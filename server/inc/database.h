@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdint.h>
+#include "types.h"
 #ifdef __MACH__
 
 #include <unistd.h>

@@ -7,6 +7,7 @@
 #include "requests.h"
 #include "local_time.h"
 #include "core.h"
+#include "types.h"
 
 #define HOME_WINDOW_CONTENT_BOX_ID "home_window_content_box"
 #define CHATS_BUTTON_ID "chats_button"
@@ -75,7 +76,7 @@ guint add_chat_sorted_to_visible_list_store(struct _Chat *chat);
 
 void show_chats_i_am_in(void);
 
-void create_searching_chat(char *name);
+void create_searching_chat(t_chat *chat);
 
 void delete_searched_chats(void);
 

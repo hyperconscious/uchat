@@ -7,7 +7,7 @@ uint32_t user_id = 0;
 
 int main(int argc, char **argv) {
     if (argc != 3) {
-        fprintf(stderr, "Usage: %s <ip> <port>\n", argv[0]);
+        fprintf(stderr, "Usage: %s \"ip\" <port>\n", argv[0]);
         return 1;
     }
 

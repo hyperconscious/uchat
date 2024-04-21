@@ -1,6 +1,7 @@
 #include "handle_db_chat.h"
 
-int mx_get_chats_by_user_id(sqlite3_stmt *stmt, int user_id, int max_rows, t_chat **chats ,int *result_count)
+int mx_get_chats_by_user_id(sqlite3_stmt *stmt, int user_id, int max_rows,
+        t_chat **chats ,uint16_t *result_count)
 {
     int result = 0;
     MX_TRY_FUNCTION(sqlite3_reset(stmt), result);

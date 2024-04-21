@@ -5,14 +5,14 @@ t_list *get_chats(void) {
                               "Doe", NULL, 10, false, 1712957612439);
     t_list *chats = mx_create_node(chat1);
     uint16_t count = 0;
-    char **my_chats = rq_get_chats(user_id, &count, serverAddress, Port);
+    t_chat **my_chats = rq_get_chats(user_id, &count, serverAddress, Port);
     for (uint16_t i = 0; i < count; i++) {
-        Chat *chat = create_chat(i + 3, NULL, my_chats[i],
+        Chat *chat = create_chat(my_chats[i]->id, NULL, (char *)my_chats[i]->name,
                                  NULL, 1, false, 1712957612439);
         mx_push_back(&chats, chat);
     }
     for (uint16_t i = 0; i < count; i++) {
-        free(my_chats[i]);
+        free((char *)my_chats[i]->name);
     }
     free(my_chats);
 /*

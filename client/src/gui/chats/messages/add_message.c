@@ -39,12 +39,13 @@ void add_message_to_selected_chat(void) {
 
         Chat *chat = get_list_store_item_by_index(all_chats_list_store,
                                                   selected_chat_index);
-        if (chat->searching) {
+        if (chat->searching && chat->messages == NULL) {
             chat->id = rq_create_chat(chat->name, user_id, 
                                               serverAddress, Port);
             chat->searching = false;
             delete_searched_chats();
             show_chats_i_am_in();
+           // gtk_entry_set_text(SEARCH_CHAT_ENTRY_ID, "");
         }
 
         Message *previous_message = (Message *)mx_get_last_element(
