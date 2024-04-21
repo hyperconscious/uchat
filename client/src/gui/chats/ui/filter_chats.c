@@ -7,7 +7,6 @@ static void add_matching_chat(GObject *object) {
     if (strcasestr(chat->name, filter_text) != NULL) {
         guint added_chat_index = add_chat_sorted_to_visible_list_store(chat);
         if (chat->selected) {
-            printf("1");
             GtkListBoxRow *added_row = gtk_list_box_get_row_at_index(
                     get_list_box(CHAT_LIST_BOX_ID),
                     added_chat_index

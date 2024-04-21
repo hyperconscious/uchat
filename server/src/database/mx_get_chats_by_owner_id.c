@@ -14,17 +14,21 @@ char **mx_get_chat_names(sqlite3 *db, int owner_id, uint16_t *count) {
     chat_names = malloc(capacity * sizeof(char*));
 
     while (sqlite3_step(stmt) == SQLITE_ROW) {
-        char *name = strdup((char*)sqlite3_column_text(stmt, 0));
         if(*count >= capacity) {
             char **temp = realloc(chat_names, capacity * sizeof(char*));
             if (!temp) {
                 fprintf(stderr, "Memory reallocation failed\n");
+                for (uint16_t i = 0; i < *count; ++i) {
+                    free(chat_names[i]);
+                }
                 free(chat_names);
+                sqlite3_finalize(stmt);
                 return NULL;
             }
             chat_names = temp;
         }
-        strcpy(chat_names[*count], name);
+        const char *name = (const char*)sqlite3_column_text(stmt, 0);
+        chat_names[*count] = strdup(name);
         (*count)++;
     }
 
