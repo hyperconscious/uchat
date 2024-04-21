@@ -1,6 +1,7 @@
 #pragma once
 
 #define _GNU_SOURCE
+
 #include "gui_util.h"
 #include "list.h"
 #include "requests.h"
@@ -13,7 +14,8 @@
 #define SETTINGS_BUTTON_ID "settings_button"
 #define LOG_OUT_BUTTON_ID "log_out_button"
 #define CHATS_BOX_ID "chats_box"
-#define CHAT_LIST_BOX_ID "chat_list"
+#define PERSONAL_CHAT_LIST_BOX_ID "personal_chat_list"
+#define GROUP_CHAT_LIST_BOX_ID "group_chat_list"
 #define SEARCH_CHAT_ENTRY_ID "search_chat_entry"
 #define CHAT_NOT_SELECTED_BOX_ID "chat_not_selected_box"
 #define CHAT_BOX_ID "chat_box"
@@ -24,6 +26,7 @@
 #define CHAT_MESSAGES_LIST_ID "chat_messages_list"
 #define CHAT_MESSAGE_ENTRY_ID "message_entry"
 #define SEND_MESSAGE_BUTTON_ID "send_message_button"
+#define LABEL_NO_INTERNET_CONNECTION_ID "label_no_internet_connection"
 #define SETTINGS_BOX_ID "settings_box"
 
 extern int Port;
@@ -69,8 +72,11 @@ guint add_chat_sorted_to_all_list_store(struct _Chat *chat);
 void add_chat_sorted(struct _Chat *chat);
 
 guint add_chat_sorted_to_visible_list_store(struct _Chat *chat);
+
 void show_chats_i_am_in(void);
-void create_searching_chat(char* name);
+
+void create_searching_chat(char *name);
+
 void delete_searched_chats(void);
 
 void remove_chat(struct _Chat *chat, GListStore *list);

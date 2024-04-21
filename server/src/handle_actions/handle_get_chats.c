@@ -16,7 +16,7 @@ void handle_get_chats(int client_socket){
         send_and_release_packet(client_socket, &count_of_chats);
         for (uint16_t i = 0; i < count; ++i) {
             t_packet chat_to_send = create_packet(PACKET_TYPE_CHAT, chats[i]);
-            printf("sended chat");
+            printf("sended chat\n");
             send_and_release_packet(client_socket, &chat_to_send);
             free(chats[i]);
         }

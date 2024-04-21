@@ -20,8 +20,8 @@ void handle_sign_up(int client_socket) {
     sqlite3_stmt *stmt;
     sqlite3_open(DATABASE, &db);
     mx_init_add_user(db, &stmt);
-
-    if (mx_add_user(stmt, username, password) == 0) {
+    int res = mx_add_user(stmt, username, password);
+    if (res == 0) {
         id = sqlite3_last_insert_rowid(db);
         t_packet packet_code = create_packet(PACKET_TYPE_UINT8, &result_code);
         t_packet packet_id = create_packet(PACKET_TYPE_UINT32, &id);

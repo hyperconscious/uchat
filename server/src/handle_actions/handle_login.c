@@ -24,13 +24,14 @@ void handle_login(int client_socket) {
     sqlite3_finalize(stmt1);
     t_client_status_code result_code = SUCCESS_LOGIN;
     mx_init_check_password(db, &stmt2);
+    int res = mx_check_password(stmt2, username, password);
     if (id < 0)
     {
         result_code = LOGIN_DOESNT_EXIST;
         t_packet packet_code = create_packet(PACKET_TYPE_UINT8, &result_code);
         send_and_release_packet(client_socket, &packet_code);
     }
-    else if (mx_check_password(stmt2, username, password) == 100) {
+    else if (res == 100) {
         t_packet packet_code = create_packet(PACKET_TYPE_UINT8, &result_code);
         t_packet packet_id = create_packet(PACKET_TYPE_UINT32, &id);
         send_and_release_packet(client_socket, &packet_code);

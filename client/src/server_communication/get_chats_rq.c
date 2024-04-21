@@ -16,7 +16,7 @@ t_chat** rq_get_chats(uint32_t owner_id, uint16_t *count, char* server_address, 
     t_chat **chats_array = malloc(*count * sizeof(t_chat*));
     for (uint16_t i = 0; i < *count; i++) {
         chats_array[i] = receive_packet(client_socket).u_payload.chat_data;
-        printf("%s\n", (char *)chats_array[i]->name);
+      //  printf("%s\n", (char *)chats_array[i]->name);
     }
     
     close(client_socket);

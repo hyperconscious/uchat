@@ -60,7 +60,7 @@ t_packet create_packet(t_packet_type type, const void *data) {
             break;
         case PACKET_TYPE_CHAT:
             packet.u_payload.chat_data = (t_chat *)data;
-            packet.data_size += sizeof(t_chat);
+            packet.data_size += sizeof(t_chat *);
             break;
         case PACKET_TYPE_UINT8:
             packet.u_payload.uint8_data = *(const uint8_t *)data;
@@ -105,6 +105,7 @@ void send_packet(int socket_fd, t_packet *packet) {
             break;
         case PACKET_TYPE_CHAT:
             serialized_data = serialize_chat(packet->u_payload.chat_data);
+            printf("serialized: %s", serialized_data);
             memcpy(buffer + sizeof(packet->type), serialized_data,
                    strlen(serialized_data));
             break;
@@ -145,10 +146,9 @@ t_packet receive_packet(int socket_fd) {
         fprintf(stderr, "No connection, unable to receive to packet\n");
         return packet;
     }
-    printf("1\n");
     ssize_t bytes_received = recv(socket_fd, &(packet.type), sizeof(packet.type), 0);
     if (bytes_received != sizeof(packet.type)) {
-        fprintf(stderr, "Failed to receive packet type\n");
+        fprintf(stderr, "Failed to receive packet type - %d\n", packet.type);
         exit(EXIT_FAILURE);
     }
     char* serialized_data = NULL;
