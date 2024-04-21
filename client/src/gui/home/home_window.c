@@ -11,7 +11,7 @@ void on_home_window_show(void) {
     add_widget_to_box(get_box(HOME_WINDOW_CONTENT_BOX_ID),
                       get_widget(SETTINGS_BOX_ID), true, true, 0);
     hide_widget(SETTINGS_BOX_ID);
-}
+} 
 
 void on_chats_button_clicked(void) {
     set_home_header_button_active_style(CHATS_BUTTON_ID);
@@ -23,6 +23,17 @@ void on_discover_button_clicked(void) {
     set_home_header_button_active_style(DISCOVER_BUTTON_ID);
     hide_widget(CHATS_BOX_ID);
     hide_widget(SETTINGS_BOX_ID);
+
+    uint16_t count = 0;
+    char **founded_chats = rq_discover(user_id,
+                            &count, serverAddress, Port);
+   
+   
+
+    for (uint16_t i = 0; i < count; i++) {
+        free(founded_chats[i]);
+    }
+    free(founded_chats);
 }
 
 void on_settings_button_clicked(void) {

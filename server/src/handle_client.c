@@ -29,6 +29,9 @@ void *handle_client(void *arg) {
         case RQ_GET_CHATS:
             handle_get_chats(client_socket);
             break;
+        case RQ_DISCOVER:
+            handle_discover(client_socket);
+            break;
         default:
             fprintf(stderr, "wrong action from client\n");
             break;

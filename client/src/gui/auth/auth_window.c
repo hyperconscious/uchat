@@ -3,8 +3,12 @@
 #include "serializer.h"
 #include "string.h"
 
+uint16_t language_id = 0;
+
+
 void on_auth_window_show(void) {
     set_selected_language_button_style(ENGLISH_LANGUAGE_BUTTON_ID);
+    language_id = 1;
 }
 
 void on_log_in_button_clicked(void) {
@@ -17,7 +21,7 @@ void on_log_in_button_clicked(void) {
     char *result = rq_process_user_authentication(serverAddress, Port,
                                                   username,
                                                   password, AUTH_LOGIN,
-                                                  &user_id);
+                                                  &user_id, language_id);
     if (strcmp(result, SUCCESSFUL) == 0) {
         free(result);
         open_window(HOME_WINDOW_ID);
@@ -39,11 +43,12 @@ void on_sign_up_button_clicked(void) {
     char *result = rq_process_user_authentication(serverAddress, Port,
                                                   username,
                                                   password, AUTH_SIGN_UP,
-                                                  &user_id);
+                                                  &user_id, language_id);
     if (strcmp(result, SUCCESSFUL) == 0) {
         free(result);
         open_window(HOME_WINDOW_ID);
         close_window(AUTH_WINDOW_ID);
+        printf("%d\n", language_id);
         return;
     }
     show_auth_error(result);
@@ -70,24 +75,33 @@ void on_sign_up_confirm_password_visibility_icon_release(void) {
 
 void on_english_language_button_clicked(void) {
     set_selected_language_button_style(ENGLISH_LANGUAGE_BUTTON_ID);
+    language_id = 1;
+    
+    
 }
 
 void on_french_language_button_clicked(void) {
     set_selected_language_button_style(FRENCH_LANGUAGE_BUTTON_ID);
+    language_id = 2;
+
 }
 
 void on_spanish_language_button_clicked(void) {
     set_selected_language_button_style(SPANISH_LANGUAGE_BUTTON_ID);
+    language_id = 3;
 }
 
 void on_chinese_language_button_clicked(void) {
     set_selected_language_button_style(CHINESE_LANGUAGE_BUTTON_ID);
+    language_id = 4;
 }
 
 void on_ukrainian_language_button_clicked(void) {
     set_selected_language_button_style(UKRAINIAN_LANGUAGE_BUTTON_ID);
+    language_id = 5;
 }
 
 void on_german_language_button_clicked(void) {
     set_selected_language_button_style(GERMAN_LANGUAGE_BUTTON_ID);
+    language_id = 6;
 }

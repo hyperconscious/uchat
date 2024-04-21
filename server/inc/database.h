@@ -78,7 +78,7 @@ int mx_init_find_id_by_user(sqlite3 *db, sqlite3_stmt **statement);
 
 
 //user_data
-int mx_add_user(sqlite3_stmt *stmt, const char *name, const char *password);
+int mx_add_user(sqlite3_stmt *stmt, const char *name, const char *password, uint16_t lang);
 
 int mx_sub_user(sqlite3_stmt *stmt, long id);
 
@@ -102,6 +102,10 @@ int mx_sub_user_from_chat(sqlite3_stmt *stmt, int user_id, int chat_id);
 long mx_find_id_by_user(sqlite3_stmt *stmt, char* username);
 long mx_get_user_id_by_login(sqlite3_stmt *stmt, char *login);
 
+
+char **mx_get_users_by_language(sqlite3 *db, int language, uint16_t *count);
+
+
 char **mx_get_chat_names(sqlite3 *db, int owner_id, uint16_t *count);
 
 //int mx_find_id_by_login(t_db_info *info, char* username);
@@ -117,3 +121,6 @@ const char *get_last_error(sqlite3_stmt *stmt);
 
 //testing
 void mx_test_db_all(void);
+
+
+uint16_t mx_get_lang_by_id(sqlite3 *db, uint32_t user_id);

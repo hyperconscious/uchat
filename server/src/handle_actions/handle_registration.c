@@ -3,13 +3,18 @@
 void handle_sign_up(int client_socket) {
     t_packet user = receive_packet(client_socket);
     t_packet pass = receive_packet(client_socket);
+    t_packet lang = receive_packet(client_socket);
+
     char* username = user.u_payload.s_string.data;
     char* password = pass.u_payload.s_string.data;
+    uint16_t language = lang.u_payload.uint16_data;
 
     if(user.type != PACKET_TYPE_STRING || pass.type != PACKET_TYPE_STRING) {
         fprintf(stderr, "Failed to receive packet from client\n");
         free_packet(&user);
         free_packet(&pass);
+        free_packet(&lang);
+
         return;
     }
 
@@ -20,7 +25,7 @@ void handle_sign_up(int client_socket) {
     sqlite3_stmt *stmt;
     sqlite3_open(DATABASE, &db);
     mx_init_add_user(db, &stmt);
-    int res = mx_add_user(stmt, username, password);
+    int res = mx_add_user(stmt, username, password, language);
     if (res == 0) {
         id = sqlite3_last_insert_rowid(db);
         t_packet packet_code = create_packet(PACKET_TYPE_UINT8, &result_code);

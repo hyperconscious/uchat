@@ -23,6 +23,8 @@ extern int Port;
 extern char *serverAddress;
 extern uint32_t user_id;
 
+
+
 bool validate_sign_up_input(char *username,
                             char *password,
                             char *confirm_password);
