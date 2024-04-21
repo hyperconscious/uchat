@@ -1,4 +1,4 @@
-#include "../inc/database.h"
+#include "handle_db_chat.h"
 
 int mx_add_chat(sqlite3_stmt *stmt, char *name, int owner_id)
 {

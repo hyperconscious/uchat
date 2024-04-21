@@ -1,4 +1,4 @@
-#include "database.h"
+#include "handle_db_chat.h"
 
 void mx_test_db_add_user(void)
 {
@@ -51,6 +51,36 @@ void mx_test_db_remove_user(void)
     sqlite3_close(db);
 }
 
+void mx_test_db_add_user_to_chat(void)
+{
+    fprintf(stderr, "\nAdd user to chat db test...\n");
+    sqlite3_stmt *add_stmt;
+    sqlite3_stmt *get_user_stmt;
+    sqlite3_stmt *get_chat_stmt;
+    sqlite3 *db;
+    sqlite3_open(DATABASE, &db);
+    mx_init_add_user_to_chat(db, &add_stmt);
+    mx_init_find_id_by_user(db, &get_user_stmt);
+    mx_init_get_chats_by_name(db, &get_chat_stmt);
+    t_chat *chats;
+    int count;
+    
+    long id = mx_get_user_id_by_login(get_user_stmt, "test user");
+    if(id == -1)
+    {
+        sqlite3_close(db);
+        fprintf(stderr, "Test failed, cannot find user\n");
+        return;
+    }
+    mx_get_chats_by_name(get_chat_stmt, "test_chat", -1, &chats, &count);
+    mx_add_user_to_chat(add_stmt, id, chats[0].id);
+    fprintf(stderr, "Test passed\n");
+    free(chats);
+    sqlite3_finalize(get_user_stmt);
+    sqlite3_finalize(get_chat_stmt);
+    sqlite3_close(db);
+}
+
 void mx_test_db_add_chat(void)
 {
     fprintf(stderr, "\nAdd chat to db test...\n");
@@ -82,7 +112,7 @@ void mx_test_db_remove_chat(void)
     
     sqlite3_stmt *get_chat_stmt;
 
-    mx_init_get_chats_id_by_name(db, &get_chat_stmt);
+    mx_init_get_chats_by_name(db, &get_chat_stmt);
 
     t_chat *chats;
     uint16_t chats_count;
@@ -109,6 +139,7 @@ void mx_test_db_all(void)
 {
     mx_test_db_add_user();
     mx_test_db_add_chat();
+    mx_test_db_add_user_to_chat();
     mx_test_db_remove_chat();
     mx_test_db_remove_user();
     fprintf(stderr, "\nTests finished\n");

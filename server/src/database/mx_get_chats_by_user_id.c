@@ -1,4 +1,4 @@
-#include "database.h"
+#include "handle_db_chat.h"
 
 int mx_get_chats_by_user_id(sqlite3_stmt *stmt, int user_id, int max_rows,
         t_chat **chats ,uint16_t *result_count)
@@ -25,9 +25,10 @@ int mx_get_chats_by_user_id(sqlite3_stmt *stmt, int user_id, int max_rows,
     for(int i = 0; i < *result_count; i++)
     {
         sqlite3_step(stmt);
-        chats[i]->id = sqlite3_column_int64(stmt, 0);
-        chats[i]->name = (char *)sqlite3_column_text(stmt, 1);
-        chats[i]->owner_id = sqlite3_column_int64(stmt, 2);
+        (*chats)[i].id = sqlite3_column_int64(stmt, 0);
+        (*chats)[i].name = sqlite3_column_text(stmt, 1);
+        (*chats)[i].owner_id = sqlite3_column_int64(stmt, 2);
+        (*chats)[i].creation_time = sqlite3_column_text(stmt, 3);
     }
     return 0;
 }
