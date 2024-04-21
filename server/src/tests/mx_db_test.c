@@ -102,6 +102,24 @@ void mx_test_db_add_chat(void)
     sqlite3_close(db);
 }
 
+void mx_test_db_get_users_from_chat(void)
+{
+    fprintf(stderr, "\nGet users from chat test...\n");
+    sqlite3 *db;
+    sqlite3_open(DATABASE, &db);
+    sqlite3_stmt *get_chats_stmt;
+    mx_init_get_chats_by_name(db, &get_chats_stmt);
+    t_db_chat *chats;
+    uint16_t chats_count;
+    uint32_t *ids;
+
+    mx_get_chats_by_name(get_chats_stmt, "test_chat", -1, &chats, &chats_count);
+
+    uint16_t users_count;
+    mx_get_users_from_chat(db, chats[0].id, -1, &ids,  &users_count);
+    
+}
+
 void mx_test_db_remove_chat(void)
 {
     fprintf(stderr, "\nRemove chat from db test...\n");
