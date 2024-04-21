@@ -72,6 +72,27 @@ void mx_test_db_add_chat(void)
     sqlite3_close(db);
 }
 
+void mx_test_db_remove_chat(void)
+{
+    fprintf(stderr, "\nRemove chat from db test...\n");
+    sqlite3_stmt *remove_stmt;
+    sqlite3 *db;
+    sqlite3_open(DATABASE, &db);
+    mx_init_add_chat(db, &remove_stmt);
+
+    sqlite3_stmt *get_id_stmt;
+
+    mx_init_find_id_by_user(db, &get_id_stmt);
+    long id = mx_get_user_id_by_login(get_id_stmt, "test user");
+    if(mx_add_chat(remove_stmt, "test chat", id))
+        fprintf(stderr, "Test failed\n");
+    else
+        fprintf(stderr, "Test passed\n");
+    sqlite3_finalize(remove_stmt);
+    sqlite3_finalize(get_id_stmt);
+    sqlite3_close(db);
+}
+
 void mx_test_db_all(void)
 {
     mx_test_db_add_user();

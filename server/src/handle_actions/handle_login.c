@@ -30,7 +30,7 @@ void handle_login(int client_socket) {
         t_packet packet_code = create_packet(PACKET_TYPE_UINT8, &result_code);
         send_and_release_packet(client_socket, &packet_code);
     }
-    else if (mx_check_password(stmt2, id, password) == 100) {
+    else if (mx_check_password(stmt2, username, password) == 100) {
         t_packet packet_code = create_packet(PACKET_TYPE_UINT8, &result_code);
         t_packet packet_id = create_packet(PACKET_TYPE_UINT32, &id);
         send_and_release_packet(client_socket, &packet_code);
