@@ -43,6 +43,8 @@ void add_message_to_selected_chat(void) {
             chat->id = rq_create_chat(chat->name, user_id, 
                                               serverAddress, Port);
             chat->searching = false;
+            delete_searched_chats();
+            show_chats_am_in();
         }
 
         Message *previous_message = (Message *)mx_get_last_element(
