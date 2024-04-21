@@ -57,6 +57,8 @@ int mx_init_sub_chat(sqlite3 *db, sqlite3_stmt **statement);
 
 int mx_init_get_chats_id_by_user_id(sqlite3 *db, sqlite3_stmt **statement);
 
+int mx_init_get_chats_id_by_name(sqlite3 *db, sqlite3_stmt **statement);
+
 int mx_init_add_chat_participant(sqlite3 *db, sqlite3_stmt **statement);
 
 int mx_init_sub_chat_participant(sqlite3 *db, sqlite3_stmt **statement);
@@ -97,6 +99,8 @@ int mx_sub_message(sqlite3_stmt *stmt, int id);
 int mx_add_chat(sqlite3_stmt *stmt, char *name, int owner_id);
 
 int mx_get_chats_by_user_id(sqlite3_stmt *stmt, int user_id, int max_rows, t_chat **chats ,int *result_count);
+
+int mx_get_chats_by_name(sqlite3_stmt *stmt, char *name, int max_rows, t_chat **chats ,int *result_count);
 
 int mx_get_chat_by_id(sqlite3 *db, sqlite3_stmt **statement, long *result_ids);
 
