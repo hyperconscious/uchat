@@ -24,7 +24,7 @@ char* rq_process_user_authentication(char* server_address, int port,
                                      t_client_rq authentication_code,
                                      uint32_t *id);
 
-char** rq_search_chats(char* searching_chat, uint16_t *count, 
+t_chat* rq_search_chats(char* searching_chat, uint16_t *count, 
                        char* server_address, int port);
 uint32_t rq_create_chat(char* name, uint32_t owner_id, 
                         char* server_address, int port);

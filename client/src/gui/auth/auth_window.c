@@ -8,10 +8,6 @@ void on_auth_window_show(void) {
 }
 
 void on_log_in_button_clicked(void) {
-
-        open_window(HOME_WINDOW_ID);
-        close_window(AUTH_WINDOW_ID);
-        return;
     char *username = get_entry_text(LOG_IN_USERNAME_ENTRY_ID);
     char *password = get_entry_text(LOG_IN_PASSWORD_ENTRY_ID);
 

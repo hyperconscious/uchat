@@ -1,6 +1,6 @@
 #pragma once
 
-typedef struct chat_s{
+typedef struct {
     long id;
     long owner_id;
     char *name;
