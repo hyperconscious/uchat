@@ -8,6 +8,7 @@
 #include <stdint.h>
 #include "list.h"
 #include "types.h"
+#include "serializer.h"
 
 typedef enum e_packet_type {
     PACKET_TYPE_INVALID,

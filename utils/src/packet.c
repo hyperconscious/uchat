@@ -1,44 +1,5 @@
 #include "packet.h"
 
-char *serialize_chat(const t_chat *chat) {
-    size_t name_len = strlen((const char *)chat->name);
-    size_t serialized_size = sizeof(chat->id) + sizeof(chat->owner_id) + name_len + 1;
-
-    char *serialized_data = malloc(serialized_size);
-    if (!serialized_data) {
-        perror("malloc");
-        exit(EXIT_FAILURE);
-    }
-
-    memcpy(serialized_data, &chat->id, sizeof(chat->id));
-    memcpy(serialized_data + sizeof(chat->id), &chat->owner_id, sizeof(chat->owner_id));
-    strcpy(serialized_data + sizeof(chat->id) + sizeof(chat->owner_id), (const char *)chat->name);
-
-    return serialized_data;
-}
-
-t_chat *deserialize_chat(const char *serialized_data) {
-    t_chat *chat = malloc(sizeof(t_chat));
-    if (!chat) {
-        perror("malloc");
-        exit(EXIT_FAILURE);
-    }
-
-    memcpy(&chat->id, serialized_data, sizeof(chat->id));
-    memcpy(&chat->owner_id, serialized_data + sizeof(chat->id), sizeof(chat->owner_id));
-
-    size_t name_len = strlen(serialized_data + sizeof(chat->id) + sizeof(chat->owner_id));
-
-    chat->name = malloc(name_len + 1);
-    if (!chat->name) {
-        perror("malloc");
-        exit(EXIT_FAILURE);
-    }
-    strcpy((char *)chat->name, serialized_data + sizeof(chat->id) + sizeof(chat->owner_id));
-
-    return chat;
-}
-
 
 t_packet create_packet(t_packet_type type, const void *data) {
 
@@ -59,8 +20,13 @@ t_packet create_packet(t_packet_type type, const void *data) {
                         + packet.u_payload.s_string.length;
             break;
         case PACKET_TYPE_CHAT:
-            packet.u_payload.chat_data = (t_chat *)data;
-            packet.data_size += sizeof(t_chat *);
+            packet.u_payload.chat_data = malloc(sizeof(t_chat));
+            if (!packet.u_payload.chat_data) {
+                perror("malloc");
+                exit(EXIT_FAILURE);
+            }
+            memcpy(packet.u_payload.chat_data, data, sizeof(t_chat));
+            packet.data_size = sizeof(t_chat);
             break;
         case PACKET_TYPE_UINT8:
             packet.u_payload.uint8_data = *(const uint8_t *)data;
@@ -105,8 +71,9 @@ void send_packet(int socket_fd, t_packet *packet) {
             break;
         case PACKET_TYPE_CHAT:
             serialized_data = serialize_chat(packet->u_payload.chat_data);
-            printf("serialized: %s", serialized_data);
-            memcpy(buffer + sizeof(packet->type), serialized_data,
+            int data_len = strlen(serialized_data) + 1;
+            memcpy(buffer + sizeof(packet->type), &data_len, sizeof(data_len));
+            memcpy(buffer + sizeof(packet->type) + sizeof(data_len), serialized_data,
                    strlen(serialized_data));
             break;
         case PACKET_TYPE_UINT8:
@@ -148,7 +115,7 @@ t_packet receive_packet(int socket_fd) {
     }
     ssize_t bytes_received = recv(socket_fd, &(packet.type), sizeof(packet.type), 0);
     if (bytes_received != sizeof(packet.type)) {
-        fprintf(stderr, "Failed to receive packet type - %d\n", packet.type);
+        fprintf(stderr, "Failed to receive packet type");
         exit(EXIT_FAILURE);
     }
     char* serialized_data = NULL;
@@ -185,9 +152,7 @@ t_packet receive_packet(int socket_fd) {
                 fprintf(stderr, "Failed to receive chat data\n");
                 exit(EXIT_FAILURE);
             }
-            printf("%s = ", serialized_data);
             packet.u_payload.chat_data = deserialize_chat(serialized_data);
-            printf("%s\n", (char *)packet.u_payload.chat_data->name);
             free(serialized_data);
             break;
         case PACKET_TYPE_UINT8:

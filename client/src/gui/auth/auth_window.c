@@ -1,13 +1,18 @@
 #include "auth.h"
+#include "types.h"
+#include "serializer.h"
+#include "string.h"
 
 void on_auth_window_show(void) {
     set_selected_language_button_style(ENGLISH_LANGUAGE_BUTTON_ID);
 }
 
 void on_log_in_button_clicked(void) {
+
         open_window(HOME_WINDOW_ID);
         close_window(AUTH_WINDOW_ID);
- /*   char *username = get_entry_text(LOG_IN_USERNAME_ENTRY_ID);
+        return;
+    char *username = get_entry_text(LOG_IN_USERNAME_ENTRY_ID);
     char *password = get_entry_text(LOG_IN_PASSWORD_ENTRY_ID);
 
     if (!validate_log_in_input(username, password))
@@ -24,7 +29,7 @@ void on_log_in_button_clicked(void) {
         return;
     }
     show_auth_error(result);
-    free(result);*/
+    free(result);
 }
 
 void on_sign_up_button_clicked(void) {

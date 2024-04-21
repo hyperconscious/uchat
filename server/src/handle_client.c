@@ -1,14 +1,14 @@
 #include "handle_client.h"
+#include "serializer.h"
 
 void *handle_client(void *arg) {
     t_client_info *client_info = (t_client_info *)arg;
     int client_socket = client_info->client_socket;
     free(client_info);
-
+    
     t_packet request = receive_packet(client_socket);
     if (request.type != PACKET_TYPE_UINT8) {
         fprintf(stderr, "Failed to receive packet from client rq\n");
-       // printf("%d\n", request.type);
         close(client_socket);
         pthread_exit(NULL);
     }
