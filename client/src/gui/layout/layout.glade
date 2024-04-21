@@ -8,6 +8,7 @@
     <property name="resizable">False</property>
     <property name="window-position">center</property>
     <property name="gravity">center</property>
+    <signal name="show" handler="on_auth_window_show" swapped="no"/>
     <child>
       <object class="GtkFixed">
         <property name="visible">True</property>
@@ -30,6 +31,7 @@
                     <property name="can-focus">True</property>
                     <property name="valign">end</property>
                     <property name="margin-top">44</property>
+                    <property name="hexpand">True</property>
                     <property name="vexpand">True</property>
                     <property name="max-length">30</property>
                     <property name="width-chars">25</property>
@@ -51,8 +53,9 @@
                     <property name="can-focus">True</property>
                     <property name="valign">center</property>
                     <property name="margin-top">4</property>
+                    <property name="hexpand">True</property>
                     <property name="vexpand">True</property>
-                    <property name="max-length">30</property>
+                    <property name="max-length">100</property>
                     <property name="visibility">False</property>
                     <property name="invisible-char">*</property>
                     <property name="width-chars">25</property>
@@ -79,6 +82,7 @@
                     <property name="receives-default">True</property>
                     <property name="valign">end</property>
                     <property name="margin-top">32</property>
+                    <property name="hexpand">True</property>
                     <property name="vexpand">True</property>
                     <property name="relief">none</property>
                     <signal name="clicked" handler="on_log_in_button_clicked" swapped="no"/>
@@ -106,9 +110,10 @@
               <object class="GtkLabel" id="log_in_tab">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
+                <property name="hexpand">True</property>
                 <property name="label" translatable="yes">Log in</property>
                 <property name="justify">center</property>
-                <property name="width-chars">11</property>
+                <property name="width-chars">0</property>
               </object>
               <packing>
                 <property name="tab-fill">False</property>
@@ -118,18 +123,100 @@
               <object class="GtkBox">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="orientation">vertical</property>
                 <child>
-                  <object class="GtkEntry" id="sign_up_username_entry">
+                  <object class="GtkBox">
                     <property name="visible">True</property>
-                    <property name="can-focus">True</property>
-                    <property name="margin-top">32</property>
-                    <property name="max-length">30</property>
-                    <property name="width-chars">25</property>
-                    <property name="placeholder-text" translatable="yes">Username</property>
-                    <signal name="changed" handler="on_auth_input_change" swapped="no"/>
+                    <property name="can-focus">False</property>
+                    <property name="orientation">vertical</property>
+                    <child>
+                      <object class="GtkEntry" id="sign_up_username_entry">
+                        <property name="visible">True</property>
+                        <property name="can-focus">True</property>
+                        <property name="margin-top">32</property>
+                        <property name="max-length">30</property>
+                        <property name="width-chars">25</property>
+                        <property name="placeholder-text" translatable="yes">Username</property>
+                        <signal name="changed" handler="on_auth_input_change" swapped="no"/>
+                        <style>
+                          <class name="auth_entry"/>
+                        </style>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkEntry" id="sign_up_password_entry">
+                        <property name="visible">True</property>
+                        <property name="can-focus">True</property>
+                        <property name="margin-top">16</property>
+                        <property name="max-length">100</property>
+                        <property name="visibility">False</property>
+                        <property name="invisible-char">*</property>
+                        <property name="width-chars">25</property>
+                        <property name="secondary-icon-pixbuf">img/ic_show.png</property>
+                        <property name="placeholder-text" translatable="yes">Password</property>
+                        <property name="input-purpose">password</property>
+                        <signal name="changed" handler="on_auth_input_change" swapped="no"/>
+                        <signal name="icon-release" handler="on_sign_up_password_visibility_icon_release" swapped="no"/>
+                        <style>
+                          <class name="auth_entry"/>
+                        </style>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkEntry" id="sign_up_confirm_password_entry">
+                        <property name="visible">True</property>
+                        <property name="can-focus">True</property>
+                        <property name="margin-top">16</property>
+                        <property name="max-length">100</property>
+                        <property name="visibility">False</property>
+                        <property name="invisible-char">*</property>
+                        <property name="width-chars">25</property>
+                        <property name="secondary-icon-pixbuf">img/ic_show.png</property>
+                        <property name="placeholder-text" translatable="yes">Confirm password</property>
+                        <property name="input-purpose">password</property>
+                        <signal name="changed" handler="on_auth_input_change" swapped="no"/>
+                        <signal name="icon-release" handler="on_sign_up_confirm_password_visibility_icon_release" swapped="no"/>
+                        <style>
+                          <class name="auth_entry"/>
+                        </style>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">2</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="sign_up_button">
+                        <property name="label" translatable="yes">Sign up</property>
+                        <property name="visible">True</property>
+                        <property name="can-focus">True</property>
+                        <property name="receives-default">True</property>
+                        <property name="margin-top">32</property>
+                        <property name="relief">none</property>
+                        <signal name="clicked" handler="on_sign_up_button_clicked" swapped="no"/>
+                        <style>
+                          <class name="button_primary"/>
+                          <class name="auth_button"/>
+                        </style>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">3</property>
+                      </packing>
+                    </child>
                     <style>
-                      <class name="auth_entry"/>
+                      <class name="auth_box"/>
                     </style>
                   </object>
                   <packing>
@@ -139,22 +226,175 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkEntry" id="sign_up_password_entry">
+                  <object class="GtkBox">
                     <property name="visible">True</property>
-                    <property name="can-focus">True</property>
-                    <property name="margin-top">16</property>
-                    <property name="max-length">30</property>
-                    <property name="visibility">False</property>
-                    <property name="invisible-char">*</property>
-                    <property name="width-chars">25</property>
-                    <property name="secondary-icon-pixbuf">img/ic_show.png</property>
-                    <property name="placeholder-text" translatable="yes">Password</property>
-                    <property name="input-purpose">password</property>
-                    <signal name="changed" handler="on_auth_input_change" swapped="no"/>
-                    <signal name="icon-release" handler="on_sign_up_password_visibility_icon_release" swapped="no"/>
-                    <style>
-                      <class name="auth_entry"/>
-                    </style>
+                    <property name="can-focus">False</property>
+                    <property name="margin-start">24</property>
+                    <property name="margin-top">32</property>
+                    <property name="orientation">vertical</property>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="name">label_learn_language</property>
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="label" translatable="yes">Your language to learn</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <child>
+                          <object class="GtkButton" id="english_language_button">
+                            <property name="label" translatable="yes">English</property>
+                            <property name="width-request">108</property>
+                            <property name="visible">True</property>
+                            <property name="can-focus">True</property>
+                            <property name="receives-default">True</property>
+                            <property name="margin-top">14</property>
+                            <signal name="clicked" handler="on_english_language_button_clicked" swapped="no"/>
+                            <style>
+                              <class name="button_secondary"/>
+                            </style>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkButton" id="french_language_button">
+                            <property name="label" translatable="yes">French</property>
+                            <property name="width-request">108</property>
+                            <property name="visible">True</property>
+                            <property name="can-focus">True</property>
+                            <property name="receives-default">True</property>
+                            <property name="margin-start">12</property>
+                            <property name="margin-top">14</property>
+                            <signal name="clicked" handler="on_french_language_button_clicked" swapped="no"/>
+                            <style>
+                              <class name="button_secondary"/>
+                            </style>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <child>
+                          <object class="GtkButton" id="spanish_language_button">
+                            <property name="label" translatable="yes">Spanish</property>
+                            <property name="width-request">108</property>
+                            <property name="visible">True</property>
+                            <property name="can-focus">True</property>
+                            <property name="receives-default">True</property>
+                            <property name="margin-top">14</property>
+                            <signal name="clicked" handler="on_spanish_language_button_clicked" swapped="no"/>
+                            <style>
+                              <class name="button_secondary"/>
+                            </style>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkButton" id="chinese_language_button">
+                            <property name="label" translatable="yes">Chinese</property>
+                            <property name="width-request">108</property>
+                            <property name="visible">True</property>
+                            <property name="can-focus">True</property>
+                            <property name="receives-default">True</property>
+                            <property name="margin-start">12</property>
+                            <property name="margin-top">14</property>
+                            <signal name="clicked" handler="on_chinese_language_button_clicked" swapped="no"/>
+                            <style>
+                              <class name="button_secondary"/>
+                            </style>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">2</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <child>
+                          <object class="GtkButton" id="ukrainian_language_button">
+                            <property name="label" translatable="yes">Ukrainian</property>
+                            <property name="width-request">108</property>
+                            <property name="visible">True</property>
+                            <property name="can-focus">True</property>
+                            <property name="receives-default">True</property>
+                            <property name="margin-top">14</property>
+                            <signal name="clicked" handler="on_ukrainian_language_button_clicked" swapped="no"/>
+                            <style>
+                              <class name="button_secondary"/>
+                            </style>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkButton" id="german_language_button">
+                            <property name="label" translatable="yes">German</property>
+                            <property name="width-request">108</property>
+                            <property name="visible">True</property>
+                            <property name="can-focus">True</property>
+                            <property name="receives-default">True</property>
+                            <property name="margin-start">12</property>
+                            <property name="margin-top">14</property>
+                            <signal name="clicked" handler="on_german_language_button_clicked" swapped="no"/>
+                            <style>
+                              <class name="button_secondary"/>
+                            </style>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">3</property>
+                      </packing>
+                    </child>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -162,52 +402,6 @@
                     <property name="position">1</property>
                   </packing>
                 </child>
-                <child>
-                  <object class="GtkEntry" id="sign_up_confirm_password_entry">
-                    <property name="visible">True</property>
-                    <property name="can-focus">True</property>
-                    <property name="margin-top">16</property>
-                    <property name="visibility">False</property>
-                    <property name="invisible-char">*</property>
-                    <property name="width-chars">25</property>
-                    <property name="secondary-icon-pixbuf">img/ic_show.png</property>
-                    <property name="placeholder-text" translatable="yes">Confirm password</property>
-                    <property name="input-purpose">password</property>
-                    <signal name="changed" handler="on_auth_input_change" swapped="no"/>
-                    <signal name="icon-release" handler="on_sign_up_confirm_password_visibility_icon_release" swapped="no"/>
-                    <style>
-                      <class name="auth_entry"/>
-                    </style>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">2</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkButton" id="sign_up_button">
-                    <property name="label" translatable="yes">Sign up</property>
-                    <property name="visible">True</property>
-                    <property name="can-focus">True</property>
-                    <property name="receives-default">True</property>
-                    <property name="margin-top">32</property>
-                    <property name="relief">none</property>
-                    <signal name="clicked" handler="on_sign_up_button_clicked" swapped="no"/>
-                    <style>
-                      <class name="button_primary"/>
-                      <class name="auth_button"/>
-                    </style>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">3</property>
-                  </packing>
-                </child>
-                <style>
-                  <class name="auth_box"/>
-                </style>
               </object>
               <packing>
                 <property name="position">1</property>
@@ -217,8 +411,9 @@
               <object class="GtkLabel" id="sign_up_tab">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
+                <property name="hexpand">True</property>
                 <property name="label" translatable="yes">Sign up</property>
-                <property name="width-chars">14</property>
+                <property name="width-chars">0</property>
               </object>
               <packing>
                 <property name="position">1</property>
@@ -229,8 +424,7 @@
         </child>
         <child>
           <object class="GtkBox">
-            <property name="width-request">556</property>
-            <property name="height-request">0</property>
+            <property name="width-request">808</property>
             <property name="visible">True</property>
             <property name="can-focus">False</property>
             <property name="orientation">vertical</property>
@@ -681,7 +875,7 @@
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
                 <property name="margin-top">8</property>
-                <property name="max-length">30</property>
+                <property name="max-length">100</property>
                 <property name="visibility">False</property>
                 <property name="invisible-char">*</property>
                 <property name="width-chars">35</property>
@@ -703,7 +897,7 @@
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
                 <property name="margin-top">12</property>
-                <property name="max-length">30</property>
+                <property name="max-length">100</property>
                 <property name="visibility">False</property>
                 <property name="invisible-char">*</property>
                 <property name="secondary-icon-pixbuf">img/ic_show.png</property>
@@ -723,7 +917,7 @@
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
                 <property name="margin-top">12</property>
-                <property name="max-length">30</property>
+                <property name="max-length">100</property>
                 <property name="visibility">False</property>
                 <property name="invisible-char">*</property>
                 <property name="secondary-icon-pixbuf">img/ic_show.png</property>
@@ -948,7 +1142,6 @@
               <object class="GtkBox" id="inbox_box">
                 <property name="name">inbox_box</property>
                 <property name="width-request">250</property>
-                <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="margin-start">16</property>
                 <property name="margin-end">16</property>
