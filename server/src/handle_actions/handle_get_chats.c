@@ -1,4 +1,5 @@
 #include "handle_requests.h"
+#include "handle_db_chat.h"
 
 void handle_get_chats(int client_socket){
     t_packet owner_id_packet = receive_packet(client_socket);
@@ -6,9 +7,9 @@ void handle_get_chats(int client_socket){
     sqlite3 *db;
     sqlite3_open(DATABASE, &db);
     sqlite3_stmt *stmt;
-    mx_init_get_chats_id_by_user_id(db, &stmt);
+    mx_init_get_chats_by_user_id(db, &stmt);
     uint16_t count = 0;
-    t_chat **chats = NULL;
+    t_db_chat **chats = NULL;
     mx_get_chats_by_user_id(stmt, owner_id_packet.u_payload.uint32_data,
                             -1, chats, &count);
     t_packet count_of_chats = create_packet(PACKET_TYPE_UINT32, &count);

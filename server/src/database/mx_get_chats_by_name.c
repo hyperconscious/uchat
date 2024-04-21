@@ -1,6 +1,6 @@
 #include "handle_db_chat.h"
 
-int mx_get_chats_by_name(sqlite3_stmt *stmt, char *name, int max_rows, t_chat
+int mx_get_chats_by_name(sqlite3_stmt *stmt, char *name, int max_rows, t_db_chat
         **chats ,uint16_t *result_count)
 {
     int result = 0;
@@ -31,7 +31,6 @@ int mx_get_chats_by_name(sqlite3_stmt *stmt, char *name, int max_rows, t_chat
         (*chats)[i].name = sqlite3_column_text(stmt, 1);
         (*chats)[i].owner_id = sqlite3_column_int64(stmt, 2);
         (*chats)[i].creation_time = sqlite3_column_text(stmt, 3);
-
     }
     return 0;
 }
