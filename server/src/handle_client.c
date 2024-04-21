@@ -8,6 +8,7 @@ void *handle_client(void *arg) {
     t_packet request = receive_packet(client_socket);
     if (request.type != PACKET_TYPE_UINT8) {
         fprintf(stderr, "Failed to receive packet from client rq\n");
+        printf("%d\n", request.type);
         close(client_socket);
         pthread_exit(NULL);
     }

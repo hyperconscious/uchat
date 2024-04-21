@@ -28,5 +28,5 @@ char** rq_search_chats(char* searching_chat, uint16_t *count,
                        char* server_address, int port);
 uint32_t rq_create_chat(char* name, uint32_t owner_id, 
                         char* server_address, int port);
-char** rq_get_chats(uint32_t owner_id, uint16_t *count, char* server_address, int port);
+t_chat** rq_get_chats(uint32_t owner_id, uint16_t *count, char* server_address, int port);
 

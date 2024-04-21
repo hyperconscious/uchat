@@ -1,5 +1,45 @@
 #include "packet.h"
 
+char *serialize_chat(const t_chat *chat) {
+    size_t name_len = strlen((const char *)chat->name);
+    size_t serialized_size = sizeof(chat->id) + sizeof(chat->owner_id) + name_len + 1;
+
+    char *serialized_data = malloc(serialized_size);
+    if (!serialized_data) {
+        perror("malloc");
+        exit(EXIT_FAILURE);
+    }
+
+    memcpy(serialized_data, &chat->id, sizeof(chat->id));
+    memcpy(serialized_data + sizeof(chat->id), &chat->owner_id, sizeof(chat->owner_id));
+    strcpy(serialized_data + sizeof(chat->id) + sizeof(chat->owner_id), (const char *)chat->name);
+
+    return serialized_data;
+}
+
+t_chat *deserialize_chat(const char *serialized_data) {
+    t_chat *chat = malloc(sizeof(t_chat));
+    if (!chat) {
+        perror("malloc");
+        exit(EXIT_FAILURE);
+    }
+
+    memcpy(&chat->id, serialized_data, sizeof(chat->id));
+    memcpy(&chat->owner_id, serialized_data + sizeof(chat->id), sizeof(chat->owner_id));
+
+    size_t name_len = strlen(serialized_data + sizeof(chat->id) + sizeof(chat->owner_id));
+
+    chat->name = malloc(name_len + 1);
+    if (!chat->name) {
+        perror("malloc");
+        exit(EXIT_FAILURE);
+    }
+    strcpy((char *)chat->name, serialized_data + sizeof(chat->id) + sizeof(chat->owner_id));
+
+    return chat;
+}
+
+
 t_packet create_packet(t_packet_type type, const void *data) {
 
     t_packet packet = {0};
@@ -18,11 +58,10 @@ t_packet create_packet(t_packet_type type, const void *data) {
             packet.data_size += sizeof(packet.u_payload.s_string.length)
                         + packet.u_payload.s_string.length;
             break;
-      /*  case PACKET_TYPE_LIST:
-            packet.u_payload.list_data = (t_list*)data;
-            packet.data_size += mx_list_size(packet.u_payload.list_data) 
-                                * sizeof(t_list);
-            break;*/
+        case PACKET_TYPE_CHAT:
+            packet.u_payload.chat_data = (t_chat *)data;
+            packet.data_size += sizeof(t_chat);
+            break;
         case PACKET_TYPE_UINT8:
             packet.u_payload.uint8_data = *(const uint8_t *)data;
             packet.data_size += sizeof(packet.u_payload.uint8_data);
@@ -36,7 +75,7 @@ t_packet create_packet(t_packet_type type, const void *data) {
             packet.data_size += sizeof(packet.u_payload.uint32_data);
             break;
         default:
-            fprintf(stderr, "Unknown packet type\n");
+            fprintf(stderr, "Unknown packet type in create\n");
             exit(EXIT_FAILURE);
     }
 
@@ -56,8 +95,7 @@ void send_packet(int socket_fd, t_packet *packet) {
     }
 
     memcpy(buffer, &(packet->type), sizeof(packet->type));
-
-   // t_list *current = NULL;
+    char* serialized_data = NULL;
     switch (packet->type) {
         case PACKET_TYPE_STRING:
             memcpy(buffer + sizeof(packet->type), &(packet->u_payload.s_string.length),
@@ -65,14 +103,10 @@ void send_packet(int socket_fd, t_packet *packet) {
             memcpy(buffer + sizeof(packet->type) + sizeof(packet->u_payload.s_string.length),
                     packet->u_payload.s_string.data, packet->u_payload.s_string.length);
             break;
-        /* case PACKET_TYPE_LIST:
-            current = packet->u_payload.list_data;
-            size_t offset = sizeof(packet->type);
-            while (current != NULL) {
-                memcpy(buffer + offset, current, sizeof(t_list));
-                offset += sizeof(t_list);
-                current = current->next;
-            }*/
+        case PACKET_TYPE_CHAT:
+            serialized_data = serialize_chat(packet->u_payload.chat_data);
+            memcpy(buffer + sizeof(packet->type), serialized_data,
+                   strlen(serialized_data));
             break;
         case PACKET_TYPE_UINT8:
             memcpy(buffer + sizeof(packet->type), &(packet->u_payload.uint8_data),
@@ -111,13 +145,13 @@ t_packet receive_packet(int socket_fd) {
         fprintf(stderr, "No connection, unable to receive to packet\n");
         return packet;
     }
-    
+    printf("1\n");
     ssize_t bytes_received = recv(socket_fd, &(packet.type), sizeof(packet.type), 0);
     if (bytes_received != sizeof(packet.type)) {
         fprintf(stderr, "Failed to receive packet type\n");
         exit(EXIT_FAILURE);
     }
-
+    char* serialized_data = NULL;
     switch (packet.type) {
         case PACKET_TYPE_STRING:
             bytes_received = recv(socket_fd, &(packet.u_payload.s_string.length),
@@ -135,29 +169,27 @@ t_packet receive_packet(int socket_fd) {
             }
             packet.u_payload.s_string.data[packet.u_payload.s_string.length] = '\0';
             break;
-        /* case PACKET_TYPE_LIST:
-            bytes_received = recv(socket_fd, &(packet.data_size),
-                                  sizeof(packet.data_size), 0);
+        case PACKET_TYPE_CHAT:
+            bytes_received = recv(socket_fd, &(packet.data_size), sizeof(packet.data_size), 0);
             if (bytes_received != sizeof(packet.data_size)) {
-                fprintf(stderr, "Failed to receive list data size\n");
+                fprintf(stderr, "Failed to receive chat data size\n");
                 exit(EXIT_FAILURE);
             }
-
-            char *list_buffer = malloc(packet.data_size);
-            if (!list_buffer) {
+            serialized_data = malloc(packet.data_size);
+            if (!serialized_data) {
                 perror("malloc");
                 exit(EXIT_FAILURE);
             }
-
-            bytes_received = recv(socket_fd, list_buffer, packet.data_size, 0);
-            if (bytes_received != (ssize_t)packet.data_size) {
-                fprintf(stderr, "Failed to receive list data\n");
-                free(list_buffer); 
+            bytes_received = recv(socket_fd, serialized_data, packet.data_size, 0);
+            if (bytes_received != packet.data_size) {
+                fprintf(stderr, "Failed to receive chat data\n");
                 exit(EXIT_FAILURE);
             }
-            packet.u_payload.list_data = create_list_from_data(list_buffer, packet.data_size);
-            free(list_buffer);
-            break;*/
+            printf("%s = ", serialized_data);
+            packet.u_payload.chat_data = deserialize_chat(serialized_data);
+            printf("%s\n", (char *)packet.u_payload.chat_data->name);
+            free(serialized_data);
+            break;
         case PACKET_TYPE_UINT8:
             bytes_received = recv(socket_fd, &(packet.u_payload.uint8_data),
                                     sizeof(packet.u_payload.uint8_data), 0);
@@ -185,7 +217,7 @@ t_packet receive_packet(int socket_fd) {
             packet.u_payload.uint32_data = ntohl(packet.u_payload.uint32_data);
             break;
         default:
-            fprintf(stderr, "Unknown packet type\n");
+            fprintf(stderr, "Unknown packet type received\n");
             exit(EXIT_FAILURE);
     }
     

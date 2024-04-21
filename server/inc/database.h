@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdint.h>
+#include "types.h"
 #ifdef __MACH__
 
 #include <unistd.h>
@@ -68,11 +69,6 @@ int mx_init_get_last_messages(sqlite3 *db, sqlite3_stmt **statement);
 int mx_init_find_id_by_user(sqlite3 *db, sqlite3_stmt **statement);
 
 
-typedef struct chat_s{
-    long id;
-    const unsigned char *name;
-    long owner_id;
-} t_chat;
 
 //db_info
 //int mx_init_db_info(const char *db, sqlite3_stmt *stmt);
@@ -98,7 +94,8 @@ int mx_sub_message(sqlite3_stmt *stmt, int id);
 //chat
 int mx_add_chat(sqlite3_stmt *stmt, char *name, int owner_id);
 
-int mx_get_chats_by_user_id(sqlite3_stmt *stmt, int user_id, int max_rows, t_chat **chats ,int *result_count);
+int mx_get_chats_by_user_id(sqlite3_stmt *stmt, int user_id, int max_rows,
+        t_chat **chats ,uint16_t *result_count);
 
 int mx_get_chats_by_name(sqlite3_stmt *stmt, char *name, int max_rows, t_chat **chats ,int *result_count);
 
