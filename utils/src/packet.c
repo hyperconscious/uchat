@@ -110,7 +110,7 @@ void send_packet(int socket_fd, t_packet *packet) {
 }
 
 t_packet receive_packet(int socket_fd) {
-    t_packet packet;
+    t_packet packet = {0};
     if (socket_fd < 0) {
         fprintf(stderr, "No connection, unable to receive to packet\n");
         return packet;

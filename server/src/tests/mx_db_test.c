@@ -1,6 +1,6 @@
 #include "database.h"
 
-void mx_test_db_add_user()
+void mx_test_db_add_user(void)
 {
     fprintf(stderr, "\nAdd user to db test...\n");
     sqlite3_stmt *stmt;
@@ -22,7 +22,7 @@ void mx_test_db_add_user()
     sqlite3_close(db);
 }
 
-void mx_test_db_remove_user()
+void mx_test_db_remove_user(void)
 {
     fprintf(stderr, "\nRemove user from db test...\n");
     sqlite3_stmt *remove_stmt;
@@ -51,7 +51,7 @@ void mx_test_db_remove_user()
     sqlite3_close(db);
 }
 
-void mx_test_db_add_chat()
+void mx_test_db_add_chat(void)
 {
     fprintf(stderr, "\nAdd chat to db test...\n");
     sqlite3_stmt *stmt;
@@ -72,7 +72,7 @@ void mx_test_db_add_chat()
     sqlite3_close(db);
 }
 
-void mx_test_db_remove_chat()
+void mx_test_db_remove_chat(void)
 {
     fprintf(stderr, "\nRemove chat from db test...\n");
     sqlite3_stmt *remove_stmt;
@@ -97,14 +97,14 @@ void mx_test_db_remove_chat()
 
     if(mx_sub_chat(remove_stmt, chats[0].id))
         fprintf(stderr, "Test failed\n");
-    else    
+    else
         fprintf(stderr, "Test passed\n");
     sqlite3_finalize(remove_stmt);
     sqlite3_finalize(get_chat_stmt);
     sqlite3_close(db);
 }
 
-void mx_test_db_all()
+void mx_test_db_all(void)
 {
     mx_test_db_add_user();
     mx_test_db_add_chat();

@@ -110,3 +110,5 @@ guint get_box_child_count(GtkBox *box);
 GtkFileChooser *get_file_chooser_button(char *id);
 
 char *get_file_chooser_button_set_file_name(char *id);
+
+GdkPixbuf *gdk_pixbuf_new_from_url(const gchar *url);

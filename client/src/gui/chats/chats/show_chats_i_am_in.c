@@ -1,6 +1,6 @@
 #include "home.h"
 
-void show_chats_am_in(){
+void show_chats_i_am_in(void) {
     int size = g_list_model_get_n_items(G_LIST_MODEL(all_chats_list_store));
 
     for (int i = 0; i < size; i++) {
@@ -9,6 +9,4 @@ void show_chats_am_in(){
             add_chat_sorted_to_visible_list_store(chat);
         }
     }
-    
 }
-

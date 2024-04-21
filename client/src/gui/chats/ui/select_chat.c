@@ -7,6 +7,7 @@ static void set_chat_image(char *path,
             50,
             "circle_default_avatar",
             path,
+            false,
             draw_circle_image
     );
 
@@ -22,12 +23,13 @@ static void set_chat_name(char *name) {
 
 static void set_chat_messages(t_list *messages) {
     clear_list_box(CHAT_MESSAGES_LIST_ID);
-    if (messages == NULL) {
-        return;
-    }
-    int messages_count = mx_list_size(messages);
 
+    if (messages == NULL)
+        return;
+
+    int messages_count = mx_list_size(messages);
     Message *previous_message = NULL;
+
     for (int i = 0; i < messages_count; i++) {
         Message *message = mx_get_element_by_index(messages, i);
         if (message != NULL) {
