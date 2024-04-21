@@ -89,6 +89,7 @@ void mx_test_db_remove_chat(void)
     if(mx_get_chats_by_name(get_chat_stmt, "test chat", 1, &chats, &chats_count))
     {
         fprintf(stderr, "error\n");
+        fprintf(stderr, "%s\n", sqlite3_errmsg(db));
         sqlite3_finalize(remove_stmt);
         sqlite3_finalize(get_chat_stmt);
         sqlite3_close(db);
