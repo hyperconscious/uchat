@@ -55,6 +55,8 @@ int mx_init_add_chat(sqlite3 *db, sqlite3_stmt **statement);
 
 int mx_init_sub_chat(sqlite3 *db, sqlite3_stmt **statement);
 
+int mx_init_get_chats_id_by_user_id(sqlite3 *db, sqlite3_stmt **statement);
+
 int mx_init_add_chat_participant(sqlite3 *db, sqlite3_stmt **statement);
 
 int mx_init_sub_chat_participant(sqlite3 *db, sqlite3_stmt **statement);
@@ -63,6 +65,12 @@ int mx_init_get_last_messages(sqlite3 *db, sqlite3_stmt **statement);
 
 int mx_init_find_id_by_user(sqlite3 *db, sqlite3_stmt **statement);
 
+
+typedef struct chat_s{
+    long id;
+    const unsigned char *name;
+    long owner_id;
+} t_chat;
 
 //db_info
 //int mx_init_db_info(const char *db, sqlite3_stmt *stmt);
@@ -77,7 +85,7 @@ int mx_add_user(sqlite3_stmt *stmt, const char *name, const char *password);
 
 int mx_sub_user(sqlite3_stmt *stmt, long id);
 
-int mx_check_password(sqlite3_stmt *stmt, int id, char *password);
+int mx_check_password(sqlite3_stmt *stmt, char *login, char *password);
 
 
 //message
@@ -87,6 +95,11 @@ int mx_sub_message(sqlite3_stmt *stmt, int id);
 
 //chat
 int mx_add_chat(sqlite3_stmt *stmt, char *name, int owner_id);
+
+int mx_get_chats_by_user_id(sqlite3_stmt *stmt, int user_id, int max_rows, t_chat **chats ,int *result_count);
+
+int mx_get_chat_by_id(sqlite3 *db, sqlite3_stmt **statement, long *result_ids);
+
 
 int mx_sub_chat(sqlite3_stmt *stmt, int id);
 
@@ -108,9 +121,7 @@ int *mx_find_users_by_login(sqlite3 *db, const char *name, uint16_t *count);
 
 char *mx_get_login_by_id(sqlite3 *db, const int id);
 
-int mx_get_last_messages(sqlite3_stmt *stmt, int chat_id, int max_rows,
-                         void(*callback)(sqlite3_stmt *));
-
+int mx_get_last_messages(sqlite3_stmt *stmt, int chat_id, int max_rows);
 
 //utils
 const char *get_last_error(sqlite3_stmt *stmt);
