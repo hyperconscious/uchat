@@ -1142,6 +1142,7 @@
               <object class="GtkBox" id="inbox_box">
                 <property name="name">inbox_box</property>
                 <property name="width-request">250</property>
+                <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="margin-start">16</property>
                 <property name="margin-end">16</property>
@@ -1277,7 +1278,6 @@
                 </child>
                 <child>
                   <object class="GtkLabel" id="label_no_internet_connection">
-                    <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="margin-bottom">8</property>
                     <property name="label" translatable="yes">No connection</property>
