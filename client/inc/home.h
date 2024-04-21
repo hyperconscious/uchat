@@ -28,6 +28,9 @@
 
 extern int Port;
 extern char *serverAddress;
+extern uint32_t user_id;
+extern GListStore *all_chats_list_store;
+extern GListStore *visible_chats_list_store;
 
 typedef struct {
     char *text;
@@ -37,7 +40,7 @@ typedef struct {
 
 struct _Chat {
     GtkWidget parent_instance;
-    long id;
+    uint32_t id;
     char *image_path;
     char *name;
     t_list *messages;
@@ -47,8 +50,6 @@ struct _Chat {
     long long creation_time_in_millis;
 };
 
-extern GListStore *all_chats_list_store;
-extern GListStore *visible_chats_list_store;
 
 GtkWidget *create_chat_list_box_widget(gpointer item,
                                        gpointer user_data);

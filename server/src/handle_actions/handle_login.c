@@ -1,4 +1,4 @@
-#include "handle_login.h"
+#include "handle_requests.h"
 
 void handle_login(int client_socket) {
     t_packet user = receive_packet(client_socket);
@@ -13,9 +13,6 @@ void handle_login(int client_socket) {
 
     char* username = user.u_payload.s_string.data;
     char* password = pass.u_payload.s_string.data;
-
-    //t_db_info *info;
-    //mx_init_db_info(DATABASE, &info);
 
     sqlite3 *db;
     sqlite3_stmt *stmt;

@@ -1,7 +1,9 @@
 #include "requests.h"
 
-char* rq_process_user_authentication(char* server_address, int port, char* username, char* password,
-                                                 t_client_rq authentication_code) {
+char* rq_process_user_authentication(char* server_address, int port,
+                                        char* username, char* password,
+                                        t_client_rq authentication_code,
+                                        uint32_t *id) {
 	int client_socket = create_and_connect_socket(server_address, port);
 
     if(client_socket < 0)
@@ -15,7 +17,6 @@ char* rq_process_user_authentication(char* server_address, int port, char* usern
     send_and_release_packet(client_socket, &user);
     send_and_release_packet(client_socket, &pass);
     t_client_status_code status_code = receive_packet(client_socket).u_payload.uint8_data;
-    int id;
     switch (status_code) {
         case WRONG_PASSWORD:
             return strdup("Wrong password");
@@ -27,13 +28,11 @@ char* rq_process_user_authentication(char* server_address, int port, char* usern
             return strdup("This login already exist");
             break;
         case SUCCESS_REGISTRATION:
-            id = receive_packet(client_socket).u_payload.uint32_data;
-            (void)id;
+            *id = receive_packet(client_socket).u_payload.uint32_data;
             return strdup("success");
             break;
         case SUCCESS_LOGIN:
-            id = receive_packet(client_socket).u_payload.uint32_data;
-            (void)id;
+            *id = receive_packet(client_socket).u_payload.uint32_data;
             return strdup("success");
             break;
         default:

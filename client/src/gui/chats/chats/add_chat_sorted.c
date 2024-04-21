@@ -52,5 +52,5 @@ guint add_chat_sorted_to_visible_list_store(Chat *chat) {
 
 void add_chat_sorted(Chat *chat) {
     add_chat_sorted_to_visible_list_store(chat);
-    guint add_chat_sorted_to_all_list_store(Chat *chat);
+    add_chat_sorted_to_all_list_store(chat);
 }
