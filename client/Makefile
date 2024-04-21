@@ -18,12 +18,15 @@ GTK_INC = `pkg-config --cflags gtk+-3.0`
 
 INCLUDE_HEADER_DIRS = $(addprefix -I, $(HEADER_DIRS))
 INCLUDE_UTILS_HEADER_DIRS = $(addprefix -I, $(UTILS_HEADER_DIRS))
-INCLUDE_ALL_HEADER_DIRS = $(INCLUDE_HEADER_DIRS) $(INCLUDE_UTILS_HEADER_DIRS)$(INCLUDE SOUP_HEADER_DIRS)
+INCLUDE_ALL_HEADER_DIRS = $(INCLUDE_HEADER_DIRS) $(INCLUDE_UTILS_HEADER_DIRS)
+
+CFLAGS += `pkg-config --cflags libcurl`
+LDFLAGS += `pkg-config --libs libcurl`
 
 all: $(BINNAME)
 
 $(BINNAME): $(OBJS) 
-	@$(CC) -o $@ $^ $(UTILS_LIB) $(GTK_LIBS)
+	@$(CC) -o $@ $^ $(UTILS_LIB) $(GTK_LIBS) $(LDFLAGS)
 	@printf "\033[32;1m$@ created\033[0m\n"
 
 $(OBJS): $(OBJDIR)/%.o: $(SRCDIR)/%.c Makefile | $(OBJDIR)

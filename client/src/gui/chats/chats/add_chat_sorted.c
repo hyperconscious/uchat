@@ -3,8 +3,6 @@
 static int compare_chats_last_message_time(const void *a,
                                            const void *b,
                                            void *user_data) {
-   /* if (user_data == NULL) {}
-
     Chat *first_chat = (Chat *)a;
     Chat *second_chat = (Chat *)b;
 
@@ -13,6 +11,11 @@ static int compare_chats_last_message_time(const void *a,
         Message *second_chat_last_message = get_chat_last_message(second_chat);
         return second_chat_last_message->time_in_millis -
                first_chat_last_message->time_in_millis;
+    }
+    else if (first_chat->messages == NULL && second_chat->messages == NULL) {
+        long long first_chat_creation_time = first_chat->creation_time_in_millis;
+        long long second_chat_creation_time = second_chat->creation_time_in_millis;
+        return second_chat_creation_time - first_chat_creation_time;
     }
     else if (first_chat->messages == NULL) {
         long long first_chat_creation_time = first_chat->creation_time_in_millis;
@@ -25,11 +28,9 @@ static int compare_chats_last_message_time(const void *a,
         Message *first_chat_last_message = get_chat_last_message(first_chat);
         return second_chat_creation_time -
                first_chat_last_message->time_in_millis;
-    }*/
-    (void)a;
-    (void)b;
+    }
+
     (void)user_data;
-    return 1;
 }
 
 guint add_chat_sorted_to_all_list_store(Chat *chat) {

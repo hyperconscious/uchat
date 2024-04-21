@@ -6,10 +6,12 @@ GtkWidget *create_avatar_widget(
         int size,
         char *widget_name,
         char *path,
+        bool is_image_local,
         gboolean (*callback_function)(GtkWidget *, cairo_t *, gpointer *)) {
     GtkWidget *avatar_widget;
 
     if (path != NULL) {
+        (void)is_image_local;
         avatar_widget = GTK_WIDGET(
                 create_drawing_area(
                         size,

@@ -14,4 +14,5 @@ GtkWidget *create_avatar_widget(
         int size,
         char *widget_name,
         char *path,
+        bool is_image_local,
         gboolean (*callback_function)(GtkWidget *, cairo_t *, gpointer *));
