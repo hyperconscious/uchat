@@ -29,6 +29,7 @@
 #define SEND_MESSAGE_BUTTON_ID "send_message_button"
 #define LABEL_NO_INTERNET_CONNECTION_ID "label_no_internet_connection"
 #define SETTINGS_BOX_ID "settings_box"
+#define DISCOVER_BOX_ID "discover_box"
 
 extern int Port;
 extern char *serverAddress;
@@ -54,7 +55,6 @@ struct _Chat {
     bool searching;
     long long creation_time_in_millis;
 };
-
 
 GtkWidget *create_chat_list_box_widget(gpointer item,
                                        gpointer user_data);

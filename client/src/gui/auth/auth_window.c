@@ -77,14 +77,11 @@ void on_sign_up_confirm_password_visibility_icon_release(void) {
 void on_english_language_button_clicked(void) {
     set_selected_language_button_style(ENGLISH_LANGUAGE_BUTTON_ID);
     language_id = 1;
-    
-    
 }
 
 void on_french_language_button_clicked(void) {
     set_selected_language_button_style(FRENCH_LANGUAGE_BUTTON_ID);
     language_id = 2;
-
 }
 
 void on_spanish_language_button_clicked(void) {
