@@ -1,6 +1,13 @@
+#pragma once
+
 #include "gui_util.h"
 
 #define DISCOVER_GRID_ID "discover_grid"
+
+extern int Port;
+extern char *serverAddress;
+extern uint32_t user_id;
+
 
 typedef struct {
     long id;
