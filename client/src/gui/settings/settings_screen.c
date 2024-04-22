@@ -19,6 +19,9 @@ void on_change_username_button_clicked(void) {
     char *username = get_entry_text(CHANGE_USERNAME_ENTRY_ID);
     if (!validate_change_username_input(username))
         return;
+
+    change_username_rq(user_id, username, serverAddress, Port);
+    set_entry_text(CHANGE_USERNAME_ENTRY_ID, "");
 }
 
 void on_change_password_button_clicked(void) {

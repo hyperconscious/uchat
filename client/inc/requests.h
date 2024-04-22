@@ -36,4 +36,6 @@ void rq_add_user_to_chat(uint32_t user_id, uint32_t chat_id, char*
 char** rq_discover(uint32_t id, uint16_t *count, char* server_address, int port);
 
 char* rq_get_login_by_id(uint32_t id, char* server_address, int port);
+void change_username_rq(uint32_t id, char* new_username, char* server_address, int port);
+
 

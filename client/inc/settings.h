@@ -2,6 +2,8 @@
 
 #include "gui_util.h"
 #include "core.h"
+#include "requests.h"
+
 
 #define CHANGE_AVATAR_BOX_ID "change_avatar_box"
 #define AVATAR_FILE_CHOOSER_BUTTON "avatar_file_chooser_button"
@@ -11,6 +13,12 @@
 #define CONFIRM_NEW_PASSWORD_ENTRY_ID "confirm_new_password_entry"
 #define CHANGE_USERNAME_ERROR_LABEL_ID "change_username_error_label"
 #define CHANGE_PASSWORD_ERROR_LABEL_ID "change_password_error_label"
+
+
+extern int Port;
+extern char *serverAddress;
+extern uint32_t user_id;
+extern char* user_username;
 
 void show_change_username_error(char *error);
 

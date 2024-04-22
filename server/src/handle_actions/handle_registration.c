@@ -27,7 +27,7 @@ void handle_sign_up(int client_socket) {
     mx_init_add_user(db, &stmt);
     int res = mx_add_user(stmt, username, password, language);
     sqlite3_finalize(stmt);
-    sqlite3_close(db);
+    
     if (res == 0) {
         id = sqlite3_last_insert_rowid(db);
         t_packet packet_code = create_packet(PACKET_TYPE_UINT8, &result_code);
@@ -40,6 +40,7 @@ void handle_sign_up(int client_socket) {
         t_packet packet_code = create_packet(PACKET_TYPE_UINT8, &result_code);
         send_and_release_packet(client_socket, &packet_code);
     }
+    sqlite3_close(db);
     free_packet(&user);
     free_packet(&pass);
 }
