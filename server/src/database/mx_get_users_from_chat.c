@@ -1,6 +1,6 @@
 #include "database.h"
 
-int mx_get_users_from_chat(sqlite3 *db, long chat_id, int max_count, long **result_ids, int *result_count) 
+int mx_get_users_from_chat(sqlite3 *db, long chat_id, int max_count, uint32_t **result_ids, uint16_t *result_count) 
 {
     (*result_count) = 0;
     sqlite3_stmt *statement;
@@ -23,7 +23,7 @@ int mx_get_users_from_chat(sqlite3 *db, long chat_id, int max_count, long **resu
     sqlite3_bind_int64(statement, 1, chat_id);
     sqlite3_bind_int64(statement, 2, max_count);
 
-    *result_ids = malloc(*result_count * sizeof(long));
+    *result_ids = malloc(*result_count * sizeof(uint32_t));
     for(int i = 0; i < *result_count; i++)
     {
         sqlite3_step(statement);

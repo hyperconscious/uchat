@@ -20,7 +20,7 @@ t_db_chat* rq_get_chats(uint32_t owner_id, uint16_t *count, char* server_address
         (chats_array + i)->owner_id = receive_packet(client_socket).u_payload.uint32_data;
         (chats_array + i)->name = receive_packet(client_socket).u_payload.s_string.data;
     }
-    
+     
     close(client_socket);
     return chats_array;
 }

@@ -21,9 +21,9 @@
 #define SUCCESSFUL "success"
 
 char* rq_process_user_authentication(char* server_address, int port,
-                                     char* username, char* password,
-                                     t_client_rq authentication_code,
-                                     uint32_t *id);
+                                        char* username, char* password,
+                                        t_client_rq authentication_code,
+                                        uint32_t *id, uint16_t language);
 
 t_db_chat* rq_search_chats(char* searching_chat, uint16_t *count,
                            char* server_address, int port);
@@ -32,4 +32,7 @@ uint32_t rq_create_chat(char* name, uint32_t owner_id,
 t_db_chat* rq_get_chats(uint32_t owner_id, uint16_t *count, char* server_address, int port);
 void rq_add_user_to_chat(uint32_t chat_id, uint32_t user_id, char*
                          server_address, int port);
+
+char** rq_discover(uint32_t id, uint16_t *count, char* server_address, int port);
+
 

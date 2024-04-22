@@ -10,7 +10,6 @@ void handle_search_chat(int client_socket){
     }
     char* chat_name_to_search = name.u_payload.s_string.data;
   
-    
     uint16_t count = 0;
     uint16_t sz = 0;
     t_db_chat* chats = NULL;

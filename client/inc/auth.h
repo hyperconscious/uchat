@@ -24,6 +24,8 @@ extern char *serverAddress;
 extern uint32_t user_id;
 extern char* user_username;
 
+
+
 bool validate_sign_up_input(char *username,
                             char *password,
                             char *confirm_password);
