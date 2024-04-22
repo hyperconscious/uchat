@@ -7,17 +7,12 @@ t_list *get_chats(void) {
     t_db_chat *my_chats = rq_get_chats(user_id, &count, serverAddress, Port);
     for (uint16_t i = 0; i < count; i++) {
         char* chat_name = (my_chats + i)->owner_id == user_id 
-                          ? (char *)(my_chats + i)->name 
+                          ? strdup((my_chats + i)->name) 
                           : rq_get_login_by_id((my_chats + i)->owner_id,
                                                serverAddress, Port);
         Chat *chat = create_chat((my_chats + i)->id, NULL, chat_name,
                                  NULL, 0, false, 1712957612439);
         mx_push_back(&chats, chat);
-    }
-    for (uint16_t i = 0; i < count; i++) {
-      //  free((char *)(my_chats + i)->name);
-      //  free((char *)(my_chats + i)->creation_time);
-      //  free(my_chats + i);
     }
     free(my_chats);
 /*
