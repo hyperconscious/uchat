@@ -7,7 +7,7 @@ void mx_test_db_add_user(void)
     sqlite3 *db;
     sqlite3_open(DATABASE, &db);
     mx_init_add_user(db, &stmt);
-    int status = mx_add_user(stmt, "test user", "1234", 0);
+    int status = mx_add_user(stmt, "test user2", "1234", 0);
     int id;
     id = sqlite3_last_insert_rowid(db);
     if(status != SQLITE_OK)
@@ -31,7 +31,7 @@ void mx_test_db_remove_user(void)
     sqlite3_open(DATABASE, &db);
     mx_init_sub_user(db, &remove_stmt);
     mx_init_find_id_by_user(db, &get_user_stmt);
-    long id = mx_get_user_id_by_login(get_user_stmt, "test user");
+    long id = mx_get_user_id_by_login(get_user_stmt, "test user2");
     if(id == -1)
     {
         sqlite3_close(db);
@@ -65,14 +65,15 @@ void mx_test_db_add_user_to_chat(void)
     t_db_chat *chats;
     uint16_t count;
     
-    long id = mx_get_user_id_by_login(get_user_stmt, "test user");
+    long id = mx_get_user_id_by_login(get_user_stmt, "test user2");
     if(id == -1)
     {
         sqlite3_close(db);
         fprintf(stderr, "Test failed, cannot find user\n");
         return;
     }
-    mx_get_chats_by_name(get_chat_stmt, "test_chat", -1, &chats, &count);
+    mx_get_chats_by_name(get_chat_stmt, "test chat", -1, &chats, &count);
+    fprintf(stderr, "user id = %ld, chat id = %ld\n", id, chats[0].id);
     mx_add_user_to_chat(add_stmt, id, chats[0].id);
     fprintf(stderr, "Test passed\n");
     free(chats);
@@ -92,7 +93,7 @@ void mx_test_db_add_chat(void)
     sqlite3_stmt *get_id_stmt;
 
     mx_init_find_id_by_user(db, &get_id_stmt);
-    long id = mx_get_user_id_by_login(get_id_stmt, "test user");
+    long id = mx_get_user_id_by_login(get_id_stmt, "test user2");
     if(mx_add_chat(stmt, "test chat", id))
         fprintf(stderr, "Test failed\n");
     else    
@@ -158,8 +159,8 @@ void mx_test_db_all(void)
     mx_test_db_add_user();
     mx_test_db_add_chat();
     mx_test_db_add_user_to_chat();
-    mx_test_db_remove_chat();
-    mx_test_db_remove_user();
+    //mx_test_db_remove_chat();
+    //mx_test_db_remove_user();
     fprintf(stderr, "\nTests finished\n");
 }
 

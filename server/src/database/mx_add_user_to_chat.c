@@ -1,6 +1,6 @@
 #include "../inc/database.h"
 
-int mx_add_user_to_chat(sqlite3_stmt *stmt, int chat_id, int user_id)
+int mx_add_user_to_chat(sqlite3_stmt *stmt, int user_id, int chat_id)
 {
     int result = 0;
     MX_TRY_FUNCTION(sqlite3_reset(stmt), result);
