@@ -77,8 +77,84 @@ void mx_test_db_add_user_to_chat(void)
     mx_add_user_to_chat(add_stmt, id, chats[0].id);
     fprintf(stderr, "Test passed\n");
     free(chats);
+    sqlite3_finalize(add_stmt);
     sqlite3_finalize(get_user_stmt);
     sqlite3_finalize(get_chat_stmt);
+    sqlite3_close(db);
+}
+
+void mx_test_db_message(void)
+{
+    fprintf(stderr, "\nmessaging db test...\n");
+    sqlite3 *db;
+    sqlite3_open(DATABASE, &db);
+    sqlite3_stmt *add_usr_stmt;
+    sqlite3_stmt *add_chat_stmt;
+    sqlite3_stmt *add_msg_stmt;
+    sqlite3_stmt *get_usr_by_login;
+    sqlite3_stmt *get_chat;
+    sqlite3_stmt *add_usr_to_chat;
+    mx_init_add_user(db, &add_usr_stmt);
+    mx_init_add_chat(db, &add_chat_stmt);
+    mx_init_add_message(db, &add_msg_stmt);
+    mx_init_find_id_by_user(db, &get_usr_by_login);
+    mx_init_get_chats_by_name(db, &get_chat);
+    mx_init_add_user_to_chat(db, &add_usr_to_chat);
+
+    if(mx_add_user(add_usr_stmt, "test_user1", "1234", 0))
+    {
+        fprintf(stderr, "Add user error");
+    }
+    uint32_t first_id = sqlite3_last_insert_rowid(db);
+
+    if(mx_add_user(add_usr_stmt, "test_user2", "2134", 0))
+    {
+        fprintf(stderr, "Add user error");
+    }
+    uint32_t second_id = sqlite3_last_insert_rowid(db);
+
+    if(mx_add_chat(add_chat_stmt, "stupid_chat", mx_get_user_id_by_login(get_usr_by_login, "test_user1")))
+    {
+        fprintf(stderr, "Add chat error");
+    }
+
+    t_db_chat *chats;
+    uint16_t chat_count;
+    if(mx_get_chats_by_name(get_chat, "stupid_chat", 1, &chats, &chat_count))
+    {
+        fprintf(stderr, "Get chats error\n");
+    }
+    uint32_t chat_id = chats[0].id;
+
+    if( mx_add_user_to_chat(add_usr_to_chat, first_id, chat_id) ||
+        mx_add_user_to_chat(add_usr_to_chat, second_id, chat_id))
+    {
+        fprintf(stderr, "Add user to chat error\n");
+    }
+
+    if( mx_add_message(add_msg_stmt, "Fuck youuu", first_id, chat_id) ||
+        mx_add_message(add_msg_stmt, "Fuck you toooo", second_id, chat_id))
+    {
+        //fprintf(stderr, "%s\n%s\n", sqlite3_errstr(mx_add_message(add_msg_stmt, "Fuck youuu", first_id, chat_id)), sqlite3_errstr(mx_add_message(add_msg_stmt, "Fuck you toooo", second_id, chat_id)));
+        fprintf(stderr, "Add message error %d %d %d\n", first_id, second_id, chat_id);
+    }
+
+    t_db_message *last_messages;
+    int msg_count;
+    if( mx_get_last_messages(db, chat_id, "", -1, 1, &last_messages, &msg_count))
+    {
+        fprintf(stderr, "Get last messages error\n");
+    }
+    for(int i = 0; i < msg_count; i++)
+    {
+        fprintf(stderr, "user %d: printed \"%s\" at %s\n", last_messages[i].user_id, last_messages[i].text, last_messages[i].time);
+    }
+
+    sqlite3_finalize(add_usr_stmt);
+    sqlite3_finalize(add_chat_stmt);
+    sqlite3_finalize(add_msg_stmt);
+    sqlite3_finalize(get_usr_by_login);
+    sqlite3_finalize(get_chat);
     sqlite3_close(db);
 }
 
@@ -91,11 +167,10 @@ void mx_test_db_add_chat(void)
     mx_init_add_chat(db, &stmt);
     
     sqlite3_stmt *get_id_stmt;
-
     mx_init_find_id_by_user(db, &get_id_stmt);
     long id = mx_get_user_id_by_login(get_id_stmt, "test user2");
     if(mx_add_chat(stmt, "test chat", id))
-        fprintf(stderr, "Test failed\n");
+        fprintf(stderr, "Test failed %d\n", mx_add_chat(stmt, "test chat", id));
     else    
         fprintf(stderr, "Test passed\n");
     sqlite3_finalize(stmt);
@@ -118,7 +193,8 @@ void mx_test_db_get_users_from_chat(void)
 
     uint16_t users_count;
     mx_get_users_from_chat(db, chats[0].id, -1, &ids,  &users_count);
-    
+    sqlite3_finalize(get_chats_stmt);
+    sqlite3_close(db);
 }
 
 void mx_test_db_remove_chat(void)
@@ -159,6 +235,7 @@ void mx_test_db_all(void)
     mx_test_db_add_user();
     mx_test_db_add_chat();
     mx_test_db_add_user_to_chat();
+    mx_test_db_message();
     //mx_test_db_remove_chat();
     //mx_test_db_remove_user();
     fprintf(stderr, "\nTests finished\n");

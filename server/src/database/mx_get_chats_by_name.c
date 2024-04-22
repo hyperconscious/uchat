@@ -28,9 +28,9 @@ int mx_get_chats_by_name(sqlite3_stmt *stmt, char *name, int max_rows, t_db_chat
     {
         sqlite3_step(stmt);
         (*chats)[i].id = sqlite3_column_int64(stmt, 0);
-        (*chats)[i].name = (const char *)sqlite3_column_text(stmt, 1);
+        (*chats)[i].name = strdup((const char *)sqlite3_column_text(stmt, 1));
         (*chats)[i].owner_id = sqlite3_column_int64(stmt, 2);
-        (*chats)[i].creation_time = (const char *)sqlite3_column_text(stmt, 3);
+        (*chats)[i].creation_time = strdup((const char *)sqlite3_column_text(stmt, 3));
     }
     return 0;
 }
