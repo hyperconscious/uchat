@@ -25,6 +25,8 @@ void handle_login(int client_socket) {
     t_client_status_code result_code = SUCCESS_LOGIN;
     mx_init_check_password(db, &stmt2);
     int res = mx_check_password(stmt2, username, password);
+    sqlite3_finalize(stmt2);
+    sqlite3_close(db);
     if (id < 0)
     {
         result_code = LOGIN_DOESNT_EXIST;
@@ -41,8 +43,6 @@ void handle_login(int client_socket) {
         t_packet packet_code = create_packet(PACKET_TYPE_UINT8, &result_code);
         send_and_release_packet(client_socket, &packet_code);
     }
-    sqlite3_finalize(stmt2);
-    sqlite3_close(db);
     free_packet(&user);
     free_packet(&pass);
 }

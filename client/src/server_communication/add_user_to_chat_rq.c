@@ -1,6 +1,6 @@
 #include "requests.h"
 
-void rq_add_user_to_chat(uint32_t chat_id, uint32_t user_id, char* server_address, int port){
+void rq_add_user_to_chat(uint32_t user_id, uint32_t chat_id, char* server_address, int port){
     int client_socket = create_and_connect_socket(server_address, port);
 
     if(client_socket == -1)

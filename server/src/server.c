@@ -8,7 +8,7 @@ int main(int argc, char* argv[]) {
 	  }
     // db processing...
    // mx_test_db_all();
-  /*  sqlite3 *db;
+   /* sqlite3 *db;
     sqlite3_open(DATABASE, &db);
     mx_recreate_tables(db);
     sqlite3_close(db);*/
@@ -21,8 +21,8 @@ int main(int argc, char* argv[]) {
         t_client_info *client_info = malloc(sizeof(t_client_info));
         client_info->client_socket = client_socket;
 
-        pthread_t thread = create_thread(handle_client, (void *)client_info);
-        detach_thread(thread);
+      /*  pthread_t thread = */create_thread(handle_client, (void *)client_info);
+     //   detach_thread(thread);
     }
     
     close(server_socket);

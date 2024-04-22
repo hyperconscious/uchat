@@ -11,12 +11,11 @@ void handle_add_chat(int client_socket) {
     mx_add_chat(stmt, chat_name_packet.u_payload.s_string.data, 
                 owner_id_packet.u_payload.uint32_data);
     int chat_id = sqlite3_last_insert_rowid(db);
-    t_packet chat_id_packet = create_packet(PACKET_TYPE_UINT32, &chat_id);
-    send_and_release_packet(client_socket, &chat_id_packet);
     sqlite3_finalize(stmt);
     sqlite3_close(db);
+    t_packet chat_id_packet = create_packet(PACKET_TYPE_UINT32, &chat_id);
+    send_and_release_packet(client_socket, &chat_id_packet);
     free_packet(&owner_id_packet);
     free_packet(&chat_name_packet);
 }
-
 

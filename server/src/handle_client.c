@@ -35,6 +35,9 @@ void *handle_client(void *arg) {
         case RQ_DISCOVER:
             handle_discover(client_socket);
             break;
+        case RQ_GET_LOGIN_BY_ID:
+            handle_get_login_by_id(client_socket);
+            break;
         default:
             fprintf(stderr, "wrong action from client\n");
             break;

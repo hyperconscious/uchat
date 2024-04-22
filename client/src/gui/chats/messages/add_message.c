@@ -43,7 +43,8 @@ void add_message_to_selected_chat(void) {
             uint32_t other_user_id = chat->id;
             chat->id = rq_create_chat(chat->name, user_id, 
                                               serverAddress, Port);
-            rq_add_user_to_chat(other_user_id, chat->id serverAddress, Port);
+            rq_add_user_to_chat(user_id, chat->id, serverAddress, Port);
+            rq_add_user_to_chat(other_user_id, chat->id, serverAddress, Port);
             chat->searching = false;
             delete_searched_chats();
             show_chats_i_am_in();

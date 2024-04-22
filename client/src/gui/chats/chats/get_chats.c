@@ -3,10 +3,14 @@
 t_list *get_chats(void) {
     Chat *chat1 = create_chat(0, NULL, "My notes", NULL, 0, false, 1712957612439);
     t_list *chats = mx_create_node(chat1);
-   // uint16_t count = 0;
-   /* t_db_chat *my_chats = rq_get_chats(user_id, &count, serverAddress, Port);
+    uint16_t count = 0;
+    t_db_chat *my_chats = rq_get_chats(user_id, &count, serverAddress, Port);
     for (uint16_t i = 0; i < count; i++) {
-        Chat *chat = create_chat((my_chats + i)->id, NULL, (my_chats + i)->name,
+        char* chat_name = (my_chats + i)->owner_id == user_id 
+                          ? (char *)(my_chats + i)->name 
+                          : rq_get_login_by_id((my_chats + i)->owner_id,
+                                               serverAddress, Port);
+        Chat *chat = create_chat((my_chats + i)->id, NULL, chat_name,
                                  NULL, 0, false, 1712957612439);
         mx_push_back(&chats, chat);
     }
@@ -15,7 +19,7 @@ t_list *get_chats(void) {
       //  free((char *)(my_chats + i)->creation_time);
       //  free(my_chats + i);
     }
-    free(my_chats);*/
+    free(my_chats);
 /*
     Message *chat2_message1 = create_message("Hi", false, 1712957652439);
     Message *chat2_message2 = create_message("How are you?", true,

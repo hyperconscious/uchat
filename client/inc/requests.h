@@ -30,9 +30,10 @@ t_db_chat* rq_search_chats(char* searching_chat, uint16_t *count,
 uint32_t rq_create_chat(char* name, uint32_t owner_id, 
                         char* server_address, int port);
 t_db_chat* rq_get_chats(uint32_t owner_id, uint16_t *count, char* server_address, int port);
-void rq_add_user_to_chat(uint32_t chat_id, uint32_t user_id, char*
+void rq_add_user_to_chat(uint32_t user_id, uint32_t chat_id, char*
                          server_address, int port);
 
 char** rq_discover(uint32_t id, uint16_t *count, char* server_address, int port);
 
+char* rq_get_login_by_id(uint32_t id, char* server_address, int port);
 

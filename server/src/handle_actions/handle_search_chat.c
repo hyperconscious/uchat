@@ -19,10 +19,12 @@ void handle_search_chat(int client_socket){
     sqlite3_open(DATABASE, &db);
     mx_init_get_chats_by_name(db, &stmt);
     mx_init_find_id_by_user(db, &stmt_u_id);
+
     mx_get_chats_by_name(stmt, chat_name_to_search, 15, &chats, &count);
     char** users = mx_find_users_by_login(db, 15, chat_name_to_search, &sz);
     t_packet count_arr = create_packet(PACKET_TYPE_UINT16, &(uint16_t){sz +
             count});
+    sqlite3_finalize(stmt);
     send_and_release_packet(client_socket, &count_arr);
     for (uint16_t i = 0; i < count + sz; ++i) {
         if (i < count) {
@@ -43,11 +45,10 @@ void handle_search_chat(int client_socket){
         send_and_release_packet(client_socket, &chat_owner_id);
         send_and_release_packet(client_socket, &chat_name);
     }
-    sqlite3_finalize(stmt);
     sqlite3_finalize(stmt_u_id);
+    sqlite3_close(db);
     free(chats);
     free(users);
-    sqlite3_close(db);
     free_packet(&name);
     return;
 }
