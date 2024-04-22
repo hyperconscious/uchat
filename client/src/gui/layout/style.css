@@ -176,6 +176,19 @@ notebook header tabs tab:hover {
     text-shadow: 0.5px 0 0 white;
 }
 
+.internet_connection_indicator {
+    background-color: lawngreen;
+    border-radius: 50%;
+}
+
+#internet_connection_available_indicator {
+    background-color: lawngreen;
+}
+
+#internet_connection_not_available_indicator {
+    background-color: red;
+}
+
 /*inbox*/
 #inbox_box {
     background-color: #353644;
