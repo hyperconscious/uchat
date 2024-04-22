@@ -1,5 +1,4 @@
 #include "server.h"
-#include "database.h"
 
 int main(int argc, char* argv[]) {
     if (argc != 2) {
@@ -11,7 +10,7 @@ int main(int argc, char* argv[]) {
     sqlite3_open(DATABASE, &db);
     mx_recreate_tables(db);
     sqlite3_close(db);
-    
+
     // db processing...
     mx_test_db_all();
     

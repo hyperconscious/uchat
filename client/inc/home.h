@@ -14,6 +14,7 @@
 #define DISCOVER_BUTTON_ID "discover_button"
 #define SETTINGS_BUTTON_ID "settings_button"
 #define LOG_OUT_BUTTON_ID "log_out_button"
+#define INTERNET_CONNECTION_INDICATOR_ID "internet_connection_indicator"
 #define CHATS_BOX_ID "chats_box"
 #define PERSONAL_CHAT_LIST_BOX_ID "personal_chat_list"
 #define GROUP_CHAT_LIST_BOX_ID "group_chat_list"
@@ -29,11 +30,12 @@
 #define SEND_MESSAGE_BUTTON_ID "send_message_button"
 #define LABEL_NO_INTERNET_CONNECTION_ID "label_no_internet_connection"
 #define SETTINGS_BOX_ID "settings_box"
+#define DISCOVER_BOX_ID "discover_box"
 
 extern int Port;
 extern char *serverAddress;
 extern uint32_t user_id;
-extern char* user_username;
+extern char *user_username;
 extern GListStore *all_chats_list_store;
 extern GListStore *visible_chats_list_store;
 
@@ -54,7 +56,6 @@ struct _Chat {
     bool searching;
     long long creation_time_in_millis;
 };
-
 
 GtkWidget *create_chat_list_box_widget(gpointer item,
                                        gpointer user_data);
@@ -118,6 +119,8 @@ Message *create_message(const char *text,
 Message *get_chat_last_message(struct _Chat *chat);
 
 void set_chat_list_box_row_selected_style(GtkListBoxRow *selected_row);
+
+void show_internet_connection_status(bool available);
 
 G_BEGIN_DECLS
 #define CHAT_TYPE chat_get_type()

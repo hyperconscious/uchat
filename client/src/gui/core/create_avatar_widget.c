@@ -12,6 +12,9 @@ GtkWidget *create_avatar_widget(
 
     if (path != NULL) {
         (void)is_image_local;
+//        GdkPixbuf *pixbuf = is_image_local
+//                            ? gdk_pixbuf_new_from_file(path, NULL)
+//                            : gdk_pixbuf_new_from_url(path);
         avatar_widget = GTK_WIDGET(
                 create_drawing_area(
                         size,

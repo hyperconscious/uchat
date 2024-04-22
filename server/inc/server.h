@@ -4,6 +4,8 @@
 #include "socket_operations.h"
 #include "threads.h"
 #include "handle_client.h"
+#include <sys/sysinfo.h>
+#include "database.h"
 
-#define MAX_CLIENTS 7
+#define MAX_CLIENTS  (get_nprocs_conf() * 128)
 

@@ -3,6 +3,7 @@
 gboolean draw_circle_image(GtkWidget *widget,
                            cairo_t *cr,
                            gpointer *user_data) {
+//    GdkPixbuf *pixbuf = (GdkPixbuf *)user_data;
     char *image_path = (char *)user_data;
     GdkPixbuf *pixbuf = gdk_pixbuf_new_from_file(image_path, NULL);
 
@@ -12,13 +13,11 @@ gboolean draw_circle_image(GtkWidget *widget,
     double center_y = widget_height / 2.0;
     double image_width = gdk_pixbuf_get_width(pixbuf);
     double image_height = gdk_pixbuf_get_height(pixbuf);
-    double scale = MIN(widget_width / image_width,
+    double scale = MAX(widget_width / image_width,
                        widget_height / image_height);
-    image_width *= scale;
-    image_height *= scale;
 
-    double image_x = center_x - image_width / 2.0;
-    double image_y = center_y - image_height / 2.0;
+    double image_x = center_x - image_width * scale / 2.0;
+    double image_y = center_y - image_height * scale / 2.0;
     double radius = 0.5 * MIN(widget_width, widget_height);
 
     cairo_new_path(cr);
@@ -38,6 +37,7 @@ gboolean draw_circle_image(GtkWidget *widget,
 gboolean draw_rounded_square_image(GtkWidget *widget,
                                    cairo_t *cr,
                                    gpointer *user_data) {
+//    GdkPixbuf *pixbuf = (GdkPixbuf *)user_data;
     char *image_path = (char *)user_data;
     GdkPixbuf *pixbuf = gdk_pixbuf_new_from_file(image_path, NULL);
 

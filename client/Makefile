@@ -1,6 +1,6 @@
 BINNAME = ../uchat
 CC = clang
-CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic -pthread
+CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic -pthread 
 
 OBJDIR = obj
 SRCDIR = src

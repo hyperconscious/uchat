@@ -22,7 +22,7 @@ button:hover {
 }
 
 .button_primary {
-    padding: 9px 0;
+    padding: 9px;
     background-color: #6A57E4;
     border-radius: 25px;
     color: white;
@@ -57,7 +57,7 @@ image {
     -gtk-icon-shadow: none;
 }
 
-#circle_default_avatar {
+#rounded_square_default_avatar {
     border-radius: 20px;
     font-size: 24px;
 }
@@ -176,6 +176,20 @@ notebook header tabs tab:hover {
     text-shadow: 0.5px 0 0 white;
 }
 
+.internet_connection_indicator {
+    background-color: lawngreen;
+    border-radius: 50%;
+}
+
+#internet_connection_available_indicator {
+    background-color: lawngreen;
+}
+
+#internet_connection_not_available_indicator {
+    background-color: red;
+}
+
+/*inbox*/
 #inbox_box {
     background-color: #353644;
 }
@@ -248,6 +262,7 @@ notebook header tabs tab:hover {
     color: white;
 }
 
+/*chats*/
 #chat_not_selected_box {
     background-color: #414255;
 }
@@ -314,6 +329,7 @@ notebook header tabs tab:hover {
     -gtk-icon-effect: none;
 }
 
+/*settings*/
 #settings_box {
     background-color: #353644;
     color: white;
@@ -334,11 +350,20 @@ notebook header tabs tab:hover {
     background-color: #353644;
 }
 
-#settings_box separator:not(#rest_width_separator) {
+#settings_box separator,
+#discover_box separator {
     background-color: grey;
 }
 
-#rest_width_separator {
-    /*min-width: 100px;*/
-    background-color: transparent;
+/*discover*/
+#discover_box {
+    background-color: #353644;
+    color: white;
+}
+
+.discover_grid_item {
+    background-color: #414255;
+    border-radius: 20px;
+    color: white;
+    padding: 12px;
 }

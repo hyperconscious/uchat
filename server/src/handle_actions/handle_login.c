@@ -25,6 +25,7 @@ void handle_login(int client_socket) {
     t_client_status_code result_code = SUCCESS_LOGIN;
     mx_init_check_password(db, &stmt2);
     int res = mx_check_password(stmt2, username, password);
+    
     if (id < 0)
     {
         result_code = LOGIN_DOESNT_EXIST;

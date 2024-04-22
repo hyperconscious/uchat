@@ -8,11 +8,10 @@ uint16_t mx_get_lang_by_id(sqlite3 *db, uint32_t user_id) {
     sqlite3_bind_int(stmt, 1, user_id);
     
     uint16_t lang = 0;
-    while ((sqlite3_step(stmt)) == SQLITE_ROW) {
+    if ((sqlite3_step(stmt)) == SQLITE_ROW) {
         lang = sqlite3_column_int64(stmt, 0); 
     }
-    return lang;
-    
-    }
-
+    sqlite3_finalize(stmt);
+    return lang;   
+}
 

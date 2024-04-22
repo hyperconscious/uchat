@@ -13,3 +13,6 @@ void handle_add_chat(int client_socket);
 void handle_get_chats(int client_socket);
 void handle_add_user_to_chat(int client_socket);
 void handle_discover(int client_socket);
+void handle_get_login_by_id(int client_socket);
+void handle_change_username(int client_socket);
+

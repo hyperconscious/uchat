@@ -32,6 +32,7 @@ char* rq_process_user_authentication(char* server_address, int port,
             break;
         case SUCCESS_REGISTRATION:
             *id = receive_packet(client_socket).u_payload.uint32_data;
+            printf("reg id %d\n", *id);
             return strdup("success");
             break;
         case SUCCESS_LOGIN:

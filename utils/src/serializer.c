@@ -1,6 +1,6 @@
 #include "serializer.h"
 
-void foo(){}
+void foo(void){}
 /*
 char *serialize_chat(const t_chat *chat) {
     if (!chat || !chat->name) {

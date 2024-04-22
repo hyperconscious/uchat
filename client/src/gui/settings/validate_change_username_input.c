@@ -6,7 +6,7 @@ bool validate_change_username_input(char *username) {
         return false;
     }
     else {
-        set_entry_text(CHANGE_USERNAME_ENTRY_ID, "");
+       
         return true;
     }
 }

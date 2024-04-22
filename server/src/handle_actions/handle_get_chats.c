@@ -11,6 +11,8 @@ void handle_get_chats(int client_socket){
     t_db_chat *chats = NULL;
     mx_get_chats_by_user_id(stmt, owner_id_packet.u_payload.uint32_data,
                             -1, &chats, &count);
+    sqlite3_finalize(stmt);
+    sqlite3_close(db);
     t_packet count_of_chats = create_packet(PACKET_TYPE_UINT32, &count);
     send_and_release_packet(client_socket, &count_of_chats);
     if (chats) {
@@ -22,12 +24,9 @@ void handle_get_chats(int client_socket){
             send_and_release_packet(client_socket, &chat_id);
             send_and_release_packet(client_socket, &chat_owner_id);
             send_and_release_packet(client_socket, &chat_name);
-           // free((char*)(chats + i)->name);//mb wrong
-          //  free(chats + i);
         }
         free(chats);
     }
-    sqlite3_close(db);
     free_packet(&owner_id_packet);
     return;
 }

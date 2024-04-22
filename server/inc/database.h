@@ -142,3 +142,6 @@ void mx_test_db_all(void);
 
 
 uint16_t mx_get_lang_by_id(sqlite3 *db, uint32_t user_id);
+int mx_change_username(sqlite3 *db, uint32_t id, char* new_name);
+
+
