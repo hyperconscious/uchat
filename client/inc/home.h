@@ -29,6 +29,8 @@
 #define CHAT_MESSAGE_ENTRY_ID "message_entry"
 #define SEND_MESSAGE_BUTTON_ID "send_message_button"
 #define LABEL_NO_INTERNET_CONNECTION_ID "label_no_internet_connection"
+#define CHAT_ACTIONS_BOX_ID "chat_actions_box"
+#define CHAT_MEMBERS_LIST_ID "chat_members_list"
 #define SETTINGS_BOX_ID "settings_box"
 #define DISCOVER_BOX_ID "discover_box"
 
@@ -56,6 +58,12 @@ struct _Chat {
     bool searching;
     long long creation_time_in_millis;
 };
+
+typedef struct {
+    long id;
+    char *name;
+    char *image_url;
+} Person;
 
 GtkWidget *create_chat_list_box_widget(gpointer item,
                                        gpointer user_data);
@@ -87,7 +95,7 @@ void remove_chat(struct _Chat *chat, GListStore *list);
 void add_messages_list_box_row(Message *message,
                                Message *previous_message);
 
-void add_message(int index,
+void add_message(struct _Chat *chat,
                  Message *message);
 
 void add_message_to_selected_chat(void);
@@ -97,6 +105,8 @@ void show_chats(t_list *chats);
 void connect_chat_list_box_row_activated_signal(void);
 
 gboolean get_selected_chat_index(guint *index);
+
+struct _Chat *get_selected_chat(void);
 
 void on_chat_list_item_activated(GtkListBox *listbox,
                                  GtkListBoxRow *row,
@@ -121,6 +131,8 @@ Message *get_chat_last_message(struct _Chat *chat);
 void set_chat_list_box_row_selected_style(GtkListBoxRow *selected_row);
 
 void show_internet_connection_status(bool available);
+
+void show_chat_actions_box(void);
 
 G_BEGIN_DECLS
 #define CHAT_TYPE chat_get_type()

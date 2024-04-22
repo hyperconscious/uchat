@@ -14,13 +14,17 @@ void add_widget_to_box(GtkBox *box,
     gtk_widget_show(widget);
 }
 
-void remove_first_child_from_box(GtkBox *box) {
+void remove_child_from_box(GtkBox *box,
+                           int index) {
     GList *children = gtk_container_get_children(GTK_CONTAINER(box));
-    if (children != NULL) {
-        GtkWidget *first_child = GTK_WIDGET(children->data);
-        gtk_container_remove(GTK_CONTAINER(box), first_child);
-        g_list_free(children);
+    int count = g_list_length(children);
+
+    if (index >= 0 && index < count) {
+        GtkWidget *child = g_list_nth_data(children, index);
+        gtk_container_remove(GTK_CONTAINER(box), child);
     }
+
+    g_list_free(children);
 }
 
 guint get_box_child_count(GtkBox *box) {

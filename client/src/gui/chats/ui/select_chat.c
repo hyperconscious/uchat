@@ -40,7 +40,7 @@ static void set_chat_messages(t_list *messages) {
 }
 
 static void show_chat_box(void) {
-    if (get_widget_visible(CHAT_BOX_ID) == false) {
+    if (!get_widget_visible(CHAT_BOX_ID)) {
         gtk_widget_destroy(get_widget(CHAT_NOT_SELECTED_BOX_ID));
         GtkBox *chats_content_box = get_box(CHATS_BOX_ID);
         GtkWidget *chat_box = get_widget(CHAT_BOX_ID);
@@ -100,5 +100,10 @@ void select_chat(GtkListBoxRow *selected_row) {
 
         g_timeout_add(50, scroll_window_to_bottom,
                       CHAT_MESSAGES_SCROLLED_WINDOW_ID);
+    }
+
+    if (get_widget_visible(CHAT_ACTIONS_BOX_ID)) {
+        hide_widget(CHAT_ACTIONS_BOX_ID);
+        show_widget(CHAT_BOX_ID);
     }
 }

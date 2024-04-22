@@ -3,7 +3,7 @@
 void on_discover_screen_show(void) {
     const int column_count = 4;
     const int row_count = 4;
-    DiscoverPerson person = {.id = 0, .name = "Paul", .image_url = NULL};
+    Person person = {.id = 0, .name = "Paul", .image_url = NULL};
     GtkGrid *discover_grid = GTK_GRID(get_widget(DISCOVER_GRID_ID));
 
     for (int i = 0; i < row_count; i++) {

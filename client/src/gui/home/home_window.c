@@ -12,8 +12,11 @@ void on_home_window_show(void) {
                       get_widget(SETTINGS_BOX_ID), true, true, 0);
     add_widget_to_box(get_box(HOME_WINDOW_CONTENT_BOX_ID),
                       get_widget(DISCOVER_BOX_ID), true, true, 0);
+    add_widget_to_box(get_box(CHATS_BOX_ID),
+                      get_widget(CHAT_ACTIONS_BOX_ID), true, true, 0);
     hide_widget(SETTINGS_BOX_ID);
     hide_widget(DISCOVER_BOX_ID);
+    hide_widget(CHAT_ACTIONS_BOX_ID);
 }
 
 void on_chats_button_clicked(void) {
@@ -31,9 +34,8 @@ void on_discover_button_clicked(void) {
 
     uint16_t count = 0;
     char **founded_chats = rq_discover(user_id,
-                            &count, serverAddress, Port);
-   
-   
+                                       &count, serverAddress, Port);
+
 
     for (uint16_t i = 0; i < count; i++) {
         free(founded_chats[i]);
@@ -52,7 +54,7 @@ void on_log_out_button_clicked(void) {
 }
 
 void on_search_message_entry_changed(void) {
-    if(strlen(get_entry_text(SEARCH_CHAT_ENTRY_ID)) == 0){
+    if (strlen(get_entry_text(SEARCH_CHAT_ENTRY_ID)) == 0) {
         g_list_store_remove_all(visible_chats_list_store);
         delete_searched_chats();
         show_chats_i_am_in();
@@ -60,18 +62,19 @@ void on_search_message_entry_changed(void) {
     }
 
     uint16_t count = 0;
-    t_db_chat *founded_chats = rq_search_chats(get_entry_text(SEARCH_CHAT_ENTRY_ID),
-                            &count, serverAddress, Port);
+    t_db_chat *founded_chats = rq_search_chats(
+            get_entry_text(SEARCH_CHAT_ENTRY_ID),
+            &count, serverAddress, Port);
     for (uint16_t i = 0; i < count; i++) {
         create_searching_chat(founded_chats + i);
     }
-        
+
     filter_chats();
 
     for (uint16_t i = 0; i < count; i++) {
-      //  free((char *)(founded_chats + i)->name);
-      //  free((char *)(founded_chats + i)->creation_time);
-       //  free(founded_chats + i);
+        //  free((char *)(founded_chats + i)->name);
+        //  free((char *)(founded_chats + i)->creation_time);
+        //  free(founded_chats + i);
     }
     free(founded_chats);
 }
@@ -86,4 +89,22 @@ void on_chat_list_item_activated(GtkListBox *listbox,
 
 void on_send_message_button_clicked(void) {
     add_message_to_selected_chat();
+}
+
+void on_chat_actions_button_clicked(void) {
+    show_chat_actions_box();
+
+    hide_widget(SETTINGS_BOX_ID);
+    hide_widget(CHAT_BOX_ID);
+    show_widget(CHAT_ACTIONS_BOX_ID);
+}
+
+void on_chat_actions_back_button_clicked(void) {
+    hide_widget(CHAT_ACTIONS_BOX_ID);
+    show_widget(CHAT_BOX_ID);
+}
+
+void on_chat_actions_box_hide(void) {
+    GtkBox *chat_actions_header_box = get_box("chat_actions_header_box");
+    remove_child_from_box(chat_actions_header_box, 1);
 }

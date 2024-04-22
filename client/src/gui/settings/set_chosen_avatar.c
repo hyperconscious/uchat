@@ -5,7 +5,7 @@ void set_chosen_avatar(char user_name_first_letter,
                        bool is_first_set) {
     GtkBox *change_avatar_box = get_box(CHANGE_AVATAR_BOX_ID);
     if (!is_first_set)
-        remove_first_child_from_box(change_avatar_box);
+        remove_child_from_box(change_avatar_box, 0);
     GtkWidget *avatar_widget = create_avatar_widget(
             user_name_first_letter,
             120,

@@ -103,7 +103,8 @@ void list_store_for_each(GListStore *list_store,
 
 gboolean scroll_window_to_bottom(gpointer user_data);
 
-void remove_first_child_from_box(GtkBox *box);
+void remove_child_from_box(GtkBox *box,
+                           int index);
 
 guint get_box_child_count(GtkBox *box);
 
