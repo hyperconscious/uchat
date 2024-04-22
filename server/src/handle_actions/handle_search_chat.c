@@ -36,9 +36,8 @@ void handle_search_chat(int client_socket){
             continue;
         } 
         t_packet chat_id = create_packet(PACKET_TYPE_UINT32, &(uint32_t){0});
-        t_packet chat_owner_id = create_packet(PACKET_TYPE_UINT32,
-                                &(uint32_t){mx_find_id_by_user(stmt,users[i -
-                                    count])});
+        uint32_t owner_id = mx_find_id_by_user(stmt_u_id, users[i - count]);
+        t_packet chat_owner_id = create_packet(PACKET_TYPE_UINT32, &owner_id);
         t_packet chat_name = create_packet(PACKET_TYPE_STRING, users[i- count]);
         send_and_release_packet(client_socket, &chat_id);
         send_and_release_packet(client_socket, &chat_owner_id);

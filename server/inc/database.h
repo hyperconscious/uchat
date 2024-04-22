@@ -94,7 +94,7 @@ int mx_sub_chat(sqlite3_stmt *stmt, int id);
 
 
 //chat_partipicant
-int mx_add_user_to_chat(sqlite3_stmt *stmt, int user_id, int chat_id);
+int mx_add_user_to_chat(sqlite3_stmt *stmt, int chat_id, int user_id);
 
 int mx_sub_user_from_chat(sqlite3_stmt *stmt, int user_id, int chat_id);
 

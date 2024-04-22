@@ -23,7 +23,8 @@ void on_log_in_button_clicked(void) {
                                                   password, AUTH_LOGIN,
                                                   &user_id, language_id);
     if (strcmp(result, SUCCESSFUL) == 0) {
-        user_username = username;
+        user_username = malloc(strlen(username) + 1);
+        strcpy(user_username, username);
         free(result);
         open_window(HOME_WINDOW_ID);
         close_window(AUTH_WINDOW_ID);
@@ -46,10 +47,11 @@ void on_sign_up_button_clicked(void) {
                                                   password, AUTH_SIGN_UP,
                                                   &user_id, language_id);
     if (strcmp(result, SUCCESSFUL) == 0) {
+        user_username = malloc(strlen(username) + 1);
+        strcpy(user_username, username);
         free(result);
         open_window(HOME_WINDOW_ID);
         close_window(AUTH_WINDOW_ID);
-        printf("%d\n", language_id);
         return;
     }
     show_auth_error(result);

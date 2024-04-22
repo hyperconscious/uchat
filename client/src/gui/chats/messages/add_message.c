@@ -43,11 +43,12 @@ void add_message_to_selected_chat(void) {
             uint32_t other_user_id = chat->id;
             chat->id = rq_create_chat(chat->name, user_id, 
                                               serverAddress, Port);
-            rq_add_user_to_chat(chat->id, other_user_id, serverAddress, Port);
+            rq_add_user_to_chat(other_user_id, chat->id serverAddress, Port);
             chat->searching = false;
             delete_searched_chats();
             show_chats_i_am_in();
-            //gtk_entry_set_text(GTK_ENTRY(SEARCH_CHAT_ENTRY_ID), "");
+            GtkEntry *search_entry = GTK_ENTRY(gtk_builder_get_object(Builder, SEARCH_CHAT_ENTRY_ID));
+            gtk_entry_set_text(search_entry, "");
         }
 
         Message *previous_message = (Message *)mx_get_last_element(
