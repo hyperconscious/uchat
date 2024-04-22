@@ -12,6 +12,7 @@ int mx_recreate_tables(sqlite3 *db)
         id	INTEGER,\
         name	TEXT UNIQUE NOT NULL,\
         password	TEXT, \
+        language INTEGER NOT NULL,\
         PRIMARY KEY(id AUTOINCREMENT)\
     );", NULL, NULL, NULL), result);
 
