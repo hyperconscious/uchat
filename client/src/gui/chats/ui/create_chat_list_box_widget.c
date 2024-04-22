@@ -6,7 +6,7 @@ static void set_chat_list_item_image(GtkBox *root_box,
     GtkWidget *avatar_widget = create_avatar_widget(
             first_name_letter,
             60,
-            "circle_default_avatar",
+            "rounded_square_default_avatar",
             path,
             false,
             draw_rounded_square_image
