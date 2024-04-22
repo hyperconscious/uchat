@@ -11,4 +11,4 @@ void handle_sign_up(int client_socket);
 void handle_search_chat(int client_socket);
 void handle_add_chat(int client_socket);
 void handle_get_chats(int client_socket);
-
+void handle_add_user_to_chat(int client_socket);

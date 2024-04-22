@@ -5,5 +5,4 @@ typedef struct chat_s{
     long owner_id;
     const char *name;
     const char *creation_time;
-} t_chat;
-
+} t_db_chat;

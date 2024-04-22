@@ -14,6 +14,7 @@
 #include "client_request_codes.h"
 #include "client_status_code.h"
 #include "packet.h"
+#include "types.h"
 
 #define AUTH_WINDOW_ID "auth_window"
 #define HOME_WINDOW_ID "home_window"
@@ -24,9 +25,11 @@ char* rq_process_user_authentication(char* server_address, int port,
                                      t_client_rq authentication_code,
                                      uint32_t *id);
 
-t_chat** rq_search_chats(char* searching_chat, uint16_t *count, 
-                       char* server_address, int port);
+t_db_chat* rq_search_chats(char* searching_chat, uint16_t *count,
+                           char* server_address, int port);
 uint32_t rq_create_chat(char* name, uint32_t owner_id, 
                         char* server_address, int port);
-t_chat** rq_get_chats(uint32_t owner_id, uint16_t *count, char* server_address, int port);
+t_db_chat* rq_get_chats(uint32_t owner_id, uint16_t *count, char* server_address, int port);
+void rq_add_user_to_chat(uint32_t chat_id, uint32_t user_id, char*
+                         server_address, int port);
 

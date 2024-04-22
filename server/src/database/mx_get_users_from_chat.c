@@ -1,4 +1,4 @@
-#include "handle_db_chat.h"
+#include "database.h"
 
 int mx_get_users_from_chat(sqlite3 *db, long chat_id, int max_count, long **result_ids, int *result_count) 
 {

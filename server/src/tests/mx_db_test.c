@@ -1,4 +1,4 @@
-#include "handle_db_chat.h"
+#include "database.h"
 
 void mx_test_db_add_user(void)
 {
@@ -62,8 +62,8 @@ void mx_test_db_add_user_to_chat(void)
     mx_init_add_user_to_chat(db, &add_stmt);
     mx_init_find_id_by_user(db, &get_user_stmt);
     mx_init_get_chats_by_name(db, &get_chat_stmt);
-    t_chat *chats;
-    int count;
+    t_db_chat *chats;
+    uint16_t count;
     
     long id = mx_get_user_id_by_login(get_user_stmt, "test user");
     if(id == -1)
@@ -114,7 +114,7 @@ void mx_test_db_remove_chat(void)
 
     mx_init_get_chats_by_name(db, &get_chat_stmt);
 
-    t_chat *chats;
+    t_db_chat *chats;
     uint16_t chats_count;
     if(mx_get_chats_by_name(get_chat_stmt, "test chat", 1, &chats, &chats_count))
     {

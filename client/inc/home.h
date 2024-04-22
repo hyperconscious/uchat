@@ -33,6 +33,7 @@
 extern int Port;
 extern char *serverAddress;
 extern uint32_t user_id;
+extern char* user_username;
 extern GListStore *all_chats_list_store;
 extern GListStore *visible_chats_list_store;
 
@@ -76,7 +77,7 @@ guint add_chat_sorted_to_visible_list_store(struct _Chat *chat);
 
 void show_chats_i_am_in(void);
 
-void create_searching_chat(t_chat *chat);
+void create_searching_chat(t_db_chat *chat);
 
 void delete_searched_chats(void);
 
@@ -104,7 +105,7 @@ void set_chat_list_box_row_selected_style(GtkListBoxRow *selected_row);
 
 struct _Chat *create_chat(long id,
                           char *image_path,
-                          char *name,
+                          const char *name,
                           t_list *messages,
                           int unread_messages_count,
                           bool searching,

@@ -1,18 +1,19 @@
 #include "home.h"
 
 t_list *get_chats(void) {
-    Chat *chat1 = create_chat(0, "client/src/gui/layout/img/ic_person2.png",
-                              "Doe", NULL, 10, false, 1712957612439);
+    Chat *chat1 = create_chat(0, NULL, "My notes", NULL, 0, false, 1712957612439);
     t_list *chats = mx_create_node(chat1);
     uint16_t count = 0;
-    t_chat **my_chats = rq_get_chats(user_id, &count, serverAddress, Port);
+    t_db_chat *my_chats = rq_get_chats(user_id, &count, serverAddress, Port);
     for (uint16_t i = 0; i < count; i++) {
-        Chat *chat = create_chat(my_chats[i]->id, NULL, (char *)my_chats[i]->name,
-                                 NULL, 1, false, 1712957612439);
+        Chat *chat = create_chat((my_chats + i)->id, NULL, (my_chats + i)->name,
+                                 NULL, 0, false, 1712957612439);
         mx_push_back(&chats, chat);
     }
     for (uint16_t i = 0; i < count; i++) {
-        free((char *)my_chats[i]->name);
+      //  free((char *)(my_chats + i)->name);
+      //  free((char *)(my_chats + i)->creation_time);
+      //  free(my_chats + i);
     }
     free(my_chats);
 /*

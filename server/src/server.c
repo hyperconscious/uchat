@@ -8,7 +8,7 @@ int main(int argc, char* argv[]) {
 	  }
     // db processing...
    // mx_test_db_all();
- /*   sqlite3 *db;
+  /*  sqlite3 *db;
     sqlite3_open(DATABASE, &db);
     mx_recreate_tables(db);
     sqlite3_close(db);*/

@@ -29,6 +29,9 @@ void *handle_client(void *arg) {
         case RQ_GET_CHATS:
             handle_get_chats(client_socket);
             break;
+        case RQ_ADD_USER_TO_CHAT:
+            handle_add_user_to_chat(client_socket);
+            break;
         default:
             fprintf(stderr, "wrong action from client\n");
             break;

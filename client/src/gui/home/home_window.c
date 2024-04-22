@@ -43,16 +43,18 @@ void on_search_message_entry_changed(void) {
     }
 
     uint16_t count = 0;
-    t_chat **founded_chats = rq_search_chats(get_entry_text(SEARCH_CHAT_ENTRY_ID),
+    t_db_chat *founded_chats = rq_search_chats(get_entry_text(SEARCH_CHAT_ENTRY_ID),
                             &count, serverAddress, Port);
     for (uint16_t i = 0; i < count; i++) {
-        create_searching_chat(founded_chats[i]);
+        create_searching_chat(founded_chats + i);
     }
         
     filter_chats();
 
     for (uint16_t i = 0; i < count; i++) {
-        free(founded_chats[i]);
+      //  free((char *)(founded_chats + i)->name);
+      //  free((char *)(founded_chats + i)->creation_time);
+       //  free(founded_chats + i);
     }
     free(founded_chats);
 }

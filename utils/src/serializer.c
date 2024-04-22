@@ -1,5 +1,7 @@
 #include "serializer.h"
 
+void foo(){}
+/*
 char *serialize_chat(const t_chat *chat) {
     if (!chat || !chat->name) {
         fprintf(stderr, "Error: NULL chat or chat name pointer\n");
@@ -47,10 +49,10 @@ t_chat *deserialize_chat(const char *serialized_data) {
     }
 
     // Копирование имени чата
-    memcpy(chat->name, serialized_data + sizeof(chat->id) + sizeof(chat->owner_id), name_len);
+ //   memcpy(chat->name, serialized_data + sizeof(chat->id) + sizeof(chat->owner_id), name_len);
 
     return chat;
-}
+}*/
 /*t_chat *deserialize_chat(const char *serialized_data) {
     if (!serialized_data) {
         fprintf(stderr, "Error: NULL serialized data pointer\n");

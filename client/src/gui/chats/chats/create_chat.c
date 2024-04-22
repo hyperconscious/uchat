@@ -2,7 +2,7 @@
 
 Chat *create_chat(long id,
                   char *image_path,
-                  char *name,
+                  const char *name,
                   t_list *messages,
                   int unread_messages_count,
                   bool searching,

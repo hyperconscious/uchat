@@ -104,9 +104,17 @@ long mx_get_user_id_by_login(sqlite3_stmt *stmt, char *login);
 
 char **mx_get_chat_names(sqlite3 *db, int owner_id, uint16_t *count);
 
+//chat
+int mx_add_chat(sqlite3_stmt *stmt, char *name, int owner_id);
+
+int mx_get_chats_by_user_id(sqlite3_stmt *stmt, int user_id, int max_rows, t_db_chat **chats, uint16_t *result_count);
+
+int mx_get_chats_by_name(sqlite3_stmt *stmt, char *name, int max_rows, t_db_chat **chats, uint16_t *result_count);
+
+int mx_get_chat_by_id(sqlite3 *db, sqlite3_stmt **statement, long *result_ids);
 //int mx_find_id_by_login(t_db_info *info, char* username);
 
-int *mx_find_users_by_login(sqlite3 *db, const char *name, uint16_t *count);
+char **mx_find_users_by_login(sqlite3 *db, uint8_t max_counts, const char *name, uint16_t *count);
 
 char *mx_get_login_by_id(sqlite3 *db, const int id);
 

@@ -1,6 +1,6 @@
 #include "requests.h"
 
-t_chat** rq_get_chats(uint32_t owner_id, uint16_t *count, char* server_address, int port){
+t_db_chat* rq_get_chats(uint32_t owner_id, uint16_t *count, char* server_address, int port){
     int client_socket = create_and_connect_socket(server_address, port);
 
     if(client_socket == -1)
@@ -14,11 +14,11 @@ t_chat** rq_get_chats(uint32_t owner_id, uint16_t *count, char* server_address, 
     send_and_release_packet(client_socket, &owner_id_packet);
 
     *count = receive_packet(client_socket).u_payload.uint16_data;
-    t_chat **chats_array = malloc(*count * sizeof(t_chat));
+    t_db_chat *chats_array = malloc(*count * sizeof(t_db_chat));
     for (uint16_t i = 0; i < *count; i++) {
-        chats_array[i]->id = receive_packet(client_socket).u_payload.uint32_data;
-        chats_array[i]->owner_id = receive_packet(client_socket).u_payload.uint32_data;
-        chats_array[i]->name =receive_packet(client_socket).u_payload.s_string.data;
+        (chats_array + i)->id = receive_packet(client_socket).u_payload.uint32_data;
+        (chats_array + i)->owner_id = receive_packet(client_socket).u_payload.uint32_data;
+        (chats_array + i)->name = receive_packet(client_socket).u_payload.s_string.data;
     }
     
     close(client_socket);
