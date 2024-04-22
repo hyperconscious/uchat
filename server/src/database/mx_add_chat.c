@@ -8,7 +8,7 @@ int mx_add_chat(sqlite3_stmt *stmt, char *name, int owner_id)
     MX_TRY_FUNCTION(sqlite3_bind_int(stmt, 2, owner_id), result);
     if(sqlite3_step(stmt) != SQLITE_DONE)
         return sqlite3_step(stmt);
-  //  int chat_id = sqlite3_get_last_inserted_row_id(db);
+    //int chat_id = sqlite3_get_last_inserted_row_id(db);
     return 0;
 }
 

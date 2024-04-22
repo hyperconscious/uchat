@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdint.h>
+#include <stdbool.h>
 #include "types.h"
 #ifdef __MACH__
 
@@ -37,6 +38,14 @@
 //     sqlite3_stmt *get_user_id_by_login_stmt;
 // } t_db_info;
 
+typedef struct 
+{
+    uint32_t id;
+    char *text;
+    uint32_t user_id;
+    bool is_readed;
+    char *time;
+} t_db_message;
 
 int mx_recreate_tables(sqlite3 *db);
 
@@ -64,7 +73,6 @@ int mx_init_add_user_to_chat(sqlite3 *db, sqlite3_stmt **statement);
 
 int mx_init_sub_user_from_chat(sqlite3 *db, sqlite3_stmt **statement);
 
-int mx_init_get_last_messages(sqlite3 *db, sqlite3_stmt **statement);
 
 int mx_init_find_id_by_user(sqlite3 *db, sqlite3_stmt **statement);
 
@@ -86,7 +94,7 @@ int mx_check_password(sqlite3_stmt *stmt, char *login, char *password);
 
 
 //message
-int mx_add_message(sqlite3_stmt *stmt, char *text, int user_id, int chat_id, float time);
+int mx_add_message(sqlite3_stmt *stmt, char *text, int user_id, int chat_id);
 
 int mx_sub_message(sqlite3_stmt *stmt, int id);
 
@@ -124,7 +132,7 @@ char **mx_find_users_by_login(sqlite3 *db, uint8_t max_counts, const char *name,
 
 char *mx_get_login_by_id(sqlite3 *db, const int id);
 
-int mx_get_last_messages(sqlite3_stmt *stmt, int chat_id, int max_rows);
+int mx_get_last_messages(sqlite3 *db, int chat_id, char *search_text, int max_rows, bool set_readed, t_db_message **messages, int *result_count);
 
 //utils
 const char *get_last_error(sqlite3_stmt *stmt);

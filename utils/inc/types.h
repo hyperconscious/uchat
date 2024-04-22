@@ -3,6 +3,6 @@
 typedef struct chat_s{
     long id;
     long owner_id;
-    const char *name;
-    const char *creation_time;
+    char *name;
+    char *creation_time;
 } t_db_chat;

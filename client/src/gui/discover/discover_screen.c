@@ -9,7 +9,7 @@ void on_discover_screen_show(void) {
     DiscoverPerson *founded_chats = rq_discover(user_id,
                             &count, serverAddress, Port);
    
-    printf("requestetd good\n");
+ 
 
     
     //DiscoverPerson person = {.id = 0, .name = "Paul", .image_url = NULL};

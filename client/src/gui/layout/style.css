@@ -190,10 +190,6 @@ notebook header tabs tab:hover {
 }
 
 /*inbox*/
-#inbox_box {
-    background-color: #353644;
-}
-
 #search_message_entry {
     padding: 2px 8px;
     border-radius: 12px;
@@ -327,6 +323,17 @@ notebook header tabs tab:hover {
 
 #send_image {
     -gtk-icon-effect: none;
+}
+
+#chat_actions_box {
+    background-color: #414255;
+    color: white;
+}
+
+#chat_members_list row {
+    box-shadow: none;
+    color: white;
+    margin-top: 12px;
 }
 
 /*settings*/
