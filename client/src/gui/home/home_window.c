@@ -97,5 +97,6 @@ void on_chat_actions_back_button_clicked(void) {
 
 void on_chat_actions_box_hide(void) {
     GtkBox *chat_actions_header_box = get_box("chat_actions_header_box");
-    remove_child_from_box(chat_actions_header_box, 1);
+    if (GTK_IS_WIDGET(chat_actions_header_box))
+        remove_child_from_box(chat_actions_header_box, 1);
 }
