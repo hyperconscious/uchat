@@ -11,8 +11,6 @@ void handle_discover(int client_socket){
     sqlite3_stmt *stmt;
     sqlite3_prepare_v2(db, "SELECT id FROM user_data WHERE name == ?", -1, &stmt, 0);
 
-
-
     uint16_t count = 0;
     char **chats = mx_get_users_by_language (db, lang, &count);
 
@@ -28,13 +26,8 @@ void handle_discover(int client_socket){
 
             t_packet id_to_send = create_packet(PACKET_TYPE_UINT32, &found_id);
 
-
             send_and_release_packet(client_socket, &id_to_send);
-
-
             free(chats[i]);
-
-
         }
         free(chats);
      

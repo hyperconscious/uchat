@@ -141,7 +141,7 @@ void mx_test_db_message(void)
 
     t_db_message *last_messages;
     int msg_count;
-    if( mx_get_last_messages(db, chat_id, "", -1, 1, &last_messages, &msg_count))
+    if( mx_get_last_messages(db, chat_id, "", -1, &last_messages, &msg_count))
     {
         fprintf(stderr, "Get last messages error\n");
     }
