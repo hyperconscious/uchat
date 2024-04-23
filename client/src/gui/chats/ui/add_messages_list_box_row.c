@@ -18,18 +18,6 @@ void set_message_time_label(GtkBox *message_box,
     }
 }
 
-void set_message_text_label(GtkBox *message_box,
-                            char *text,
-                            bool mine) {
-    GtkWidget *label = gtk_label_new(text);
-    GtkAlign halign = mine ? GTK_ALIGN_END : GTK_ALIGN_START;
-    char *class = mine ? "message_text_label_mine"
-                       : "message_text_label_not_mine";
-    set_class(label, class);
-    gtk_widget_set_halign(label, halign);
-    add_widget_to_box(message_box, label, false, false, 0);
-}
-
 static void set_messages_date_label(GtkBox *message_box,
                                     long long time_in_millis,
                                     Message *previous_message) {
@@ -49,6 +37,67 @@ static void set_messages_date_label(GtkBox *message_box,
     }
 }
 
+static void set_read_status_image(GtkBox *box,
+                                  bool is_read) {
+    char *read_status_image_path = is_read ? IC_HIDE_PATH : IC_SHOW_PATH;
+    GtkWidget *read_status_image = GTK_WIDGET(
+            image_new(read_status_image_path, 12, 12)
+    );
+    gtk_widget_set_margin_top(read_status_image, 2);
+    gtk_widget_set_halign(read_status_image, GTK_ALIGN_START);
+    add_widget_to_box(box, read_status_image, false, false, 0);
+}
+
+static void set_message_sender_name_label(GtkBox *box,
+                                          char *sender_name) {
+    GtkWidget *sender_name_label = gtk_label_new(sender_name);
+    set_class(sender_name_label, "label_sender_name");
+    add_widget_to_box(box, sender_name_label, false, false, 4);
+}
+
+static void set_message_text_label(GtkBox *box,
+                                   char *text,
+                                   bool is_mine,
+                                   bool halign) {
+    GtkWidget *text_label = gtk_label_new(text);
+    GtkJustification justification = is_mine ? GTK_JUSTIFY_RIGHT
+                                             : GTK_JUSTIFY_LEFT;
+    gtk_label_set_line_wrap(GTK_LABEL(text_label), true);
+    gtk_label_set_line_wrap_mode(GTK_LABEL(text_label), PANGO_WRAP_WORD_CHAR);
+    add_widget_to_box(box, text_label, false, false, 0);
+    gtk_widget_set_halign(text_label, halign);
+    gtk_label_set_justify(GTK_LABEL(text_label), justification);
+}
+
+static void set_message_box(GtkBox *message_box,
+                            char *text,
+                            char *sender_name,
+                            bool is_mine,
+                            bool is_read) {
+    GtkWidget *root_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 2);
+    GtkWidget *sender_name_and_read_status_box =
+            gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 2);
+    GtkAlign halign = is_mine ? GTK_ALIGN_END : GTK_ALIGN_START;
+    char *root_box_class = is_mine ? "message_box_mine"
+                                   : "message_box_not_mine";
+
+    set_message_text_label(GTK_BOX(root_box), text, is_mine, halign);
+    set_message_sender_name_label(GTK_BOX(sender_name_and_read_status_box),
+                                  sender_name);
+    if (is_mine)
+        set_read_status_image(GTK_BOX(sender_name_and_read_status_box),
+                              is_read);
+
+    set_class(root_box, root_box_class);
+
+    gtk_widget_set_halign(sender_name_and_read_status_box, halign);
+    gtk_widget_set_halign(root_box, halign);
+
+    add_widget_to_box(GTK_BOX(root_box), sender_name_and_read_status_box,
+                      false, false, 0);
+    add_widget_to_box(message_box, root_box, false, false, 0);
+}
+
 void add_messages_list_box_row(Message *message,
                                Message *previous_message) {
     GtkWidget *message_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 2);
@@ -64,7 +113,11 @@ void add_messages_list_box_row(Message *message,
             previous_message,
             message->mine
     );
-    set_message_text_label(GTK_BOX(message_box), message->text, message->mine);
+    set_message_box(GTK_BOX(message_box),
+                    message->text,
+                    "Josh",
+                    message->mine,
+                    true);
 
     list_box_append(CHAT_MESSAGES_LIST_ID, message_box);
 }

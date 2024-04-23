@@ -5,6 +5,7 @@ void on_settings_screen_show(void) {
     char *image_path = NULL;
     GtkBox *change_avatar_box = get_box(CHANGE_AVATAR_BOX_ID);
     bool is_avatar_first_set = get_box_child_count(change_avatar_box) == 1;
+    set_current_username(user_name);
     if (is_avatar_first_set)
         set_chosen_avatar(user_name[0], image_path, true);
 }
@@ -21,6 +22,7 @@ void on_change_username_button_clicked(void) {
         return;
 
     change_username_rq(user_id, username, serverAddress, Port);
+    set_current_username(username);
     set_entry_text(CHANGE_USERNAME_ENTRY_ID, "");
 }
 

@@ -33,8 +33,8 @@ static GtkWidget *create_chat_member_widget(char *name,
 
     gtk_button_set_image(
             GTK_BUTTON(remove_member_button),
-            GTK_WIDGET(
-                    image_new("client/src/gui/layout/img/ic_remove.svg"))
+            GTK_WIDGET(image_new("client/src/gui/layout/img/ic_remove.svg", -1,
+                                 -1))
     );
 
     gtk_widget_set_halign(remove_member_button, GTK_ALIGN_END);

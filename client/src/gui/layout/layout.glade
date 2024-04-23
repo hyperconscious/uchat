@@ -855,6 +855,7 @@
         <property name="visible">True</property>
         <property name="can-focus">True</property>
         <property name="vexpand">True</property>
+        <property name="hscrollbar-policy">never</property>
         <property name="shadow-type">in</property>
         <child>
           <object class="GtkViewport" id="chat_messages_viewport">
@@ -913,6 +914,7 @@
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
                 <property name="hexpand">True</property>
+                <property name="max-length">1024</property>
                 <property name="placeholder-text" translatable="yes">Write a message...</property>
               </object>
               <packing>
@@ -1089,7 +1091,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkLabel">
+              <object class="GtkLabel" id="settings_current_username_label">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="halign">start</property>
