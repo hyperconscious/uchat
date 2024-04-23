@@ -55,10 +55,13 @@ static void unselect_previous_selected_chat(
             previous_selected_chat_index
     );
     previous_selected_chat->selected = false;
+}
 
+static void remove_previous_chat_avatar_if_set(void) {
     GtkContainer *chat_header_box = GTK_CONTAINER(get_box(CHAT_HEADER_BOX_ID));
     GtkWidget *previous_avatar = get_container_first_child(chat_header_box);
-    gtk_widget_destroy(previous_avatar);
+    if (GTK_IS_DRAWING_AREA(previous_avatar))
+        gtk_widget_destroy(previous_avatar);
 }
 
 static void set_messages_read(GtkListBoxRow *row,
@@ -85,6 +88,8 @@ void select_chat(GtkListBoxRow *selected_row) {
     guint previous_selected_chat_index;
     bool is_chat_selected =
             get_selected_chat_index(&previous_selected_chat_index);
+
+    remove_previous_chat_avatar_if_set();
 
     if (!is_chat_selected || !selected_chat->selected) {
         if (is_chat_selected)

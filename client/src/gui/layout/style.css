@@ -185,6 +185,10 @@ notebook header tabs tab:hover {
     background-color: lawngreen;
 }
 
+#internet_connection_waiting_indicator {
+    background-color: yellow;
+}
+
 #internet_connection_not_available_indicator {
     background-color: red;
 }
