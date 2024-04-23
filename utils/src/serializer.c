@@ -3,16 +3,17 @@
 char *serialize_message(const t_db_message *message) {
     size_t text_length = strlen(message->text);
     size_t time_length = strlen(message->time);
-    size_t buffer_size = sizeof(uint32_t) * 4 + sizeof(bool) + text_length + time_length + 2; // Для '\0'
-
+    size_t buffer_size = text_length + time_length + sizeof(uint32_t) * 4 + sizeof(bool) + 16;
     char *buffer = malloc(buffer_size);
     if (buffer == NULL) {
         perror("malloc");
         exit(EXIT_FAILURE);
     }
 
-    sprintf(buffer, "%u|%s|%u|%u|%d|%s", message->id, message->text, message->user_id,
-            message->chat_id, message->is_readed, message->time);
+    sprintf(buffer, "%zu|%zu|%u|%s|%u|%u|%d|%s",
+        text_length, time_length,
+        message->id, message->text, message->user_id,
+        message->chat_id, message->is_readed, message->time);
 
     return buffer;
 }
@@ -20,13 +21,24 @@ char *serialize_message(const t_db_message *message) {
 t_db_message deserialize_message(const char *buffer) {
     t_db_message message;
 
-    sscanf(buffer, "%u|%m[^|]|%u|%u|%d|%m[^|]", &message.id, &message.text, &message.user_id,
-           &message.chat_id, &message.is_readed, &message.time);
+    size_t msg_size = 0;
+    size_t time_size = 0;
+    int temp = 0;
+
+    sscanf(buffer, "%zu|%zu", &msg_size, &time_size);
+    buffer += strcspn(buffer, "|") + 1;
+
+    message.text = malloc(msg_size + 1);
+    message.time = malloc(time_size + 1);
+
+    sscanf(buffer, "%u|%[^|]|%u|%u|%d|%[^|]", &message.id, message.text, &message.user_id,
+           &message.chat_id, &temp, message.time);
+    message.is_readed = temp;
 
     return message;
 }
 
-char *serialize_chat(const t_chat *chat) {
+/*char *serialize_chat(const t_chat *chat) {
     if (!chat || !chat->name) {
         fprintf(stderr, "Error: NULL chat or chat name pointer\n");
         return NULL;
@@ -72,4 +84,4 @@ t_chat *deserialize_chat(const char *serialized_data) {
 
 
     return chat;
-}
+}*/

@@ -88,3 +88,19 @@ long long get_current_time_millis(void) {
     gettimeofday(&tv, NULL);
     return (long long)(tv.tv_sec) * 1000 + (long long)(tv.tv_usec) / 1000;
 }
+
+long long convert_to_epoch(const char *datetime_str) {
+    struct tm tm_time;
+    memset(&tm_time, 0, sizeof(struct tm));
+
+    if (strptime(datetime_str, "%Y-%m-%d %H:%M:%S", &tm_time) == NULL) {
+        fprintf(stderr, "Error parsing datetime string\n");
+    }
+
+    time_t time_seconds = mktime(&tm_time);
+    if (time_seconds == -1) {
+        fprintf(stderr, "Error converting time to seconds since epoch\n");
+    }
+
+    return (long long) time_seconds;
+}

@@ -1,4 +1,6 @@
 #pragma once
+#include <stdbool.h>
+#include <stdint.h>
 
 typedef struct chat_s{
     long id;
@@ -18,7 +20,7 @@ typedef struct
     uint32_t id;
     char *text;
     uint32_t user_id;
+    uint32_t chat_id;
     bool is_readed;
     char *time;
-    int32_t chat_id;
 } t_db_message;
