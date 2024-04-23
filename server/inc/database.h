@@ -45,6 +45,7 @@ typedef struct
     uint32_t user_id;
     bool is_readed;
     char *time;
+    int32_t chat_id;
 } t_db_message;
 
 int mx_recreate_tables(sqlite3 *db);
@@ -97,6 +98,10 @@ int mx_check_password(sqlite3_stmt *stmt, char *login, char *password);
 int mx_add_message(sqlite3_stmt *stmt, char *text, int user_id, int chat_id);
 
 int mx_sub_message(sqlite3_stmt *stmt, int id);
+
+int mx_remove_message(sqlite3 *db, int message_id);
+
+int mx_edit_message(sqlite3 *db, int message_id, char *new_text);
 
 int mx_sub_chat(sqlite3_stmt *stmt, int id);
 
