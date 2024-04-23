@@ -7,9 +7,7 @@ void handle_discover(int client_socket){
     sqlite3_open(DATABASE, &db);
 
     uint32_t lang = mx_get_lang_by_id(db, id.u_payload.uint32_data);
-
-
-
+    
     uint16_t count = 0;
     char **chats = mx_get_users_by_language (db, lang, &count);
 

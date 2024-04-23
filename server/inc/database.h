@@ -132,14 +132,13 @@ char **mx_find_users_by_login(sqlite3 *db, uint8_t max_counts, const char *name,
 
 char *mx_get_login_by_id(sqlite3 *db, const int id);
 
-int mx_get_last_messages(sqlite3 *db, int chat_id, char *search_text, int max_rows, bool set_readed, t_db_message **messages, int *result_count);
+int mx_get_last_messages(sqlite3 *db, int chat_id, char *search_text, int max_rows, t_db_message **messages, int *result_count);
 
 //utils
 const char *get_last_error(sqlite3_stmt *stmt);
 
 //testing
 void mx_test_db_all(void);
-
 
 uint16_t mx_get_lang_by_id(sqlite3 *db, uint32_t user_id);
 int mx_change_username(sqlite3 *db, uint32_t id, char* new_name);
