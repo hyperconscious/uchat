@@ -1,7 +1,8 @@
 #include "handle_requests.h"
 
 void handle_get_chats(int client_socket){
-    t_packet owner_id_packet = receive_packet(client_socket);
+    t_packet owner_id_packet;
+    if(!receive_packet(client_socket, &owner_id_packet)) return;
    
     sqlite3 *db;
     sqlite3_open(DATABASE, &db);

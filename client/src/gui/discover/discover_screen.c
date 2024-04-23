@@ -6,7 +6,7 @@ void on_discover_screen_show(void) {
     const int row_count = 4;
 
     uint16_t count = 0;
-    DiscoverPerson *founded_chats = rq_discover(user_id,
+    Person *founded_chats = rq_discover(user_id,
                             &count, serverAddress, Port);
    
  

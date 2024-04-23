@@ -12,7 +12,8 @@ char* rq_get_login_by_id(uint32_t id, char* server_address, int port){
     send_and_release_packet(client_socket, &packet_rq);
     send_and_release_packet(client_socket, &user_id);
 
-    char *login = receive_packet(client_socket).u_payload.s_string.data;
+    t_packet login;
+    if(!receive_packet(client_socket, &login)) return NULL;
     close(client_socket);
-    return login; 
+    return login.u_payload.s_string.data; 
 } 

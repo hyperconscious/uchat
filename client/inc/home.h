@@ -42,9 +42,10 @@ extern GListStore *all_chats_list_store;
 extern GListStore *visible_chats_list_store;
 
 typedef struct {
-    char *text;
     bool mine;
+    uint32_t id;
     long long time_in_millis;
+    char *text;
 } Message;
 
 struct _Chat {
@@ -58,12 +59,6 @@ struct _Chat {
     bool searching;
     long long creation_time_in_millis;
 };
-
-typedef struct {
-    long id;
-    char *name;
-    char *image_url;
-} Person;
 
 GtkWidget *create_chat_list_box_widget(gpointer item,
                                        gpointer user_data);

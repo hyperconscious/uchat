@@ -2,7 +2,8 @@
 
 void handle_search_chat(int client_socket){
 
-    t_packet name = receive_packet(client_socket);
+    t_packet name;
+    if(!receive_packet(client_socket, &name)) return;
     if(name.type != PACKET_TYPE_STRING) {
         fprintf(stderr, "Failed to receive packet from client\n");
         free_packet(&name);

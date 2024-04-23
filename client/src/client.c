@@ -1,4 +1,5 @@
 #include "client.h"
+#include "packet.h"
 
 GtkBuilder *Builder = NULL;
 int Port = -1;

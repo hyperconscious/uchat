@@ -36,8 +36,8 @@ typedef struct {
 } t_packet;
 
 t_packet create_packet(t_packet_type type, const void *data);
-void send_packet(int socket_fd, t_packet *packet);
-t_packet receive_packet(int socket_fd);
+int send_packet(int socket_fd, t_packet *packet);
+int receive_packet(int socket_fd, t_packet *packet);
 void free_packet(t_packet *packet);
-void send_and_release_packet(int socket_fd, t_packet *packet);
+int send_and_release_packet(int socket_fd, t_packet *packet);
 

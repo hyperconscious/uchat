@@ -1,7 +1,8 @@
 #include "handle_requests.h"
 
 void handle_discover(int client_socket){
-    t_packet id = receive_packet(client_socket);
+    t_packet id;
+    if(!receive_packet(client_socket, &id)) return;
    
     sqlite3 *db;
     sqlite3_open(DATABASE, &db);

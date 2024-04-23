@@ -6,8 +6,8 @@ void *handle_client(void *arg) {
     int client_socket = client_info->client_socket;
     free(client_info);
     
-    t_packet request = receive_packet(client_socket);
-    if (request.type != PACKET_TYPE_UINT8) {
+    t_packet request;
+    if (!receive_packet(client_socket, &request) || request.type != PACKET_TYPE_UINT8) {
         fprintf(stderr, "Failed to receive packet from client rq\n");
         close(client_socket);
         pthread_exit(NULL);
@@ -40,6 +40,9 @@ void *handle_client(void *arg) {
             break;
         case RQ_CHANGE_USERNAME:
             handle_change_username(client_socket);
+            break;
+        case RQ_ADD_MESSAGE:
+            handle_add_message(client_socket);
             break;
         default:
             fprintf(stderr, "wrong action from client\n");

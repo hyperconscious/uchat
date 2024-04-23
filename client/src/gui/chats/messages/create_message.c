@@ -5,7 +5,8 @@ Message *create_message(const char *text,
                         long long time_in_millis) {
     Message *message = malloc(sizeof(Message));
     if (message != NULL) {
-        message->text = strdup(text);
+        message->text = malloc(strlen(text) + 1);
+        strcpy(message->text, text);
         message->mine = mine;
         message->time_in_millis = time_in_millis;
     }

@@ -1,8 +1,10 @@
 #include "handle_requests.h"
 
 void handle_add_user_to_chat(int client_socket) {
-    t_packet chat_id_packet = receive_packet(client_socket);
-    t_packet user_id_packet = receive_packet(client_socket);
+    t_packet chat_id_packet;
+    t_packet user_id_packet;
+    if(!receive_packet(client_socket, &chat_id_packet)) return;
+    if(!receive_packet(client_socket, &user_id_packet)) return;
 
     sqlite3 *db;
     sqlite3_stmt *stmt;

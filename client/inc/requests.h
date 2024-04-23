@@ -9,7 +9,6 @@
 #endif
 
 #include <string.h>
-#include "packet.h"
 #include "socket_operations.h"
 #include "client_request_codes.h"
 #include "client_status_code.h"
@@ -34,9 +33,12 @@ t_db_chat* rq_get_chats(uint32_t owner_id, uint16_t *count, char* server_address
 void rq_add_user_to_chat(uint32_t user_id, uint32_t chat_id, char*
                          server_address, int port);
 
-DiscoverPerson* rq_discover(uint32_t id, uint16_t *count, char* server_address, int port);
+Person* rq_discover(uint32_t id, uint16_t *count, char* server_address, int port);
 
 char* rq_get_login_by_id(uint32_t id, char* server_address, int port);
 void change_username_rq(uint32_t id, char* new_username, char* server_address, int port);
+
+int rq_add_message(uint32_t user_id, uint32_t chat_id, char* text, 
+                    char* server_address, int port);
 
 

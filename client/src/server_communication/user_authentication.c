@@ -19,7 +19,12 @@ char* rq_process_user_authentication(char* server_address, int port,
     send_and_release_packet(client_socket, &user);
     send_and_release_packet(client_socket, &pass);
     send_and_release_packet(client_socket, &lang);
-    t_client_status_code status_code = receive_packet(client_socket).u_payload.uint8_data;
+    t_packet status_code_p;
+    t_packet id_p;
+    if(!receive_packet(client_socket, &status_code_p)) {
+        return strdup("No connection with server");
+    }
+    t_client_status_code status_code = status_code_p.u_payload.uint8_data;
     switch (status_code) {
         case WRONG_PASSWORD:
             return strdup("Wrong password");
@@ -31,11 +36,13 @@ char* rq_process_user_authentication(char* server_address, int port,
             return strdup("This login already exist");
             break;
         case SUCCESS_REGISTRATION:
-            *id = receive_packet(client_socket).u_payload.uint32_data;
+            receive_packet(client_socket, &id_p);
+            *id = id_p.u_payload.uint32_data;
             return strdup("success");
             break;
         case SUCCESS_LOGIN:
-            *id = receive_packet(client_socket).u_payload.uint32_data;
+            receive_packet(client_socket, &id_p);
+            *id = id_p.u_payload.uint32_data;
             return strdup("success");
             break;
         default:

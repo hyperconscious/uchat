@@ -1,9 +1,12 @@
 #include "handle_requests.h"
 
 void handle_sign_up(int client_socket) {
-    t_packet user = receive_packet(client_socket);
-    t_packet pass = receive_packet(client_socket);
-    t_packet lang = receive_packet(client_socket);
+    t_packet user;
+    t_packet pass;
+    t_packet lang;
+    if(!receive_packet(client_socket, &user)) return;
+    if(!receive_packet(client_socket, &pass)) return;
+    if(!receive_packet(client_socket, &lang)) return;
 
     char* username = user.u_payload.s_string.data;
     char* password = pass.u_payload.s_string.data;
