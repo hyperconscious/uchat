@@ -63,11 +63,9 @@ int mx_init_get_chats_by_name(sqlite3 *db, sqlite3_stmt **statement);
 
 int mx_init_add_user_to_chat(sqlite3 *db, sqlite3_stmt **statement);
 
-int mx_init_sub_user_from_chat(sqlite3 *db, sqlite3_stmt **statement);
-
+int mx_init_remove_user_from_chat(sqlite3 *db, sqlite3_stmt **statement);
 
 int mx_init_find_id_by_user(sqlite3 *db, sqlite3_stmt **statement);
-
 
 //db_info
 //int mx_init_db_info(const char *db, sqlite3_stmt *stmt);
@@ -84,6 +82,7 @@ int mx_sub_user(sqlite3_stmt *stmt, long id);
 
 int mx_check_password(sqlite3_stmt *stmt, char *login, char *password);
 
+int mx_edit_user(sqlite3 *db, int user_id, char *new_name, char *new_password, int new_lang);
 
 //message
 int mx_add_message(sqlite3_stmt *stmt, char *text, int user_id, int chat_id);
@@ -96,11 +95,12 @@ int mx_edit_message(sqlite3 *db, int message_id, char *new_text);
 
 int mx_sub_chat(sqlite3_stmt *stmt, int id);
 
+int mx_set_read_to_all_unread_messages(sqlite3* db, int user_id, int chat_id);
 
 //chat_partipicant
 int mx_add_user_to_chat(sqlite3_stmt *stmt, int user_id, int chat_id);
 
-int mx_sub_user_from_chat(sqlite3_stmt *stmt, int user_id, int chat_id);
+int mx_remove_user_from_chat(sqlite3_stmt *stmt, int user_id, int chat_id);
 
 //selectors
 long mx_find_id_by_user(sqlite3_stmt *stmt, char* username);

@@ -1,6 +1,6 @@
 #include "../inc/database.h"
 
-int mx_sub_user_from_chat(sqlite3_stmt *stmt, int user_id, int chat_id)
+int mx_remove_user_from_chat(sqlite3_stmt *stmt, int user_id, int chat_id)
 {
     int result = 0;
     MX_TRY_FUNCTION(sqlite3_reset(stmt), result);
