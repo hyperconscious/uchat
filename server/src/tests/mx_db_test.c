@@ -149,9 +149,10 @@ void mx_test_db_message(void)
     }
     for(int i = 0; i < msg_count; i++)
     {
-        fprintf(stderr, "user %d: printed \"%s\" at %s\n", last_messages[i].user_id, last_messages[i].text, last_messages[i].time);
+        fprintf(stderr, "user %d %s: printed \"%s\" at %s\n", last_messages[i].user_id, mx_get_login_by_id(db, last_messages[i].user_id), last_messages[i].text, last_messages[i].time);
     }
 
+    mx_edit_user(db, last_messages[0].user_id, "Nya nya cat, ", "nya1234", 2);
     mx_edit_message(db, last_messages[0].id, "hi :3");
 
     if( mx_get_last_messages(db, chat_id, "", -1, &last_messages, &msg_count))
@@ -160,7 +161,7 @@ void mx_test_db_message(void)
     }
     for(int i = 0; i < msg_count; i++)
     {
-        fprintf(stderr, "user %d: printed \"%s\" at %s\n", last_messages[i].user_id, last_messages[i].text, last_messages[i].time);
+        fprintf(stderr, "user %d %s: printed \"%s\" at %s\n", last_messages[i].user_id, mx_get_login_by_id(db, last_messages[i].user_id), last_messages[i].text, last_messages[i].time);
     }
 
     mx_sub_chat(remove_chat_stmt, chats[0].id);
