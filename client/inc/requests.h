@@ -15,6 +15,7 @@
 #include "client_status_code.h"
 #include "packet.h"
 #include "types.h"
+#include "discover.h"
 
 #define AUTH_WINDOW_ID "auth_window"
 #define HOME_WINDOW_ID "home_window"
@@ -33,7 +34,7 @@ t_db_chat* rq_get_chats(uint32_t owner_id, uint16_t *count, char* server_address
 void rq_add_user_to_chat(uint32_t user_id, uint32_t chat_id, char*
                          server_address, int port);
 
-char** rq_discover(uint32_t id, uint16_t *count, char* server_address, int port);
+DiscoverPerson* rq_discover(uint32_t id, uint16_t *count, char* server_address, int port);
 
 char* rq_get_login_by_id(uint32_t id, char* server_address, int port);
 void change_username_rq(uint32_t id, char* new_username, char* server_address, int port);
