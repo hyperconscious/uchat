@@ -94,28 +94,30 @@ void mx_test_db_message(void)
     sqlite3_stmt *get_usr_by_login;
     sqlite3_stmt *get_chat;
     sqlite3_stmt *add_usr_to_chat;
+    sqlite3_stmt *remove_chat_stmt;
     mx_init_add_user(db, &add_usr_stmt);
     mx_init_add_chat(db, &add_chat_stmt);
     mx_init_add_message(db, &add_msg_stmt);
     mx_init_find_id_by_user(db, &get_usr_by_login);
     mx_init_get_chats_by_name(db, &get_chat);
     mx_init_add_user_to_chat(db, &add_usr_to_chat);
+    mx_init_sub_chat(db, &remove_chat_stmt);
 
     if(mx_add_user(add_usr_stmt, "test_user1", "1234", 0))
     {
-        fprintf(stderr, "Add user error");
+        fprintf(stderr, "Add user error\n");
     }
-    uint32_t first_id = sqlite3_last_insert_rowid(db);
+    uint32_t first_id = mx_get_user_id_by_login(get_usr_by_login, "test_user1");
 
     if(mx_add_user(add_usr_stmt, "test_user2", "2134", 0))
     {
-        fprintf(stderr, "Add user error");
+        fprintf(stderr, "Add user error\n");
     }
-    uint32_t second_id = sqlite3_last_insert_rowid(db);
+    uint32_t second_id = mx_get_user_id_by_login(get_usr_by_login, "test_user2");
 
     if(mx_add_chat(add_chat_stmt, "stupid_chat", mx_get_user_id_by_login(get_usr_by_login, "test_user1")))
     {
-        fprintf(stderr, "Add chat error");
+        fprintf(stderr, "Add chat error\n");
     }
 
     t_db_chat *chats;
@@ -149,6 +151,19 @@ void mx_test_db_message(void)
     {
         fprintf(stderr, "user %d: printed \"%s\" at %s\n", last_messages[i].user_id, last_messages[i].text, last_messages[i].time);
     }
+
+    mx_edit_message(db, last_messages[0].id, "hi :3");
+
+    if( mx_get_last_messages(db, chat_id, "", -1, &last_messages, &msg_count))
+    {
+        fprintf(stderr, "Get last messages error\n");
+    }
+    for(int i = 0; i < msg_count; i++)
+    {
+        fprintf(stderr, "user %d: printed \"%s\" at %s\n", last_messages[i].user_id, last_messages[i].text, last_messages[i].time);
+    }
+
+    mx_sub_chat(remove_chat_stmt, chats[0].id);
 
     sqlite3_finalize(add_usr_stmt);
     sqlite3_finalize(add_chat_stmt);
@@ -235,7 +250,7 @@ void mx_test_db_all(void)
     mx_test_db_add_user();
     mx_test_db_add_chat();
     //mx_test_db_add_user_to_chat();
-    //mx_test_db_message();
+    mx_test_db_message();
     mx_test_db_remove_chat();
     mx_test_db_remove_user();
     fprintf(stderr, "\nTests finished\n");
