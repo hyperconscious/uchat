@@ -1,4 +1,3 @@
-#include "discover.h"
 #include "requests.h"
 
 void on_discover_screen_show(void) {

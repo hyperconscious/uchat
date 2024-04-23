@@ -32,19 +32,7 @@ void on_discover_button_clicked(void) {
     hide_widget(SETTINGS_BOX_ID);
     show_widget(DISCOVER_BOX_ID);
 
-<<<<<<< HEAD
     
-=======
-    uint16_t count = 0;
-    char **founded_chats = rq_discover(user_id,
-                                       &count, serverAddress, Port);
-
-
-    for (uint16_t i = 0; i < count; i++) {
-        free(founded_chats[i]);
-    }
-    free(founded_chats);
->>>>>>> c3bb771acdadacfe4f23a4c8a544e83697731560
 }
 
 void on_settings_button_clicked(void) {
