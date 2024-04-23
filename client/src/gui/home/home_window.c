@@ -32,7 +32,6 @@ void on_discover_button_clicked(void) {
     hide_widget(SETTINGS_BOX_ID);
     show_widget(DISCOVER_BOX_ID);
 
-    
 }
 
 void on_settings_button_clicked(void) {

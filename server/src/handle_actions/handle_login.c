@@ -1,8 +1,10 @@
 #include "handle_requests.h"
 
 void handle_login(int client_socket) {
-    t_packet user = receive_packet(client_socket);
-    t_packet pass = receive_packet(client_socket);
+    t_packet user;
+    t_packet pass;
+    if(!receive_packet(client_socket, &user)) return;
+    if(!receive_packet(client_socket, &pass)) return;
 
     if(user.type != PACKET_TYPE_STRING || pass.type != PACKET_TYPE_STRING) {
         fprintf(stderr, "Failed to receive packet from client\n");

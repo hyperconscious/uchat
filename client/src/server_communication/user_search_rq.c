@@ -15,12 +15,30 @@ t_db_chat* rq_search_chats(char* searching_chat, uint16_t *count,
     send_and_release_packet(client_socket, &search_rq);
     send_and_release_packet(client_socket, &chat_name_to_search);
 
-    *count= receive_packet(client_socket).u_payload.uint16_data;
+    t_packet cc;
+    if(!receive_packet(client_socket, &cc)) {
+        fprintf(stderr, "search failed");
+        return NULL;
+    }
+    *count = cc.u_payload.uint16_data;
     t_db_chat *chats_array = malloc((*count) * sizeof(t_db_chat));
     for (uint16_t i = 0; i < *count; i++) {
-        (chats_array + i)->id = receive_packet(client_socket).u_payload.uint32_data;
-        (chats_array + i)->owner_id = receive_packet(client_socket).u_payload.uint32_data;
-        (chats_array + i)->name =receive_packet(client_socket).u_payload.s_string.data;
+        t_packet id;
+        t_packet owner_id;
+        t_packet name;
+        if(!receive_packet(client_socket, &id) 
+        || !receive_packet(client_socket, &owner_id) 
+        || !receive_packet(client_socket, &name)) {
+            fprintf(stderr, "search failed");
+            for(uint16_t j = 0; j < i; j++){
+                free(chats_array[j].name);
+            }
+            free(chats_array);
+            return NULL;
+        }
+        (chats_array + i)->id = id.u_payload.uint32_data;
+        (chats_array + i)->owner_id = owner_id.u_payload.uint32_data;
+        (chats_array + i)->name = name.u_payload.s_string.data;
     }
     
     close(client_socket);

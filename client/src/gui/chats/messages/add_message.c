@@ -2,6 +2,8 @@
 
 void add_message(Chat *chat,
                  Message *message) {
+    message->id = rq_add_message(user_id, chat->id, message->text,
+                                 serverAddress, Port);
     if (chat->messages == NULL) {
         t_list *messages = mx_create_node(message);
         chat->messages = messages;
@@ -9,7 +11,7 @@ void add_message(Chat *chat,
     else {
         mx_push_back(&chat->messages, message);
     }
-
+    
     remove_chat(chat, all_chats_list_store);
     remove_chat(chat, visible_chats_list_store);
     add_chat_sorted(chat);

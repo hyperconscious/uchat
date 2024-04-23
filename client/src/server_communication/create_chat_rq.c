@@ -15,7 +15,8 @@ uint32_t rq_create_chat(char* name, uint32_t owner_id, char* server_address, int
     send_and_release_packet(client_socket, &owner_id_p);
     send_and_release_packet(client_socket, &chat_name);
 
-    uint32_t created_chat_id = receive_packet(client_socket).u_payload.uint32_data;
+    t_packet chat_id;
+    if(!receive_packet(client_socket, &chat_id)) return 0;
     close(client_socket);
-    return created_chat_id; 
+    return chat_id.u_payload.uint32_data;
 } 

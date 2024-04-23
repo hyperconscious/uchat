@@ -9,5 +9,7 @@ typedef enum e_client_rq {
     RQ_ADD_USER_TO_CHAT,
     RQ_GET_LOGIN_BY_ID,
     RQ_DISCOVER,
-    RQ_CHANGE_USERNAME
+    RQ_CHANGE_USERNAME,
+    RQ_ADD_MESSAGE,
+    RQ_GET_LAST_MESSAGES
 } t_client_rq;

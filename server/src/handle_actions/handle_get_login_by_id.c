@@ -1,7 +1,8 @@
 #include "handle_requests.h"
 
 void handle_get_login_by_id(int client_socket) {
-    t_packet user_id_packet = receive_packet(client_socket);
+    t_packet user_id_packet;
+    if(!receive_packet(client_socket, &user_id_packet)) return;
 
     sqlite3 *db;
     sqlite3_open(DATABASE, &db);
