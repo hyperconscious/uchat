@@ -38,15 +38,6 @@
 //     sqlite3_stmt *get_user_id_by_login_stmt;
 // } t_db_info;
 
-typedef struct 
-{
-    uint32_t id;
-    char *text;
-    uint32_t user_id;
-    bool is_readed;
-    char *time;
-    int32_t chat_id;
-} t_db_message;
 
 int mx_recreate_tables(sqlite3 *db);
 
