@@ -234,10 +234,10 @@ void mx_test_db_all(void)
 {
     mx_test_db_add_user();
     mx_test_db_add_chat();
-    mx_test_db_add_user_to_chat();
-    mx_test_db_message();
-    //mx_test_db_remove_chat();
-    //mx_test_db_remove_user();
+    //mx_test_db_add_user_to_chat();
+    //mx_test_db_message();
+    mx_test_db_remove_chat();
+    mx_test_db_remove_user();
     fprintf(stderr, "\nTests finished\n");
 }
 
