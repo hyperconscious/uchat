@@ -104,6 +104,7 @@ int mx_edit_message(sqlite3 *db, int message_id, char *new_text);
 
 int mx_sub_chat(sqlite3_stmt *stmt, int id);
 
+int mx_set_read_to_all_unread_messages(sqlite3* db, int user_id, int chat_id);
 
 //chat_partipicant
 int mx_add_user_to_chat(sqlite3_stmt *stmt, int user_id, int chat_id);
