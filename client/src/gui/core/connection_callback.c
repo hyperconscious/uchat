@@ -1,7 +1,8 @@
 #include "core.h"
 #include "home.h"
 
-gboolean timer_callback() {
+gboolean timer_callback(void *data) {
+    (void)data;
     if(Client->name != NULL){
         int socket = create_and_connect_socket(serverAddress, Port);
         if(socket != -1){

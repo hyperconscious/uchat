@@ -11,9 +11,11 @@ static void set_chat_image(char *path,
             draw_circle_image
     );
 
-    GtkBox *chat_header_box = get_box(CHAT_HEADER_BOX_ID);
-    add_widget_to_box(chat_header_box, avatar_widget, false, false, 0);
-    gtk_box_reorder_child(chat_header_box, avatar_widget, 0);
+    GtkBox *chat_header_name_and_avatar_box = get_box(
+            CHAT_HEADER_NAME_AND_AVATAR_BOX_ID);
+    add_widget_to_box(chat_header_name_and_avatar_box, avatar_widget, false,
+                      false, 0);
+    gtk_box_reorder_child(chat_header_name_and_avatar_box, avatar_widget, 0);
 }
 
 static void set_chat_name(char *name) {
@@ -63,10 +65,10 @@ static void unselect_previous_selected_chat(
 }
 
 static void remove_previous_chat_avatar_if_set(void) {
-    GtkContainer *chat_header_box = GTK_CONTAINER(get_box(CHAT_HEADER_BOX_ID));
-    GtkWidget *previous_avatar = get_container_first_child(chat_header_box);
-    if (GTK_IS_DRAWING_AREA(previous_avatar))
-        gtk_widget_destroy(previous_avatar);
+    GtkBox *name_and_image_box = get_box(CHAT_HEADER_NAME_AND_AVATAR_BOX_ID);
+    int child_count = get_box_child_count(name_and_image_box);
+    if (child_count > 1)
+        remove_child_from_box(name_and_image_box, 0);
 }
 
 static void set_messages_read(GtkListBoxRow *row,
@@ -94,20 +96,19 @@ void select_chat(GtkListBoxRow *selected_row) {
     bool is_chat_selected =
             get_selected_chat_index(&previous_selected_chat_index);
 
-    remove_previous_chat_avatar_if_set();
+    set_chat_list_box_row_selected_style(selected_row);
 
     if (!is_chat_selected || !selected_chat->selected) {
         if (is_chat_selected)
             unselect_previous_selected_chat(previous_selected_chat_index);
 
+        remove_previous_chat_avatar_if_set();
         selected_chat->selected = true;
         set_chat_name(selected_chat->name);
         set_chat_image(selected_chat->image_path, selected_chat->name[0]);
         set_chat_messages(selected_chat->messages);
         set_messages_read(selected_row, selected_chat);
-        set_chat_list_box_row_selected_style(selected_row);
         show_chat_box();
-
         g_timeout_add(50, scroll_window_to_bottom,
                       CHAT_MESSAGES_SCROLLED_WINDOW_ID);
     }
