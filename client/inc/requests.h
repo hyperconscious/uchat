@@ -41,7 +41,12 @@ void change_username_rq(uint32_t id, char* new_username, char* server_address, i
 
 int rq_add_message(uint32_t user_id, uint32_t chat_id, char* text, 
                     char* server_address, int port);
+
+uint32_t rq_remove_message(uint32_t msg_id, char* server_address, int port);
+
 t_list* rq_get_messages_from_chat(uint32_t chat_id, char* search_text,
                                  char* server_address, int port);
+
+uint32_t rq_remove_chat(uint32_t chat_id, char* server_address, int port);
 
 
