@@ -57,6 +57,8 @@ void *handle_client(void *arg) {
         case RQ_GET_MESSAGES:
             handle_get_messages(client_socket, db);
             break;
+        case RQ_DELETE_MESSAGE:
+            handle_delete_message(client_socket, db);
         case RQ_REM_MESSAGE:
             handle_remove_message(client_socket, db);
             break;

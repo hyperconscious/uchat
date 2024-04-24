@@ -9,8 +9,8 @@ void create_searching_chat(t_db_chat *s_chat) {
             return;
         }
     }
-    Chat *chat = create_chat(s_chat->owner_id, NULL, s_chat->name, NULL, 0, true,
-                             get_current_time_millis());
+    Chat *chat = create_chat(s_chat->owner_id, NULL, s_chat->name, NULL, 0,
+                            true, true, get_current_time_millis());
     add_chat_sorted_to_all_list_store(chat);
 }
 

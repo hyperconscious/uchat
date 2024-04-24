@@ -6,6 +6,7 @@ Chat *create_chat(long id,
                   t_list *messages,
                   int unread_messages_count,
                   bool searching,
+                  bool is_private,
                   long long creation_time_in_millis) {
     Chat *chat = g_object_new(CHAT_TYPE, NULL);
     if (chat != NULL) {
@@ -15,6 +16,7 @@ Chat *create_chat(long id,
         chat->messages = messages;
         chat->unread_messages_count = unread_messages_count;
         chat->searching = searching;
+        chat->is_private = is_private;
         chat->selected = false;
         chat->creation_time_in_millis = creation_time_in_millis;
     }

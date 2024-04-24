@@ -62,6 +62,7 @@ struct _Chat {
     int unread_messages_count;
     bool selected;
     bool searching;
+    bool is_private;
     long long creation_time_in_millis;
 };
 
@@ -120,11 +121,12 @@ struct _Chat *create_chat(long id,
                           t_list *messages,
                           int unread_messages_count,
                           bool searching,
+                          bool is_private,
                           long long creation_time_in_millis);
 
 Message *create_message(const char *text,
                         bool mine,
-                        long long time);
+                        long long time_in_millis);
 
 Message *get_chat_last_message(struct _Chat *chat);
 
