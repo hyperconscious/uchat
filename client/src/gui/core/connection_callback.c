@@ -1,6 +1,6 @@
 #include "core.h"
 
-gboolean timer_callback() {
+gboolean timer_callback(void) {
     int socket = create_and_connect_socket(serverAddress, Port);
     if(socket != -1){
         t_client_rq rq = CONNECTION;

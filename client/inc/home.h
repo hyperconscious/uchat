@@ -120,7 +120,7 @@ struct _Chat *create_chat(long id,
 
 Message *create_message(const char *text,
                         bool mine,
-                        long long time);
+                        long long time_in_millis);
 
 Message *get_chat_last_message(struct _Chat *chat);
 

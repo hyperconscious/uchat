@@ -6,5 +6,11 @@ int mx_remove_message(sqlite3 *db, int message_id)
     sqlite3_stmt *stmt;
     MX_TRY_FUNCTION(sqlite3_prepare_v2(db, "DELETE FROM message WHERE id = ?", -1, &stmt, 0), result);
     MX_TRY_FUNCTION(sqlite3_bind_int(stmt, 1, message_id), result);
+    if(sqlite3_step(stmt) != SQLITE_DONE)
+    {
+        return sqlite3_step(stmt);
+    }
+    return 0;
+    sqlite3_finalize(stmt);
     return sqlite3_finalize(stmt);
 }

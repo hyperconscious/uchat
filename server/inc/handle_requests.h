@@ -21,3 +21,4 @@ void handle_change_username(int client_socket, sqlite3 *db);
 
 void handle_add_message(int client_socket, sqlite3 *db);
 void handle_get_messages(int client_socket, sqlite3 *db);
+void handle_delete_message(int client_socket, sqlite3 *db);

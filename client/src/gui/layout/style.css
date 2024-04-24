@@ -28,6 +28,13 @@ button:hover {
     color: white;
 }
 
+.button_message {
+   width: 5px;
+   height: 5px;
+   margin-top: -12px;
+}
+
+
 .button_primary:active {
     background-color: #5A57E4;
 }
