@@ -11,8 +11,9 @@ char *convert_millis_to_date(long long millis,
             "Sunday"
     };
 
-    time_t seconds = millis / 1000;
-    struct tm *local_time = localtime(&seconds);
+    time_t seconds = (time_t)millis;
+    struct tm *local_time = gmtime(&seconds);
+    local_time->tm_hour = (local_time->tm_hour + 3) % 24;
     char *time_str;
 
     const char *month = months[local_time->tm_mon];
@@ -33,8 +34,9 @@ char *convert_millis_to_date(long long millis,
 }
 
 char *convert_millis_to_hour_and_minute(long long millis) {
-    time_t seconds = millis / 1000;
-    struct tm *local_time = localtime(&seconds);
+    time_t seconds = (time_t)millis;
+    struct tm *local_time = gmtime(&seconds);
+    local_time->tm_hour = (local_time->tm_hour + 3) % 24;
     char *time_str;
     asprintf(&time_str, "%02d:%02d", local_time->tm_hour, local_time->tm_min);
     return time_str;
@@ -42,51 +44,51 @@ char *convert_millis_to_hour_and_minute(long long millis) {
 
 bool check_year_same(long long millis1,
                      long long millis2) {
-    long seconds1 = millis1 / 1000;
-    struct tm local_time1;
-    localtime_r(&seconds1, &local_time1);
+    long seconds1 = (time_t)millis1;
+    struct tm *local_time1 = gmtime(&seconds1);
+    local_time1->tm_hour = (local_time1->tm_hour + 3) % 24;
 
-    long seconds2 = millis2 / 1000;
-    struct tm local_time2;
-    localtime_r(&seconds2, &local_time2);
+    long seconds2 = (time_t)millis2;
+    struct tm *local_time2 = gmtime(&seconds2);
+    local_time2->tm_hour = (local_time2->tm_hour + 3) % 24;
 
-    return local_time1.tm_year == local_time2.tm_year;
+    return local_time1->tm_year == local_time2->tm_year;
 }
 
 bool check_day_same(long long millis1,
                     long long millis2) {
-    long seconds1 = millis1 / 1000;
-    struct tm local_time1;
-    localtime_r(&seconds1, &local_time1);
+    long seconds1 = (time_t)millis1;
+    struct tm *local_time1 = gmtime(&seconds1);
+    local_time1->tm_hour = (local_time1->tm_hour + 3) % 24;
 
-    long seconds2 = millis2 / 1000;
-    struct tm local_time2;
-    localtime_r(&seconds2, &local_time2);
+    long seconds2 = (time_t)millis2;
+    struct tm *local_time2 = gmtime(&seconds2);
+    local_time2->tm_hour = (local_time2->tm_hour + 3) % 24;
 
-    return local_time1.tm_yday == local_time2.tm_yday &&
-           local_time1.tm_year == local_time2.tm_year;
+    return local_time1->tm_yday == local_time2->tm_yday &&
+           local_time1->tm_year == local_time2->tm_year;
 }
 
 bool check_time_same(long long millis1,
                      long long millis2) {
-    long seconds1 = millis1 / 1000;
-    struct tm local_time1;
-    localtime_r(&seconds1, &local_time1);
+    long seconds1 = (time_t)millis1;
+    struct tm *local_time1 = gmtime(&seconds1);
+    local_time1->tm_hour = (local_time1->tm_hour + 3) % 24;
 
-    long seconds2 = millis2 / 1000;
-    struct tm local_time2;
-    localtime_r(&seconds2, &local_time2);
+    long seconds2 = (time_t)millis2;
+    struct tm *local_time2 = gmtime(&seconds2);
+    local_time2->tm_hour = (local_time2->tm_hour + 3) % 24;
 
-    return local_time1.tm_min == local_time2.tm_min &&
-           local_time1.tm_hour == local_time2.tm_hour &&
-           local_time1.tm_yday == local_time2.tm_yday &&
-           local_time1.tm_year == local_time2.tm_year;
+    return local_time1->tm_min == local_time2->tm_min &&
+           local_time1->tm_hour== local_time2->tm_hour&&
+           local_time1->tm_yday == local_time2->tm_yday &&
+           local_time1->tm_year == local_time2->tm_year;
 }
 
 long long get_current_time_millis(void) {
     struct timeval tv;
     gettimeofday(&tv, NULL);
-    return (long long)(tv.tv_sec) * 1000 + (long long)(tv.tv_usec) / 1000;
+    return (long long)(tv.tv_sec);;
 }
 
 long long convert_to_epoch(const char *datetime_str) {

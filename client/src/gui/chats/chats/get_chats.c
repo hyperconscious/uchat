@@ -23,11 +23,17 @@ t_list *get_chats(void) {
         t_list *curr = msgs;
         t_list *res = NULL;
         while(curr != NULL){
+            /*    printf("0.%lld (%s)\n", convert_to_epoch(((t_db_message
+                                                 *)curr->data)->time),
+                        convert_millis_to_hour_and_minute(convert_to_epoch(((t_db_message
+                                                 *)curr->data)->time)));*/
             Message *msg = create_message(((t_db_message*)curr->data)->text,
                                      ((t_db_message *)curr->data)->user_id ==
                                      Client->id,
                                      convert_to_epoch(((t_db_message
                                                  *)curr->data)->time));
+             /*   printf("1.%s (%s)\n", msg->text,
+                        convert_millis_to_hour_and_minute(msg->time_in_millis));*/
             free(((t_db_message*)curr->data)->text);
             free(((t_db_message*)curr->data)->time);
             curr = curr->next;

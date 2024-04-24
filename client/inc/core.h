@@ -7,7 +7,7 @@
 #include "client_status_code.h"
 #include "threads.h"
 
-#define RETRY_INTERVAL 5000
+#define RETRY_INTERVAL 1000
 #define INTERNET_CONNECTION_INDICATOR_ID "internet_connection_indicator"
 #define INTERNET_CONNECTION_NOT_AVAILABLE_INDICATOR "internet_connection_not_available_indicator"
 #define INTERNET_CONNECTION_AVAILABLE_INDICATOR "internet_connection_available_indicator"
