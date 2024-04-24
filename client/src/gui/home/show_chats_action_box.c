@@ -3,7 +3,7 @@
 
 static void show_selected_chat_avatar(char name_first_letter,
                                       char *path) {
-    GtkBox *chat_actions_header_box = get_box("chat_actions_header_box");
+    GtkBox *chat_actions_header_box = get_box(CHAT_ACTIONS_HEADER_BOX_ID);
     GtkWidget *avatar_widget = create_avatar_widget(
             name_first_letter,
             120,

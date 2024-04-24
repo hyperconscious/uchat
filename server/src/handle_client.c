@@ -61,8 +61,6 @@ void *handle_client(void *arg) {
     }
     sqlite3_close(db);
     close(client_socket);
-    end = clock();
-    cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
     
     pthread_exit(NULL);
 }

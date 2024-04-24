@@ -91,7 +91,6 @@ void on_chat_list_item_activated(GtkListBox *listbox,
     select_chat(row);
 }
 
-
 void on_send_message_button_clicked(void) {
     add_message_to_selected_chat();
 }
@@ -110,7 +109,19 @@ void on_chat_actions_back_button_clicked(void) {
 }
 
 void on_chat_actions_box_hide(void) {
-    GtkBox *chat_actions_header_box = get_box("chat_actions_header_box");
+    GtkBox *chat_actions_header_box = get_box(CHAT_ACTIONS_HEADER_BOX_ID);
     if (GTK_IS_WIDGET(chat_actions_header_box))
         remove_child_from_box(chat_actions_header_box, 1);
+}
+
+void on_chats_category_tab_change(void) {
+    GtkNotebook *categories_notebook =
+            GTK_NOTEBOOK(get_widget(CHATS_CATEGORY_NOTEBOOK_ID));
+    int current_page = gtk_notebook_get_current_page(categories_notebook);
+    bool create_group_chat_button_visible = current_page == 0;
+    gtk_widget_set_visible(get_widget(CREATE_GROUP_CHAT_BUTTON_ID),
+                           create_group_chat_button_visible);
+}
+
+void on_create_group_chat_button_clicked(void) {
 }

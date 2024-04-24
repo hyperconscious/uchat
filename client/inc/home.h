@@ -30,6 +30,9 @@
 #define SEND_MESSAGE_BUTTON_ID "send_message_button"
 #define LABEL_NO_INTERNET_CONNECTION_ID "label_no_internet_connection"
 #define CHAT_ACTIONS_BOX_ID "chat_actions_box"
+#define CHAT_ACTIONS_HEADER_BOX_ID "chat_actions_header_box"
+#define CHATS_CATEGORY_NOTEBOOK_ID "chats_category_notebook"
+#define CREATE_GROUP_CHAT_BUTTON_ID "create_group_chat_button"
 #define CHAT_MEMBERS_LIST_ID "chat_members_list"
 #define SETTINGS_BOX_ID "settings_box"
 #define DISCOVER_BOX_ID "discover_box"
@@ -124,7 +127,7 @@ Message *get_chat_last_message(struct _Chat *chat);
 
 void set_chat_list_box_row_selected_style(GtkListBoxRow *selected_row);
 
-void show_internet_connection_status(bool available);
+void show_internet_connection_status(int available);
 
 void show_chat_actions_box(void);
 
