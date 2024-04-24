@@ -2,6 +2,30 @@
 #include "string_utils.h"
 #include "local_time.h"
 
+static void button_clicked_edit(GtkWidget* button, gpointer user_data){
+        Message *message = (Message*)user_data;
+
+       if(!button) printf("button edit "); 
+       
+       set_entry_text(CHAT_MESSAGE_ENTRY_ID, message->text);
+
+
+
+}
+
+static void button_clicked_delete(GtkWidget* button, gpointer user_data){
+      uint32_t* id = (uint32_t*)user_data;
+
+       if(!button) printf("button edit");
+
+
+       rq_delete_message(*id, serverAddress, Port);
+
+
+
+
+}
+
 void set_message_time_label(GtkBox *message_box,
                             long long time_in_millis,
                             Message *previous_message,
@@ -102,9 +126,7 @@ void add_messages_list_box_row(Message *message,
                                Message *previous_message) {
     GtkWidget *message_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 2);
 
-    gtk_widget_show(message_box);
-    gtk_widget_set_hexpand(message_box, true);
-
+   
     set_messages_date_label(GTK_BOX(message_box), message->time_in_millis,
                             previous_message);
     set_message_time_label(
@@ -118,6 +140,56 @@ void add_messages_list_box_row(Message *message,
                     "Seen by someone",
                     message->mine,
                     true);
+
+
+
+    //GtkWidget *edit_button = gtk_button_new();
+
+
+   
+    
+    if (message->mine) {
+    GtkWidget *button_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 2);
+
+    GtkWidget *edit_button = gtk_button_new();
+    GtkWidget *image_edit = gtk_image_new_from_file("button_edit_image.png");
+    gtk_button_set_image(GTK_BUTTON(edit_button), image_edit);
+
+    GtkWidget *delete_button = gtk_button_new();
+    GtkWidget *image_delete = gtk_image_new_from_file("button_delete_image.png");
+    gtk_button_set_image(GTK_BUTTON(delete_button), image_delete);
+
+    set_class(edit_button, "button_message");
+    set_class(delete_button, "button_message");
+
+
+    gtk_widget_set_halign(button_box, GTK_ALIGN_END);
+
+    g_signal_connect(edit_button, "clicked", G_CALLBACK(button_clicked_edit), message);
+    g_signal_connect(delete_button, "clicked", G_CALLBACK(button_clicked_delete), &message->id);
+
+    add_widget_to_box(GTK_BOX(button_box), edit_button, false, false, 0);
+    add_widget_to_box(GTK_BOX(button_box), delete_button, false, false, 0);
+
+    add_widget_to_box(GTK_BOX(message_box), button_box, false, false, 0);
+
+
+
+}
+
+
+
+
+    
+
+
+
+
+
+
+
+    gtk_widget_show(message_box);
+    gtk_widget_set_hexpand(message_box, true);
 
     list_box_append(CHAT_MESSAGES_LIST_ID, message_box);
 }

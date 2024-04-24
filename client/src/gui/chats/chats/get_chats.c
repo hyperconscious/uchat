@@ -18,7 +18,7 @@ t_list *get_chats(void) {
                           ? (my_chats + i)->name
                           : rq_get_login_by_id((my_chats + i)->owner_id,
                                                serverAddress, Port);
-        t_list *msgs = rq_get_messages_from_chat((my_chats +i)->id, "",
+       t_list *msgs = rq_get_messages_from_chat((my_chats +i)->id, "",
                                                  serverAddress, Port);
         t_list *curr = msgs;
         t_list *res = NULL;
@@ -32,6 +32,8 @@ t_list *get_chats(void) {
                                      Client->id,
                                      convert_to_epoch(((t_db_message
                                                  *)curr->data)->time));
+
+            msg->id = ((t_db_message*)curr->data)->id;
              /*   printf("1.%s (%s)\n", msg->text,
                         convert_millis_to_hour_and_minute(msg->time_in_millis));*/
             free(((t_db_message*)curr->data)->text);

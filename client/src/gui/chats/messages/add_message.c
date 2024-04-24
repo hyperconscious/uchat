@@ -50,6 +50,8 @@ void add_message_to_selected_chat(void) {
 
         message->id = rq_add_message(Client->id, chat->id, message->text,
                                      serverAddress, Port);
+        
+        add_message(chat, message);
         Message *previous_message = (Message *)mx_get_last_element(
                 chat->messages);
 

@@ -1,16 +1,22 @@
 #include "handle_requests.h"
 
 void handle_discover(int client_socket, sqlite3 *db){
-    t_packet id;
+    t_packet id= {0};
     if(!receive_packet(client_socket, &id)) return;
    
     uint32_t lang = mx_get_lang_by_id(db, id.u_payload.uint32_data);
+    printf("userlang is %d\n", lang);
 
     sqlite3_stmt *stmt;
     sqlite3_prepare_v2(db, "SELECT id FROM user_data WHERE name == ?", -1, &stmt, 0);
 
     uint16_t count = 0;
     char **chats = mx_get_users_by_language (db, lang, &count);
+    printf("count in handle is %d\n", count);
+    for (int i = 0; i < count; i++)
+   {
+	printf("%s\n", chats[i]);
+   }
 
     uint32_t found_id;
     if (chats) {

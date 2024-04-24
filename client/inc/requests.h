@@ -20,6 +20,8 @@
 #define HOME_WINDOW_ID "home_window"
 #define SUCCESSFUL "success"
 
+
+
 char* rq_process_user_authentication(char* server_address, int port,
                                         char* username, char* password,
                                         t_client_rq authentication_code,
@@ -46,6 +48,8 @@ uint32_t rq_remove_message(uint32_t msg_id, char* server_address, int port);
 
 t_list* rq_get_messages_from_chat(uint32_t chat_id, char* search_text,
                                  char* server_address, int port);
+
+void rq_delete_message(uint32_t id, char* server_address, int port);
 
 uint32_t rq_remove_chat(uint32_t chat_id, char* server_address, int port);
 

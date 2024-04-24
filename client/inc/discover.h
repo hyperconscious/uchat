@@ -7,7 +7,6 @@
 
 extern int Port;
 extern char *serverAddress;
-extern uint32_t user_id;
+extern Person *Client;
 
-GtkWidget *create_discover_grid_item(char *name,
-                                     char *image_url);
+GtkWidget *create_discover_grid_item(Person discovered_chat);
