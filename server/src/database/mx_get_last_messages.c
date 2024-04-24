@@ -5,7 +5,7 @@ int mx_get_last_messages(sqlite3 *db, int chat_id, char *search_text, int max_ro
     
     int result = 0;
     sqlite3_stmt *stmt;
-    sqlite3_prepare_v2(db, "SELECT message.id, message.text, message.user_id, message.time, message.is_readed, message.chat_id FROM message WHERE chat_id == ? AND text LIKE '%%' || ? || '%%' ORDER BY time ASC LIMIT ?", -1, &stmt, 0);
+    sqlite3_prepare_v2(db, "SELECT message.id, message.text, message.user_id, message.time, message.chat_id FROM message WHERE chat_id == ? AND text LIKE '%%' || ? || '%%' ORDER BY time ASC LIMIT ?", -1, &stmt, 0);
     MX_TRY_FUNCTION(sqlite3_reset(stmt), result);
     
     MX_TRY_FUNCTION(sqlite3_bind_int(stmt, 1, chat_id), result);
@@ -47,7 +47,7 @@ int mx_get_last_messages(sqlite3 *db, int chat_id, char *search_text, int max_ro
         (*messages)[i].time = strdup((const char*)sqlite3_column_text(stmt, 3));
         (*messages)[i].id = sqlite3_column_int64(stmt, 0);
         (*messages)[i].user_id = sqlite3_column_int64(stmt, 2);
-        (*messages)[i].chat_id = sqlite3_column_int64(stmt, 5);
+        (*messages)[i].chat_id = sqlite3_column_int64(stmt, 4);
     }
 
     sqlite3_finalize(stmt);

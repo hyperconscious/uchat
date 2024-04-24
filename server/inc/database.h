@@ -99,6 +99,8 @@ int mx_set_read_to_all_unread_messages(sqlite3* db, int user_id, int chat_id);
 
 t_db_message *mx_get_message_by_id(sqlite3 *db, int message_id);
 
+int mx_get_unread_messages(sqlite3* db, int user_id, int chat_id, t_db_message **result_messages, int *result_count);
+
 //chat_partipicant
 int mx_add_user_to_chat(sqlite3_stmt *stmt, int user_id, int chat_id);
 
