@@ -120,7 +120,7 @@ void mx_test_db_message(void)
 
     t_db_chat *chats;
     uint16_t chat_count;
-    if(mx_get_chats_by_name(get_chat, "stupid_chat", 1, &chats, &chat_count))
+    if(mx_get_chats_by_name(get_chat, "clever_chat", 1, &chats, &chat_count))
     {
         fprintf(stderr, "Get chats error\n");
     }
@@ -132,8 +132,8 @@ void mx_test_db_message(void)
         fprintf(stderr, "Add user to chat error\n");
     }
 
-    if( mx_add_message(add_msg_stmt, "Fuck youuu", first_id, chat_id) ||
-        mx_add_message(add_msg_stmt, "Fuck you toooo", second_id, chat_id))
+    if( mx_add_message(add_msg_stmt, "Hello youuu", first_id, chat_id) ||
+        mx_add_message(add_msg_stmt, "Hello you toooo", second_id, chat_id))
     {
         //fprintf(stderr, "%s\n%s\n", sqlite3_errstr(mx_add_message(add_msg_stmt, "Fuck youuu", first_id, chat_id)), sqlite3_errstr(mx_add_message(add_msg_stmt, "Fuck you toooo", second_id, chat_id)));
         fprintf(stderr, "Add message error %d %d %d\n", first_id, second_id, chat_id);

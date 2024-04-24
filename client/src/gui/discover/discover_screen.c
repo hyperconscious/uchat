@@ -7,12 +7,7 @@ void on_discover_screen_show(void) {
 
     uint16_t count = 0;
     Person *founded_chats = rq_discover(Client->id, &count, serverAddress, Port);
-   printf("requested, count id %d\n", count);
-   for (int i = 0; i < count; i++)
-   {
-	printf("%s\n", founded_chats[i].name);
-   }
-   
+
 
 
     
@@ -36,7 +31,7 @@ void on_discover_screen_show(void) {
         founded_chats[counter].image_url = NULL;
         GtkWidget *discover_grid_item =
                 create_discover_grid_item(founded_chats[counter]);
-			printf("creaated gritem\n");
+
 
               
 

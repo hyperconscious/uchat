@@ -7,7 +7,7 @@
 #include "client_status_code.h"
 #include "threads.h"
 
-#define RETRY_INTERVAL 1000
+#define RETRY_INTERVAL 5000
 #define INTERNET_CONNECTION_INDICATOR_ID "internet_connection_indicator"
 #define INTERNET_CONNECTION_NOT_AVAILABLE_INDICATOR "internet_connection_not_available_indicator"
 #define INTERNET_CONNECTION_AVAILABLE_INDICATOR "internet_connection_available_indicator"
@@ -38,6 +38,6 @@ GtkWidget *create_avatar_widget(
         bool is_image_local,
         gboolean (*callback_function)(GtkWidget *, cairo_t *, gpointer *));
 
-gboolean timer_callback(void *data);
+gboolean timer_callback(void);
 void show_internet_connection_status(t_connection_code available);
 

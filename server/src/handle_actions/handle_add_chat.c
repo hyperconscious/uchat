@@ -11,10 +11,7 @@ void handle_add_chat(int client_socket, sqlite3* db) {
     sqlite3_stmt *stmt;
     mx_init_add_chat(db, &stmt);
     mx_add_chat(stmt, chat_name_packet.u_payload.s_string.data, 
-                owner_id_packet.u_payload.uint32_data, 1 /*is private?*/);
-    if(is_private.u_payload.uint8_data){
-    } else
-        printf("false");
+                owner_id_packet.u_payload.uint32_data, is_private.u_payload.uint8_data);
 
     uint32_t chat_id = sqlite3_last_insert_rowid(db);
     sqlite3_finalize(stmt);

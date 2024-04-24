@@ -9,27 +9,27 @@ static void button_clicked_edit(GtkWidget* button, gpointer user_data){
        
        set_entry_text(CHAT_MESSAGE_ENTRY_ID, message->text);
 
-    GtkWidget *button_box_edit = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 2);
+    // GtkWidget *button_box_edit = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 2);
 
-    GtkWidget *edit_button_send = gtk_button_new();
-    GtkWidget *image_edit_send = gtk_image_new_from_file("button_edit_image.png");
-    gtk_button_set_image(GTK_BUTTON(edit_button_send), image_edit_send);
+    // GtkWidget *edit_button_send = gtk_button_new();
+    // GtkWidget *image_edit_send = gtk_image_new_from_file("clent/src/gui/layout/img/button_edit_image.png");
+    // gtk_button_set_image(GTK_BUTTON(edit_button_send), image_edit_send);
 
     
 
-    set_class(edit_button_send, "button_message");
+    // set_class(edit_button_send, "button_message");
 
 
 
-    gtk_widget_set_halign(button_box_edit, GTK_ALIGN_START);
+    // gtk_widget_set_halign(button_box_edit, GTK_ALIGN_START);
 
-    //g_signal_connect(edit_button, "clicked", G_CALLBACK(button_clicked_edit), message);
-    //g_signal_connect(delete_button, "clicked", G_CALLBACK(button_clicked_delete), &message->id);
+    // //g_signal_connect(edit_button, "clicked", G_CALLBACK(button_clicked_edit), message);
+    // //g_signal_connect(delete_button, "clicked", G_CALLBACK(button_clicked_delete), &message->id);
 
-    add_widget_to_box(GTK_BOX(button_box_edit), edit_button_send, false, false, 0);
+    // add_widget_to_box(GTK_BOX(button_box_edit), edit_button_send, false, false, 0);
 
 
-    add_widget_to_box(GTK_BOX(message_box), button_box_edit, false, false, 0);
+    // //add_widget_to_box(GTK_BOX(message_box), button_box_edit, false, false, 0);
 
 
 
@@ -159,7 +159,7 @@ void add_messages_list_box_row(Message *message,
     );
     set_message_box(GTK_BOX(message_box),
                     message->text,
-                    "Josh",
+                    "Seen by someone",
                     message->mine,
                     true);
 
@@ -174,11 +174,11 @@ void add_messages_list_box_row(Message *message,
     GtkWidget *button_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 2);
 
     GtkWidget *edit_button = gtk_button_new();
-    GtkWidget *image_edit = gtk_image_new_from_file("button_edit_image.png");
+    GtkWidget *image_edit = gtk_image_new_from_file("client/src/gui/layout/img/button_edit_image.png");
     gtk_button_set_image(GTK_BUTTON(edit_button), image_edit);
 
     GtkWidget *delete_button = gtk_button_new();
-    GtkWidget *image_delete = gtk_image_new_from_file("button_delete_image.png");
+    GtkWidget *image_delete = gtk_image_new_from_file("client/src/gui/layout/img/button_delete_image.png");
     gtk_button_set_image(GTK_BUTTON(delete_button), image_delete);
 
     set_class(edit_button, "button_message");

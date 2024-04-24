@@ -46,9 +46,7 @@ int Accept(int sockfd) {
 void Connect(int sockfd, const struct sockaddr *addr, socklen_t addrlen) {
     int res = connect(sockfd, addr, addrlen);
     if (res == -1) {
-    //    perror("connect failed");
         close(sockfd);
-    //    exit(EXIT_FAILURE);
     }
 }
 
@@ -68,7 +66,6 @@ void Inet_pton(int af, const char *src, void *dst) {
 
 int connect_with_timeout(int sockfd, const struct sockaddr *addr, socklen_t addrlen, unsigned int timeout_ms) {
     int rc = 0;
-    // Set O_NONBLOCK
     int sockfd_flags_before;
     if((sockfd_flags_before=fcntl(sockfd,F_GETFL,0)<0)) return -1;
     if(fcntl(sockfd,F_SETFL,sockfd_flags_before | O_NONBLOCK)<0) return -1;

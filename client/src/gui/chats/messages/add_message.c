@@ -52,20 +52,13 @@ void add_message_to_selected_chat(void) {
                                      serverAddress, Port);
         
         add_message(chat, message);
-     /*   printf("%u\n", other_user_id);
-        printf("%s (%u) sended to %s (%u): %s (%u) (chat_id %u, name %s)\n", 
-                Client->name, Client->id,
-                rq_get_login_by_id(other_user_id, serverAddress, Port), other_user_id,
-                message->text, message->id,
-                chat->id, chat->name);*/
         Message *previous_message = (Message *)mx_get_last_element(
                 chat->messages);
-        add_message(chat, message);
 
         add_messages_list_box_row(message, previous_message);
+        add_message(chat, message);
         g_timeout_add(50, scroll_window_to_bottom,
                       CHAT_MESSAGES_SCROLLED_WINDOW_ID);
         set_entry_text(CHAT_MESSAGE_ENTRY_ID, "");
-       // printf("%s\n",((Message *)chat->messages)->text);
     }
 }

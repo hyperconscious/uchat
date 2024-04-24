@@ -75,8 +75,8 @@ void *mx_get_element_by_index(t_list *head,
     return current != NULL ? current->data : NULL;
 }
 
-int mx_list_size(t_list *list) {
-    int size = 0;
+uint32_t mx_list_size(t_list *list) {
+    uint32_t size = 0;
 
     while (list != NULL) {
         size++;

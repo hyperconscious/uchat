@@ -1,14 +1,14 @@
 #include "home.h"
 
 t_list *get_chats(void) {
-    Chat *chat1 = create_chat(0, "client/src/gui/layout/img/ic_person.png",
-                              "My notes", NULL, 0, false, 1712957612439);
+  /*  Chat *chat1 = create_chat(0, "client/src/gui/layout/img/ic_person.png",
+                              "My notes", NULL, 0, false, 1712957612439);*/
 //    Chat *chat2 = create_chat(0, "client/src/gui/layout/img/ic_person2.png",
 //                              "Amanda", NULL, 0, false, 1712957612439);
 //    Chat *chat3 = create_chat(0, "client/src/gui/layout/img/ic_person.png",
 //                              "Yuriy", NULL, 0, false, 1712957612439);
 
-    t_list *chats = mx_create_node(chat1);
+    t_list *chats = NULL;//= mx_create_node(chat1);
 //    mx_push_back(&chats, chat2);
 //    mx_push_back(&chats, chat3);
     uint16_t count = 0;
@@ -23,7 +23,7 @@ t_list *get_chats(void) {
         t_list *curr = msgs;
         t_list *res = NULL;
         while(curr != NULL){
-            /*    printf("0.%lld (%s)\n", convert_to_epoch(((t_db_message
+            /* ui   printf("0.%lld (%s)\n", convert_to_epoch(((t_db_message
                                                  *)curr->data)->time),
                         convert_millis_to_hour_and_minute(convert_to_epoch(((t_db_message
                                                  *)curr->data)->time)));*/
@@ -42,7 +42,7 @@ t_list *get_chats(void) {
             mx_push_back(&res, msg);
         }
         Chat *chat = create_chat((my_chats + i)->id, NULL, chat_name,
-                                 res, 0, false,
+                                 res, 0, false, (my_chats +i)->is_private,
                                  convert_to_epoch((my_chats + i)->creation_time));
         free((my_chats + i)->name);
         free((my_chats + i)->creation_time);
