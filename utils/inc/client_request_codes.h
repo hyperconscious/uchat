@@ -14,5 +14,6 @@ typedef enum e_client_rq {
     RQ_ADD_MESSAGE,
     RQ_GET_MESSAGES,
     RQ_REM_MESSAGE,
-    RQ_REM_CHAT
+    RQ_REM_CHAT,
+    RQ_EDIT_MSG
 } t_client_rq;

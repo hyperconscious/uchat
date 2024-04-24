@@ -6,12 +6,12 @@ int main(int argc, char* argv[]) {
       return 1;
 	}
 
-    // sqlite3 *db;
-    // sqlite3_open(DATABASE, &db);
-    // mx_recreate_tables(db);
-    // sqlite3_close(db);
+    sqlite3 *db;
+    sqlite3_open(DATABASE, &db);
+    mx_recreate_tables(db);
+    sqlite3_close(db);
     // db processing...
-    mx_test_db_all();
+    //mx_test_db_all();
     int server_socket = Socket(AF_INET, SOCK_STREAM, 0);
     Bind(server_socket, atoi(argv[1]));
     Listen(server_socket, MAX_CLIENTS);
