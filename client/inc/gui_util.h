@@ -67,7 +67,9 @@ void add_widget_to_box(GtkBox *box,
                        bool fill,
                        int padding);
 
-GtkImage *image_new(char *path);
+GtkImage *image_new(char *path,
+                    int width,
+                    int height);
 
 GtkImage *get_image(char *id);
 

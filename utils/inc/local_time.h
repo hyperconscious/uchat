@@ -1,9 +1,13 @@
+#pragma once
 #define _GNU_SOURCE
 #include <time.h>
 #include <sys/time.h>
+#include <stdlib.h>
+#include <string.h>
 #include <stdio.h>
 #include <stdbool.h>
 #include "string_utils.h"
+
 
 char *convert_millis_to_date(long long millis,
                              bool include_year);
@@ -20,3 +24,5 @@ bool check_time_same(long long millis1,
                      long long millis2);
 
 long long get_current_time_millis(void);
+
+long long convert_to_epoch(const char *datetime_str);

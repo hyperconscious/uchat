@@ -1,6 +1,7 @@
 #pragma once
 
 typedef enum e_client_rq {
+    CONNECTION,
 	AUTH_SIGN_UP,
 	AUTH_LOGIN,
     RQ_SEARCH_CHAT,
@@ -11,5 +12,5 @@ typedef enum e_client_rq {
     RQ_DISCOVER,
     RQ_CHANGE_USERNAME,
     RQ_ADD_MESSAGE,
-    RQ_GET_LAST_MESSAGES
+    RQ_GET_MESSAGES
 } t_client_rq;

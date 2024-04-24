@@ -1,10 +1,11 @@
 #include "settings.h"
 
 void on_settings_screen_show(void) {
-    char *user_name = "John";
+    char *user_name = Client->name;
     char *image_path = NULL;
     GtkBox *change_avatar_box = get_box(CHANGE_AVATAR_BOX_ID);
     bool is_avatar_first_set = get_box_child_count(change_avatar_box) == 1;
+    set_current_username(user_name);
     if (is_avatar_first_set)
         set_chosen_avatar(user_name[0], image_path, true);
 }
@@ -20,7 +21,8 @@ void on_change_username_button_clicked(void) {
     if (!validate_change_username_input(username))
         return;
 
-    change_username_rq(user_id, username, serverAddress, Port);
+    change_username_rq(Client->id, username, serverAddress, Port);
+    set_current_username(username);
     set_entry_text(CHANGE_USERNAME_ENTRY_ID, "");
 }
 
@@ -28,7 +30,7 @@ void on_change_password_button_clicked(void) {
     char *new_password = get_entry_text(NEW_PASSWORD_ENTRY_ID);
     char *confirm_new_password = get_entry_text(CONFIRM_NEW_PASSWORD_ENTRY_ID);
     char *entered_old_password = get_entry_text(OLD_PASSWORD_ENTRY_ID);
-    char *old_password = "123456a";
+    char *old_password = "123456a";//no need to func mx_check_pass
 
     if (!validate_change_password_input(new_password, confirm_new_password,
                                         old_password, entered_old_password))

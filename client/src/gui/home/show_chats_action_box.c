@@ -3,7 +3,7 @@
 
 static void show_selected_chat_avatar(char name_first_letter,
                                       char *path) {
-    GtkBox *chat_actions_header_box = get_box("chat_actions_header_box");
+    GtkBox *chat_actions_header_box = get_box(CHAT_ACTIONS_HEADER_BOX_ID);
     GtkWidget *avatar_widget = create_avatar_widget(
             name_first_letter,
             120,
@@ -33,8 +33,8 @@ static GtkWidget *create_chat_member_widget(char *name,
 
     gtk_button_set_image(
             GTK_BUTTON(remove_member_button),
-            GTK_WIDGET(
-                    image_new("client/src/gui/layout/img/ic_remove.svg"))
+            GTK_WIDGET(image_new("client/src/gui/layout/img/ic_remove.svg", -1,
+                                 -1))
     );
 
     gtk_widget_set_halign(remove_member_button, GTK_ALIGN_END);

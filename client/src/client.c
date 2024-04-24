@@ -1,11 +1,9 @@
 #include "client.h"
-#include "packet.h"
 
 GtkBuilder *Builder = NULL;
 int Port = -1;
+Person *Client = NULL;
 char* serverAddress = NULL;
-uint32_t user_id = 0;
-char* user_username = NULL;
 
 int main(int argc, char **argv) {
     if (argc != 3) {
@@ -15,7 +13,8 @@ int main(int argc, char **argv) {
 
     Port = atoi(argv[2]);
     serverAddress = argv[1];
-
+    Person user = {.id = 0, .name = NULL, .image_url = NULL};
+    Client = &user;
     init_client(argc, argv);
     return 0;
 }

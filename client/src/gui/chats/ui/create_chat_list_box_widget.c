@@ -36,6 +36,7 @@ static void set_chat_list_item_last_message(GtkBox *root_box, Chat *chat) {
     gtk_label_set_ellipsize(GTK_LABEL(label), PANGO_ELLIPSIZE_END);
     gtk_widget_set_name(label, "chat_list_item_last_message");
     add_widget_to_box(root_box, label, false, false, 0);
+    gtk_label_set_single_line_mode(GTK_LABEL(label), true);
 }
 
 static void set_chat_list_item_unread_messages_indication(GtkBox *root_box,

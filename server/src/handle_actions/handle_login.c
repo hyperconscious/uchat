@@ -1,6 +1,6 @@
 #include "handle_requests.h"
 
-void handle_login(int client_socket) {
+void handle_login(int client_socket, sqlite3 *db) {
     t_packet user;
     t_packet pass;
     if(!receive_packet(client_socket, &user)) return;
@@ -16,10 +16,8 @@ void handle_login(int client_socket) {
     char* username = user.u_payload.s_string.data;
     char* password = pass.u_payload.s_string.data;
 
-    sqlite3 *db;
     sqlite3_stmt *stmt1;
     sqlite3_stmt *stmt2;
-    sqlite3_open(DATABASE, &db);
 
     mx_init_find_id_by_user(db, &stmt1);
     int /*uint32_t*/ id = mx_find_id_by_user(stmt1, username);
@@ -45,7 +43,6 @@ void handle_login(int client_socket) {
         send_and_release_packet(client_socket, &packet_code);
     }
     sqlite3_finalize(stmt2);
-    sqlite3_close(db);
     free_packet(&user);
     free_packet(&pass);
 }

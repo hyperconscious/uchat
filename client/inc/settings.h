@@ -1,9 +1,11 @@
 #pragma once
 
+#define _GNU_SOURCE
 #include "gui_util.h"
+#include <stdio.h>
 #include "core.h"
 #include "requests.h"
-
+#include "string_utils.h"
 
 #define CHANGE_AVATAR_BOX_ID "change_avatar_box"
 #define AVATAR_FILE_CHOOSER_BUTTON "avatar_file_chooser_button"
@@ -13,12 +15,11 @@
 #define CONFIRM_NEW_PASSWORD_ENTRY_ID "confirm_new_password_entry"
 #define CHANGE_USERNAME_ERROR_LABEL_ID "change_username_error_label"
 #define CHANGE_PASSWORD_ERROR_LABEL_ID "change_password_error_label"
-
+#define SETTINGS_CURRENT_USERNAME_LABEL_ID "settings_current_username_label"
 
 extern int Port;
 extern char *serverAddress;
-extern uint32_t user_id;
-extern char* user_username;
+extern Person *Client;
 
 void show_change_username_error(char *error);
 
@@ -34,3 +35,5 @@ bool validate_change_password_input(char *new_password,
 void set_chosen_avatar(char user_name_first_letter,
                        char *image_path,
                        bool is_first_set);
+
+void set_current_username(char *username);

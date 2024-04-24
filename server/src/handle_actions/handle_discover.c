@@ -1,12 +1,9 @@
 #include "handle_requests.h"
 
-void handle_discover(int client_socket){
+void handle_discover(int client_socket, sqlite3 *db){
     t_packet id;
     if(!receive_packet(client_socket, &id)) return;
    
-    sqlite3 *db;
-    sqlite3_open(DATABASE, &db);
-
     uint32_t lang = mx_get_lang_by_id(db, id.u_payload.uint32_data);
 
     sqlite3_stmt *stmt;
@@ -35,7 +32,6 @@ void handle_discover(int client_socket){
 
     }
     sqlite3_finalize(stmt);
-    sqlite3_close(db);
     free_packet(&id);
     return;
 } 

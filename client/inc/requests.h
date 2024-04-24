@@ -27,7 +27,8 @@ char* rq_process_user_authentication(char* server_address, int port,
 
 t_db_chat* rq_search_chats(char* searching_chat, uint16_t *count,
                            char* server_address, int port);
-uint32_t rq_create_chat(char* name, uint32_t owner_id, 
+uint32_t rq_create_chat(char* name, uint32_t owner_id,
+                        bool is_private,
                         char* server_address, int port);
 t_db_chat* rq_get_chats(uint32_t owner_id, uint16_t *count, char* server_address, int port);
 void rq_add_user_to_chat(uint32_t user_id, uint32_t chat_id, char*
@@ -40,5 +41,7 @@ void change_username_rq(uint32_t id, char* new_username, char* server_address, i
 
 int rq_add_message(uint32_t user_id, uint32_t chat_id, char* text, 
                     char* server_address, int port);
+t_list* rq_get_messages_from_chat(uint32_t chat_id, char* search_text,
+                                 char* server_address, int port);
 
 

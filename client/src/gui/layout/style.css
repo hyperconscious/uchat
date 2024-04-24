@@ -185,6 +185,10 @@ notebook header tabs tab:hover {
     background-color: lawngreen;
 }
 
+#internet_connection_waiting_indicator {
+    background-color: yellow;
+}
+
 #internet_connection_not_available_indicator {
     background-color: red;
 }
@@ -291,25 +295,30 @@ notebook header tabs tab:hover {
     font-size: 12px;
 }
 
-.message_text_label_mine,
-.message_text_label_not_mine {
+.message_box_mine,
+.message_box_not_mine {
     padding: 8px;
     background-color: #353644;
     color: white;
     margin-bottom: 12px;
 }
 
-.message_text_label_mine:hover,
-.message_text_label_not_mine:hover {
+.message_box_mine:hover,
+.message_box_not_mine:hover {
     background-color: transparent;
 }
 
-.message_text_label_mine {
+.message_box_mine {
     border-radius: 10px 10px 0 10px;
 }
 
-.message_text_label_not_mine {
+.message_box_not_mine {
     border-radius: 10px 10px 10px 0;
+}
+
+.label_sender_name {
+    color: grey;
+    font-size: 12px;
 }
 
 #message_entry {

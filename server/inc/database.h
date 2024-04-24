@@ -38,6 +38,7 @@
 //     sqlite3_stmt *get_user_id_by_login_stmt;
 // } t_db_info;
 
+<<<<<<< HEAD
 typedef struct 
 {
     uint32_t id;
@@ -46,6 +47,8 @@ typedef struct
     char *time;
     int32_t chat_id;
 } t_db_message;
+=======
+>>>>>>> 9df7f4fb72868df5f7e3e121698f419d18110fe8
 
 int mx_recreate_tables(sqlite3 *db);
 
