@@ -13,11 +13,12 @@ t_db_message *mx_get_message_by_id(sqlite3 *db, int message_id)
         new_message->user_id = sqlite3_column_int64(getter_stmt, 2);
         new_message->time = strdup((const char*)sqlite3_column_text(getter_stmt, 3));
         new_message->chat_id = sqlite3_column_int64(getter_stmt, 4);
-        
+        sqlite3_finalize(getter_stmt);
         return new_message;
     }
     else
     {
+        sqlite3_finalize(getter_stmt);
         return NULL;
     }
 }

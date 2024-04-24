@@ -151,8 +151,11 @@ void mx_test_db_message(void)
         fprintf(stderr, "user %d %s: printed \"%s\" at %s\n", last_messages[i].user_id, login, last_messages[i].text, last_messages[i].time);
         free(login);
     }
-    mx_set_read_to_all_unread_messages(db, last_messages[0].user_id, chat_id);
-    int stat = mx_edit_user(db, last_messages[0].user_id, "Nya nya cat", "nya1234", 2);
+    if(mx_set_read_to_all_unread_messages(db, last_messages[0].user_id, chat_id))
+    {
+        fprintf(stderr, "Set read messages error %d %d %d\n", last_messages[0].user_id, chat_id, mx_set_read_to_all_unread_messages(db, last_messages[0].user_id, chat_id));
+    }
+    int stat = mx_edit_user(db, last_messages[0].user_id, "Nya nya cat", "12345", "nya1234", 2);
     if(stat)
     {
         fprintf(stderr, "Error at edit user\n");
@@ -160,7 +163,13 @@ void mx_test_db_message(void)
             fprintf(stderr, "Because Nya nya cat was exited :3\n");
     }
     mx_edit_message(db, last_messages[0].id, "hi :3");
-
+    mx_add_message(add_msg_stmt, "New message1", first_id, chat_id);
+    mx_add_message(add_msg_stmt, "New message2", first_id, chat_id);
+    mx_add_message(add_msg_stmt, "New message3", first_id, chat_id);
+    // if(mx_get_unread_messages(db, last_messages[0].user_id, chat_id, &last_messages, &msg_count))
+    // {
+    //     fprintf(stderr, "Get last messages error\n");
+    // }
     if( mx_get_last_messages(db, chat_id, "", -1, &last_messages, &msg_count))
     {
         fprintf(stderr, "Get last messages error\n");

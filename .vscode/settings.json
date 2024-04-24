@@ -65,6 +65,7 @@
     "*.removed": "c",
     "handle_db_chat.h": "c",
     "algorithm": "c",
-    "handle_requests.h": "c"
+    "handle_requests.h": "c",
+    "requests.h": "c"
   }
 }

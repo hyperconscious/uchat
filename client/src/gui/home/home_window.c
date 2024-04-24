@@ -43,24 +43,24 @@ void on_settings_button_clicked(void) {
 
 void on_log_out_button_clicked(void) {
     //memory freeing
-  /*   int size = g_list_model_get_n_items(G_LIST_MODEL(all_chats_list_store));
+    /*   int size = g_list_model_get_n_items(G_LIST_MODEL(all_chats_list_store));
 
-    for (int i = 0; i < size; i++) {
-        Chat *chat = get_list_store_item_by_index(all_chats_list_store, i);
-        if (chat && chat->name){
-            remove_chat(chat, all_chats_list_store);
-            free(chat->name);
-        }
-    }
-    for (int i = 0; i < size; i++) {
-        Chat *chat = get_list_store_item_by_index(visible_chats_list_store, i);
-        if (chat && chat->name){
-            remove_chat(chat, all_chats_list_store);
-        }
-    }*/
+      for (int i = 0; i < size; i++) {
+          Chat *chat = get_list_store_item_by_index(all_chats_list_store, i);
+          if (chat && chat->name){
+              remove_chat(chat, all_chats_list_store);
+              free(chat->name);
+          }
+      }
+      for (int i = 0; i < size; i++) {
+          Chat *chat = get_list_store_item_by_index(visible_chats_list_store, i);
+          if (chat && chat->name){
+              remove_chat(chat, all_chats_list_store);
+          }
+      }*/
     open_window(AUTH_WINDOW_ID);
     close_window(HOME_WINDOW_ID);
-   // close_window(AUTH_WINDOW_ID);
+    // close_window(AUTH_WINDOW_ID);
 }
 
 void on_search_message_entry_changed(void) {
@@ -124,4 +124,28 @@ void on_chats_category_tab_change(void) {
 }
 
 void on_create_group_chat_button_clicked(void) {
+    gtk_widget_show(get_widget(ADD_GROUP_CHAT_MEMBERS_DIALOG_ID));
+    gtk_container_add(
+            GTK_CONTAINER(get_widget(ADD_GROUP_CHAT_MEMBERS_DIALOG_ID)),
+            get_widget("add_group_chat_members_dialog_root_box")
+    );
+}
+
+void on_close_add_group_chat_members_dialog_button_clicked(void) {
+    gtk_widget_hide(get_widget(ADD_GROUP_CHAT_MEMBERS_DIALOG_ID));
+    gtk_container_remove(
+            GTK_CONTAINER(get_widget(ADD_GROUP_CHAT_MEMBERS_DIALOG_ID)),
+            get_widget("add_group_chat_members_dialog_root_box")
+    );
+}
+
+void on_add_group_chat_members_search_entry_changed(void) {
+//    char *username = get_entry_text(
+//            ADD_GROUP_CHAT_MEMBERS_DIALOG_SEARCH_ENTRY_ID);
+//    if (strlen(username) == 0) {
+//        show_widget(ADD_GROUP_CHAT_MEMBERS_DIALOG_LABEL_ID);
+//    }
+//    else {
+//        show_widget(ADD_GROUP_CHAT_MEMBERS_DIALOG_SCROLLED_WINDOW);
+//    }
 }

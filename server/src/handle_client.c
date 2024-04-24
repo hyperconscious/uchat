@@ -59,6 +59,11 @@ void *handle_client(void *arg) {
             break;
         case RQ_DELETE_MESSAGE:
             handle_delete_message(client_socket, db);
+        case RQ_REM_MESSAGE:
+            handle_remove_message(client_socket, db);
+            break;
+        case RQ_REM_CHAT:
+            handle_remove_chat(client_socket, db);
             break;
         default:
             fprintf(stderr, "wrong action from client\n");

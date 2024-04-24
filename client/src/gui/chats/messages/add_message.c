@@ -16,7 +16,7 @@ void add_message(Chat *chat,
 
     if (chat->selected) {
         GtkListBoxRow *added_row = gtk_list_box_get_row_at_index(
-                get_list_box(PERSONAL_CHAT_LIST_BOX_ID),
+                get_list_box(CHAT_LIST_BOX_ID),
                 0
         );
         set_chat_list_box_row_selected_style(added_row);
@@ -50,7 +50,7 @@ void add_message_to_selected_chat(void) {
 
         message->id = rq_add_message(Client->id, chat->id, message->text,
                                      serverAddress, Port);
-        printf("added msd id - %d\n", message->id);
+        
         add_message(chat, message);
      /*   printf("%u\n", other_user_id);
         printf("%s (%u) sended to %s (%u): %s (%u) (chat_id %u, name %s)\n", 
@@ -60,6 +60,7 @@ void add_message_to_selected_chat(void) {
                 chat->id, chat->name);*/
         Message *previous_message = (Message *)mx_get_last_element(
                 chat->messages);
+        add_message(chat, message);
 
         add_messages_list_box_row(message, previous_message);
         g_timeout_add(50, scroll_window_to_bottom,
