@@ -27,21 +27,19 @@ static void set_chat_messages(t_list *messages) {
     if (messages == NULL)
         return;
 
-  //  int messages_count = mx_list_size(messages);
+    int messages_count = mx_list_size(messages);
     Message *previous_message = NULL;
 
-   // for (int i = 0; i < messages_count; i++) {
-    t_list *curr = messages;
-    while(curr != NULL) {
-        Message *message = ((t_list *)curr)->data;//mx_get_element_by_index(messages, i);
+    for (int i = 0; i < messages_count; i++) {
+    //t_list *curr = messages;
+  //  while(curr != NULL) {
+        Message *message = mx_get_element_by_index(messages, i);
         if (message != NULL) {
             add_messages_list_box_row(message, previous_message);
             previous_message = message;
         }
-        curr = curr->next;
+      //  curr = curr->next;
     }
-     //   }
-   // }
 }
 
 static void show_chat_box(void) {

@@ -115,7 +115,7 @@ void add_messages_list_box_row(Message *message,
     );
     set_message_box(GTK_BOX(message_box),
                     message->text,
-                    "Josh",
+                    "Seen by someone",
                     message->mine,
                     true);
 

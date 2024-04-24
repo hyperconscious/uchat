@@ -15,6 +15,8 @@ void change_username_rq(uint32_t id, char* new_username, char* server_address, i
     send_and_release_packet(client_socket, &old_user_packet);
     send_and_release_packet(client_socket, &new_user_packet);
 
+    t_packet res;
+    if(!receive_packet(client_socket, &res)) return;
     close(client_socket);
 }
 

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <stdlib.h>
+#include <stdint.h>
 
 typedef struct s_list {
     void *data;
@@ -24,4 +25,4 @@ void *mx_get_element_by_index(t_list *head,
 
 void *mx_get_last_element(t_list *head);
 
-int mx_list_size(t_list *list);
+uint32_t mx_list_size(t_list *list);
