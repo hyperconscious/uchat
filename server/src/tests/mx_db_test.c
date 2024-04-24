@@ -113,7 +113,7 @@ void mx_test_db_message(void)
     }
     uint32_t second_id = mx_get_user_id_by_login(get_usr_by_login, "test_user2");
 
-    if(mx_add_chat(add_chat_stmt, "stupid_chat", mx_get_user_id_by_login(get_usr_by_login, "test_user1")))
+    if(mx_add_chat(add_chat_stmt, "stupid_chat", mx_get_user_id_by_login(get_usr_by_login, "test_user1"), 0))
     {
         fprintf(stderr, "Add chat error\n");
     }
@@ -196,8 +196,8 @@ void mx_test_db_add_chat(void)
     sqlite3_stmt *get_id_stmt;
     mx_init_find_id_by_user(db, &get_id_stmt);
     long id = mx_get_user_id_by_login(get_id_stmt, "test user2");
-    if(mx_add_chat(stmt, "test chat", id))
-        fprintf(stderr, "Test failed %d\n", mx_add_chat(stmt, "test chat", id));
+    if(mx_add_chat(stmt, "test chat", id, 0))
+        fprintf(stderr, "Test failed %d\n", mx_add_chat(stmt, "test chat", id, 0));
     else    
         fprintf(stderr, "Test passed\n");
     sqlite3_finalize(stmt);

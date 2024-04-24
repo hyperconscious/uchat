@@ -35,12 +35,8 @@ void handle_sign_up(int client_socket, sqlite3 *db) {
         t_packet packet_id = create_packet(PACKET_TYPE_UINT32, &id);
         send_and_release_packet(client_socket, &packet_code);
         send_and_release_packet(client_socket, &packet_id);
-<<<<<<< HEAD
     } else /*if(res == SQLITE_CONSTRAINT)*/{
      //   printf("%d\n", res);
-=======
-    } else {
->>>>>>> 9df7f4fb72868df5f7e3e121698f419d18110fe8
         result_code = LOGIN_ALREADY_EXIST; 
         t_packet packet_code = create_packet(PACKET_TYPE_UINT8, &result_code);
         send_and_release_packet(client_socket, &packet_code);
