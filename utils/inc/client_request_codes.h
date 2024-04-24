@@ -12,5 +12,7 @@ typedef enum e_client_rq {
     RQ_DISCOVER,
     RQ_CHANGE_USERNAME,
     RQ_ADD_MESSAGE,
-    RQ_GET_MESSAGES
+    RQ_GET_MESSAGES,
+    RQ_REM_MESSAGE,
+    RQ_REM_CHAT
 } t_client_rq;
