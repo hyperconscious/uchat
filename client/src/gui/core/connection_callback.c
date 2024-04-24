@@ -71,31 +71,6 @@ gboolean timer_callback() {
                                 chat, check_chat_id, &index)){
                         Chat *my = get_list_store_item_by_index(all_chats_list_store,
                                                      index);
-                       /*     guint previous_selected_chat_index;
-                            bool is_chat_selected =
-                                    get_selected_chat_index(&previous_selected_chat_index);
-
-                            set_chat_list_box_row_selected_style(selected_row);
-
-                            if (!is_chat_selected || !selected_chat->selected) {
-                                if (is_chat_selected)
-                                    unselect_previous_selected_chat(previous_selected_chat_index);
-
-                                remove_previous_chat_avatar_if_set();
-                                selected_chat->selected = true;
-                                set_chat_name(selected_chat->name);
-                                set_chat_image(selected_chat->image_path, selected_chat->name[0]);
-                                set_chat_messages(selected_chat->messages);
-                                set_messages_read(selected_row, selected_chat);
-                                show_chat_box();
-                                g_timeout_add(50, scroll_window_to_bottom,
-                                              CHAT_MESSAGES_SCROLLED_WINDOW_ID);
-                                    }
-
-                            if (get_widget_visible(CHAT_ACTIONS_BOX_ID)) {
-                                hide_widget(CHAT_ACTIONS_BOX_ID);
-                                show_widget(CHAT_BOX_ID);
-                            }*/
                         my->messages = chat->messages;
                         clear_list_box(CHAT_MESSAGES_LIST_ID);
                         Message *previous_message = NULL;
@@ -107,6 +82,7 @@ gboolean timer_callback() {
                                 previous_message = message;
                             }
                         }
+                        my = chat;
                     } else {
                         add_chat_sorted_to_all_list_store(chat);
                     }
