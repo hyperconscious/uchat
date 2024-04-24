@@ -18,5 +18,5 @@ void open_window(char *id) {
 
 void close_window(char *id) {
     GtkWindow *window = get_window(id);
-    gtk_widget_destroy(GTK_WIDGET(window));
+    gtk_widget_hide(GTK_WIDGET(window));
 }
