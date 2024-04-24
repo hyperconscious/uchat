@@ -30,9 +30,12 @@ int mx_recreate_tables(sqlite3 *db)
         id	INTEGER UNIQUE, \
         user_id	INTEGER, \
         chat_id	INTEGER, \
+        last_readed_message_id INTEGER DEFAULT -1, \
         PRIMARY KEY(id AUTOINCREMENT), \
         FOREIGN KEY(user_id) REFERENCES user_data(id), \
-        FOREIGN KEY(chat_id) REFERENCES chat(id)\
+        FOREIGN KEY(chat_id) REFERENCES chat(id),\
+        FOREIGN KEY(last_readed_message_id) REFERENCES message(id),\
+        UNIQUE(user_id, chat_id)\
     );", NULL, NULL, NULL), result);
 
     MX_TRY_FUNCTION(sqlite3_exec(db, "CREATE TABLE message (\
@@ -41,7 +44,6 @@ int mx_recreate_tables(sqlite3 *db)
         user_id	INTEGER,\
         chat_id	INTEGER,\
         text	TEXT, \
-        is_readed BOOLEAN DEFAULT 0, \
         PRIMARY KEY(id AUTOINCREMENT), \
         FOREIGN KEY(user_id) REFERENCES user_data(id),\
         FOREIGN KEY(chat_id) REFERENCES chat(id)\

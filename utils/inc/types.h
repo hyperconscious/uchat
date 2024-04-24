@@ -7,6 +7,7 @@ typedef struct chat_s{
     long owner_id;
     char *name;
     char *creation_time;
+    bool is_private;
 } t_db_chat;
 
 typedef struct {

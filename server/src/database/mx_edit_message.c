@@ -12,4 +12,5 @@ int mx_edit_message(sqlite3 *db, int message_id, char *new_text)
         return sqlite3_step(stmt);
     }
     return 0;
+    sqlite3_finalize(stmt);
 }
