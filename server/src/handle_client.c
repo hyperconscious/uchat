@@ -1,5 +1,4 @@
 #include "handle_client.h"
-#include "serializer.h"
 
 void *handle_client(void *arg) {
     t_client_info *client_info = (t_client_info *)arg;
@@ -22,6 +21,9 @@ void *handle_client(void *arg) {
     }
 
     switch(request.u_payload.uint8_data) {
+        case CONNECTION:
+            handle_connection(client_socket);
+            break;
         case AUTH_LOGIN:
             handle_login(client_socket, db);
             break;

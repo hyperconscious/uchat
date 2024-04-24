@@ -7,6 +7,6 @@ typedef enum e_client_status_code {
     LOGIN_DOESNT_EXIST,
     SUCCESS_REGISTRATION,
     SUCCESS_LOGIN,
-    SUCCSESS
+    SUCCESS
 }            t_client_status_code;
 

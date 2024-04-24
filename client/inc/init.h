@@ -1,6 +1,7 @@
 #pragma once
 
 #include "gui_util.h"
+#include "core.h"
 
 #define STYLES_FILE_PATH "client/src/gui/layout/style.css"
 #define GLADE_FILE_PATH "client/src/gui/layout/layout.glade"

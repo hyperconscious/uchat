@@ -5,6 +5,8 @@
 #include "client_status_code.h"
 #include "database.h"
 
+void handle_connection(int client_socket);
+
 void handle_login(int client_socket, sqlite3 *db);
 void handle_sign_up(int client_socket, sqlite3 *db);
 
