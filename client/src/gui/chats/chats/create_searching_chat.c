@@ -5,7 +5,7 @@ void create_searching_chat(t_db_chat *s_chat) {
     for (int i = 0; i < size; i++) {
         Chat *chat = get_list_store_item_by_index(all_chats_list_store, i);
         if (chat && ((strcmp(s_chat->name, chat->name) == 0)
-                     || strcmp(s_chat->name, user_username) == 0)) {
+                     || strcmp(s_chat->name, Client->name) == 0)) {
             return;
         }
     }

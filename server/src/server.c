@@ -6,10 +6,19 @@ int main(int argc, char* argv[]) {
       return 1;
 	}
 
-   /* sqlite3 *db;
+    sqlite3 *db;
     sqlite3_open(DATABASE, &db);
     mx_recreate_tables(db);
-    sqlite3_close(db);*/
+    sqlite3_stmt *stmt;
+    mx_init_add_user(db, &stmt);
+    mx_add_user(stmt, "kir", "qweewq1", 0);
+    mx_add_user(stmt, "val", "qweewq1", 0);
+    mx_add_user(stmt, "nastya", "qweewq1", 0);
+    mx_add_user(stmt, "dan", "qweewq1", 0);
+    mx_add_user(stmt, "kirka", "qweewq1", 0);
+
+    sqlite3_finalize(stmt);
+    sqlite3_close(db);
 
     // db processing...
    // mx_test_db_all();
@@ -24,7 +33,7 @@ int main(int argc, char* argv[]) {
         client_info->client_socket = client_socket;
         
         pthread_t thread = create_thread(handle_client, (void *)client_info);
-        detach_thread(thread);
+        join_thread(thread, NULL);
     }
     
     close(server_socket);

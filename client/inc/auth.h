@@ -3,6 +3,9 @@
 #include "gui_util.h"
 #include "requests.h"
 #include "core.h"
+#include "types.h"
+#include "serializer.h"
+#include "string.h"
 
 #define LOG_IN_USERNAME_ENTRY_ID "log_in_username_entry"
 #define LOG_IN_PASSWORD_ENTRY_ID "log_in_password_entry"
@@ -21,8 +24,7 @@
 
 extern int Port;
 extern char *serverAddress;
-extern uint32_t user_id;
-extern char* user_username;
+extern Person *Client;
 
 
 

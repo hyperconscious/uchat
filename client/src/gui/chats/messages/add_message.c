@@ -2,8 +2,6 @@
 
 void add_message(Chat *chat,
                  Message *message) {
-    message->id = rq_add_message(user_id, chat->id, message->text,
-                                 serverAddress, Port);
     if (chat->messages == NULL) {
         t_list *messages = mx_create_node(message);
         chat->messages = messages;
@@ -33,15 +31,16 @@ void add_message_to_selected_chat(void) {
                 true,
                 get_current_time_millis()
         );
-
         Chat *chat = get_selected_chat();
-        if (chat->searching && chat->messages == NULL) {
-            uint32_t other_user_id = chat->id;
-            chat->id = rq_create_chat(chat->name, user_id,
-                                      serverAddress, Port);
-            rq_add_user_to_chat(user_id, chat->id, serverAddress, Port);
-            rq_add_user_to_chat(other_user_id, chat->id, serverAddress, Port);
+        uint32_t other_user_id = chat->id;
+        if (chat->searching) {
             chat->searching = false;
+            if(chat->messages == NULL) {
+                chat->id = rq_create_chat(chat->name, Client->id, true,
+                                          serverAddress, Port);
+                rq_add_user_to_chat(Client->id, chat->id, serverAddress, Port);
+                rq_add_user_to_chat(other_user_id, chat->id, serverAddress, Port);
+            }
             delete_searched_chats();
             show_chats_i_am_in();
             GtkEntry *search_entry = GTK_ENTRY(
@@ -49,13 +48,22 @@ void add_message_to_selected_chat(void) {
             gtk_entry_set_text(search_entry, "");
         }
 
+        message->id = rq_add_message(Client->id, chat->id, message->text,
+                                     serverAddress, Port);
+        add_message(chat, message);
+     /*   printf("%u\n", other_user_id);
+        printf("%s (%u) sended to %s (%u): %s (%u) (chat_id %u, name %s)\n", 
+                Client->name, Client->id,
+                rq_get_login_by_id(other_user_id, serverAddress, Port), other_user_id,
+                message->text, message->id,
+                chat->id, chat->name);*/
         Message *previous_message = (Message *)mx_get_last_element(
                 chat->messages);
 
-        add_message(chat, message);
         add_messages_list_box_row(message, previous_message);
         g_timeout_add(50, scroll_window_to_bottom,
                       CHAT_MESSAGES_SCROLLED_WINDOW_ID);
         set_entry_text(CHAT_MESSAGE_ENTRY_ID, "");
+       // printf("%s\n",((Message *)chat->messages)->text);
     }
 }

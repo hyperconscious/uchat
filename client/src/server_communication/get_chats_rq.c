@@ -36,7 +36,7 @@ t_db_chat* rq_get_chats(uint32_t owner_id, uint16_t *count, char* server_address
         (chats_array + i)->id = id.u_payload.uint32_data;
         (chats_array + i)->owner_id = owner_id.u_payload.uint32_data;
         (chats_array + i)->name = strdup(name.u_payload.s_string.data);
-        (chats_array + i)->creation_time = strdup(name.u_payload.s_string.data);
+        (chats_array + i)->creation_time = strdup(time.u_payload.s_string.data);
         free_packet(&name);
         free_packet(&time);
     }

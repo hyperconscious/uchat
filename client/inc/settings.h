@@ -1,8 +1,11 @@
 #pragma once
 
+#define _GNU_SOURCE
 #include "gui_util.h"
+#include <stdio.h>
 #include "core.h"
 #include "requests.h"
+#include "string_utils.h"
 
 #define CHANGE_AVATAR_BOX_ID "change_avatar_box"
 #define AVATAR_FILE_CHOOSER_BUTTON "avatar_file_chooser_button"
@@ -16,8 +19,7 @@
 
 extern int Port;
 extern char *serverAddress;
-extern uint32_t user_id;
-extern char* user_username;
+extern Person *Client;
 
 void show_change_username_error(char *error);
 

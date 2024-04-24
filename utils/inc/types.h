@@ -10,7 +10,7 @@ typedef struct chat_s{
 } t_db_chat;
 
 typedef struct {
-    long id;
+    uint32_t id;
     char *name;
     char *image_url;
 } Person;

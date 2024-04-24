@@ -5,7 +5,7 @@ void on_discover_screen_show(void) {
     const int row_count = 4;
 
     uint16_t count = 0;
-    Person *founded_chats = rq_discover(user_id,
+    Person *founded_chats = rq_discover(Client->id,
                             &count, serverAddress, Port);
    
  
@@ -16,7 +16,7 @@ void on_discover_screen_show(void) {
     int j = 0;
       int counter = 0;
     for (int i = 0; i < row_count && counter < count; i++) {
-      if (founded_chats[counter].id == user_id)
+      if (founded_chats[counter].id == Client->id)
       {
         counter++;
         

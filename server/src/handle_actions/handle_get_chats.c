@@ -1,11 +1,9 @@
 #include "handle_requests.h"
 
-void handle_get_chats(int client_socket){
+void handle_get_chats(int client_socket, sqlite3 *db){
     t_packet owner_id_packet;
     if(!receive_packet(client_socket, &owner_id_packet)) return;
    
-    sqlite3 *db;
-    sqlite3_open(DATABASE, &db);
     sqlite3_stmt *stmt;
     mx_init_get_chats_by_user_id(db, &stmt);
     uint16_t count = 0;
@@ -13,7 +11,6 @@ void handle_get_chats(int client_socket){
     mx_get_chats_by_user_id(stmt, owner_id_packet.u_payload.uint32_data,
                             -1, &chats, &count);
     sqlite3_finalize(stmt);
-    sqlite3_close(db);
     t_packet count_of_chats = create_packet(PACKET_TYPE_UINT32, &count);
     send_and_release_packet(client_socket, &count_of_chats);
     if (chats) {

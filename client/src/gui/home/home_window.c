@@ -42,6 +42,25 @@ void on_settings_button_clicked(void) {
 }
 
 void on_log_out_button_clicked(void) {
+    //memory freeing
+  /*   int size = g_list_model_get_n_items(G_LIST_MODEL(all_chats_list_store));
+
+    for (int i = 0; i < size; i++) {
+        Chat *chat = get_list_store_item_by_index(all_chats_list_store, i);
+        if (chat && chat->name){
+            remove_chat(chat, all_chats_list_store);
+            free(chat->name);
+        }
+    }
+    for (int i = 0; i < size; i++) {
+        Chat *chat = get_list_store_item_by_index(visible_chats_list_store, i);
+        if (chat && chat->name){
+            remove_chat(chat, all_chats_list_store);
+        }
+    }*/
+    close_window(HOME_WINDOW_ID);
+    open_window(AUTH_WINDOW_ID);
+   // close_window(AUTH_WINDOW_ID);
 }
 
 void on_search_message_entry_changed(void) {
@@ -62,11 +81,6 @@ void on_search_message_entry_changed(void) {
 
     filter_chats();
 
-    for (uint16_t i = 0; i < count; i++) {
-        //  free((char *)(founded_chats + i)->name);
-        //  free((char *)(founded_chats + i)->creation_time);
-        //  free(founded_chats + i);
-    }
     free(founded_chats);
 }
 

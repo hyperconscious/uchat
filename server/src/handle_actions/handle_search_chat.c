@@ -1,6 +1,6 @@
 #include "handle_requests.h"
 
-void handle_search_chat(int client_socket){
+void handle_search_chat(int client_socket, sqlite3 *db){
 
     t_packet name;
     if(!receive_packet(client_socket, &name)) return;
@@ -14,10 +14,8 @@ void handle_search_chat(int client_socket){
     uint16_t count = 0;
     uint16_t sz = 0;
     t_db_chat* chats = NULL;
-    sqlite3 *db;
     sqlite3_stmt *stmt;
     sqlite3_stmt *stmt_u_id;
-    sqlite3_open(DATABASE, &db);
     mx_init_get_chats_by_name(db, &stmt);
     mx_init_find_id_by_user(db, &stmt_u_id);
 
@@ -47,7 +45,6 @@ void handle_search_chat(int client_socket){
         send_and_release_packet(client_socket, &chat_name);
     }
     sqlite3_finalize(stmt_u_id);
-    sqlite3_close(db);
     free(chats);
     free(users);
     free_packet(&name);

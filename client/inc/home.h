@@ -36,8 +36,7 @@
 
 extern int Port;
 extern char *serverAddress;
-extern uint32_t user_id;
-extern char *user_username;
+extern Person *Client;
 extern GListStore *all_chats_list_store;
 extern GListStore *visible_chats_list_store;
 

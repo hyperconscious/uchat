@@ -1,7 +1,4 @@
 #include "auth.h"
-#include "types.h"
-#include "serializer.h"
-#include "string.h"
 
 uint16_t language_id = 0;
 
@@ -21,10 +18,10 @@ void on_log_in_button_clicked(void) {
     char *result = rq_process_user_authentication(serverAddress, Port,
                                                   username,
                                                   password, AUTH_LOGIN,
-                                                  &user_id, language_id);
+                                                  &Client->id, language_id);
     if (strcmp(result, SUCCESSFUL) == 0) {
-        user_username = malloc(strlen(username) + 1);
-        strcpy(user_username, username);
+        Client->name = malloc(strlen(username) + 1);
+        strcpy(Client->name, username);
         free(result);
         open_window(HOME_WINDOW_ID);
         close_window(AUTH_WINDOW_ID);
@@ -45,10 +42,10 @@ void on_sign_up_button_clicked(void) {
     char *result = rq_process_user_authentication(serverAddress, Port,
                                                   username,
                                                   password, AUTH_SIGN_UP,
-                                                  &user_id, language_id);
+                                                  &Client->id, language_id);
     if (strcmp(result, SUCCESSFUL) == 0) {
-        user_username = malloc(strlen(username) + 1);
-        strcpy(user_username, username);
+        Client->name = malloc(strlen(username) + 1);
+        strcpy(Client->name, username);
         free(result);
         open_window(HOME_WINDOW_ID);
         close_window(AUTH_WINDOW_ID);

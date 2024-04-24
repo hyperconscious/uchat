@@ -1,5 +1,4 @@
 #include "settings.h"
-#include "string_utils.h"
 
 void set_current_username(char *username) {
     GtkLabel *current_username_label =

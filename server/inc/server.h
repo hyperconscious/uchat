@@ -7,5 +7,5 @@
 //#include <sys/sysinfo.h>
 #include "database.h"
 
-#define MAX_CLIENTS 128// (get_nprocs_conf() * 128)
+#define MAX_CLIENTS 30// (get_nprocs_conf() * 128)
 
