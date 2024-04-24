@@ -38,6 +38,6 @@ GtkWidget *create_avatar_widget(
         bool is_image_local,
         gboolean (*callback_function)(GtkWidget *, cairo_t *, gpointer *));
 
-gboolean timer_callback();
+gboolean timer_callback(void *data);
 void show_internet_connection_status(t_connection_code available);
 

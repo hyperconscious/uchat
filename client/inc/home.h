@@ -33,6 +33,10 @@
 #define CHATS_CATEGORY_NOTEBOOK_ID "chats_category_notebook"
 #define CREATE_GROUP_CHAT_BUTTON_ID "create_group_chat_button"
 #define CHAT_MEMBERS_LIST_ID "chat_members_list"
+#define ADD_GROUP_CHAT_MEMBERS_DIALOG_LABEL_ID "add_group_chat_members_dialog_label"
+#define ADD_GROUP_CHAT_MEMBERS_DIALOG_SEARCH_ENTRY_ID "add_group_chat_members_dialog_search_entry"
+#define ADD_GROUP_CHAT_MEMBERS_DIALOG_ID "add_group_chat_members_dialog"
+#define ADD_GROUP_CHAT_MEMBERS_DIALOG_SCROLLED_WINDOW "add_group_chat_members_dialog_scrolled_window"
 #define SETTINGS_BOX_ID "settings_box"
 #define DISCOVER_BOX_ID "discover_box"
 

@@ -13,7 +13,7 @@ void on_settings_screen_show(void) {
 void on_avatar_file_chooser_button_file_set(void) {
     char *file_name = get_file_chooser_button_set_file_name(
             AVATAR_FILE_CHOOSER_BUTTON);
-    set_chosen_avatar(' ', file_name, false);
+    set_chosen_avatar(Client->name[0], file_name, false);
 }
 
 void on_change_username_button_clicked(void) {
