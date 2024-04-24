@@ -58,8 +58,8 @@ void on_log_out_button_clicked(void) {
             remove_chat(chat, all_chats_list_store);
         }
     }*/
-    close_window(HOME_WINDOW_ID);
     open_window(AUTH_WINDOW_ID);
+    close_window(HOME_WINDOW_ID);
    // close_window(AUTH_WINDOW_ID);
 }
 

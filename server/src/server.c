@@ -6,8 +6,8 @@ int main(int argc, char* argv[]) {
       return 1;
 	}
 
-    sqlite3 *db;
-  /*  sqlite3_open(DATABASE, &db);
+  /*  sqlite3 *db;
+    sqlite3_open(DATABASE, &db);
     mx_recreate_tables(db);
     sqlite3_stmt *stmt;
     mx_init_add_user(db, &stmt);
