@@ -52,9 +52,9 @@ void add_message_to_selected_chat(void) {
                                      serverAddress, Port);
         Message *previous_message = (Message *)mx_get_last_element(
                 chat->messages);
-        add_message(chat, message);
 
         add_messages_list_box_row(message, previous_message);
+        add_message(chat, message);
         g_timeout_add(50, scroll_window_to_bottom,
                       CHAT_MESSAGES_SCROLLED_WINDOW_ID);
         set_entry_text(CHAT_MESSAGE_ENTRY_ID, "");

@@ -39,6 +39,11 @@ void clear_lists() {
     g_list_store_remove_all(visible_chats_list_store);
 }
 
+void foo(GObject *object) {
+    Chat *chat = (Chat *)object;
+    add_chat_sorted_to_visible_list_store(chat);
+}
+
 gboolean timer_callback() {
     if(Client->name != NULL){
         int socket = create_and_connect_socket(serverAddress, Port);
@@ -66,6 +71,31 @@ gboolean timer_callback() {
                                 chat, check_chat_id, &index)){
                         Chat *my = get_list_store_item_by_index(all_chats_list_store,
                                                      index);
+                       /*     guint previous_selected_chat_index;
+                            bool is_chat_selected =
+                                    get_selected_chat_index(&previous_selected_chat_index);
+
+                            set_chat_list_box_row_selected_style(selected_row);
+
+                            if (!is_chat_selected || !selected_chat->selected) {
+                                if (is_chat_selected)
+                                    unselect_previous_selected_chat(previous_selected_chat_index);
+
+                                remove_previous_chat_avatar_if_set();
+                                selected_chat->selected = true;
+                                set_chat_name(selected_chat->name);
+                                set_chat_image(selected_chat->image_path, selected_chat->name[0]);
+                                set_chat_messages(selected_chat->messages);
+                                set_messages_read(selected_row, selected_chat);
+                                show_chat_box();
+                                g_timeout_add(50, scroll_window_to_bottom,
+                                              CHAT_MESSAGES_SCROLLED_WINDOW_ID);
+                                    }
+
+                            if (get_widget_visible(CHAT_ACTIONS_BOX_ID)) {
+                                hide_widget(CHAT_ACTIONS_BOX_ID);
+                                show_widget(CHAT_BOX_ID);
+                            }*/
                         my->messages = chat->messages;
                         clear_list_box(CHAT_MESSAGES_LIST_ID);
                         Message *previous_message = NULL;
@@ -77,11 +107,17 @@ gboolean timer_callback() {
                                 previous_message = message;
                             }
                         }
-                    } else if (strlen(get_entry_text(SEARCH_CHAT_ENTRY_ID)) == 0) {
-                        add_chat_sorted(chat);
-                    } else
+                    } else {
                         add_chat_sorted_to_all_list_store(chat);
+                    }
                 }
+                g_list_store_remove_all(visible_chats_list_store);
+                list_store_for_each(all_chats_list_store, foo);
+                guint select = 0;
+                get_selected_chat_index(&select);
+                if(select)
+                    select_chat(gtk_list_box_get_row_at_index(get_list_box(CHAT_LIST_BOX_ID),
+                                select));
             }
         } else {
             show_internet_connection_status(UNAVAIBLE);

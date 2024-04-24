@@ -9,7 +9,7 @@ int main(int argc, char* argv[]) {
     sqlite3 *db;
     sqlite3_stmt *stmt;
     sqlite3_open(DATABASE, &db);
-  //  mx_recreate_tables(db);
+    mx_recreate_tables(db);
     mx_init_add_user(db, &stmt);
     mx_add_user(stmt, "kir", "qweewq1", 0);
     mx_add_user(stmt, "val", "qweewq1", 0);

@@ -32,7 +32,7 @@ void handle_login(int client_socket, sqlite3 *db) {
         t_packet packet_code = create_packet(PACKET_TYPE_UINT8, &result_code);
         send_and_release_packet(client_socket, &packet_code);
     }
-    else if (res == 100) {
+    else if (res == 1) {
         t_packet packet_code = create_packet(PACKET_TYPE_UINT8, &result_code);
         t_packet packet_id = create_packet(PACKET_TYPE_UINT32, &id);
         send_and_release_packet(client_socket, &packet_code);
