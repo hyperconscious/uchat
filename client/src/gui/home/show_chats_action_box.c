@@ -33,7 +33,7 @@ static GtkWidget *create_chat_member_widget(char *name,
 
     gtk_button_set_image(
             GTK_BUTTON(remove_member_button),
-            GTK_WIDGET(image_new("client/src/gui/layout/img/ic_remove.svg", -1,
+            GTK_WIDGET(image_new("client/src/gui/layout/img/ic_cross.svg", -1,
                                  -1))
     );
 

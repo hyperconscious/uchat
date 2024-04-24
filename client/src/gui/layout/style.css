@@ -345,6 +345,15 @@ notebook header tabs tab:hover {
     margin-top: 12px;
 }
 
+/*add chat members*/
+#add_group_chat_members_dialog {
+    background-color: #414255;
+}
+
+#add_group_chat_members_dialog *:not(entry) {
+    background-color: #414255;
+}
+
 /*settings*/
 #settings_box {
     background-color: #353644;
