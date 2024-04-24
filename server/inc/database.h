@@ -82,7 +82,7 @@ int mx_sub_user(sqlite3_stmt *stmt, long id);
 
 int mx_check_password(sqlite3_stmt *stmt, char *login, char *password);
 
-int mx_edit_user(sqlite3 *db, int user_id, char *new_name, char *new_password, int new_lang);
+int mx_edit_user(sqlite3 *db, int user_id, char *new_name, char *old_password, char *new_password, int new_lang);
 
 //message
 int mx_add_message(sqlite3_stmt *stmt, char *text, int user_id, int chat_id);
