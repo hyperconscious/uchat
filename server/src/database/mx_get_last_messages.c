@@ -47,7 +47,6 @@ int mx_get_last_messages(sqlite3 *db, int chat_id, char *search_text, int max_ro
         (*messages)[i].time = strdup((const char*)sqlite3_column_text(stmt, 3));
         (*messages)[i].id = sqlite3_column_int64(stmt, 0);
         (*messages)[i].user_id = sqlite3_column_int64(stmt, 2);
-        (*messages)[i].is_readed = sqlite3_column_int(stmt, 4);
         (*messages)[i].chat_id = sqlite3_column_int64(stmt, 5);
     }
 

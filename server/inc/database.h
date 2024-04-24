@@ -43,7 +43,6 @@ typedef struct
     uint32_t id;
     char *text;
     uint32_t user_id;
-    bool is_readed;
     char *time;
     int32_t chat_id;
 } t_db_message;
@@ -64,7 +63,7 @@ int mx_init_sub_message(sqlite3 *db, sqlite3_stmt **statement);
 
 int mx_init_add_chat(sqlite3 *db, sqlite3_stmt **statement);
 
-int mx_init_sub_chat(sqlite3 *db, sqlite3_stmt **statement);
+//int mx_init_sub_chat(sqlite3 *db, sqlite3_stmt **statement);
 
 int mx_init_get_chats_by_user_id(sqlite3 *db, sqlite3_stmt **statement);
 
@@ -102,9 +101,11 @@ int mx_remove_message(sqlite3 *db, int message_id);
 
 int mx_edit_message(sqlite3 *db, int message_id, char *new_text);
 
-int mx_sub_chat(sqlite3_stmt *stmt, int id);
+int mx_sub_chat(sqlite3 *db, int id);
 
 int mx_set_read_to_all_unread_messages(sqlite3* db, int user_id, int chat_id);
+
+t_db_message *mx_get_message_by_id(sqlite3 *db, int message_id);
 
 //chat_partipicant
 int mx_add_user_to_chat(sqlite3_stmt *stmt, int user_id, int chat_id);
@@ -124,7 +125,7 @@ char **mx_get_users_by_language(sqlite3 *db, int language, uint16_t *count);
 char **mx_get_chat_names(sqlite3 *db, int owner_id, uint16_t *count);
 
 //chat
-int mx_add_chat(sqlite3_stmt *stmt, char *name, int owner_id);
+int mx_add_chat(sqlite3_stmt *stmt, char *name, int owner_id, bool is_private);
 
 int mx_get_chats_by_user_id(sqlite3_stmt *stmt, int user_id, int max_rows, t_db_chat **chats, uint16_t *result_count);
 

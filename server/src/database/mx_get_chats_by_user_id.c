@@ -29,6 +29,7 @@ int mx_get_chats_by_user_id(sqlite3_stmt *stmt, int user_id, int max_rows,
         (*chats)[i].name = strdup((const char *)sqlite3_column_text(stmt, 1));
         (*chats)[i].owner_id = sqlite3_column_int64(stmt, 2);
         (*chats)[i].creation_time = strdup((const char *)sqlite3_column_text(stmt, 3));
+        (*chats)[i].is_private = sqlite3_column_int64(stmt, 4);
     }
     return 0;
 }
