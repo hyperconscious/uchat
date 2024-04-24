@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/edderos/uchat1/server/src",
-      "program": "/home/edderos/uchat1/server/src/build/Debug/outDebug",
+      "cwd": "/home/edderos/uchat1/server/src/handle_actions",
+      "program": "/home/edderos/uchat1/server/src/handle_actions/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
