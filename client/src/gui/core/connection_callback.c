@@ -2,12 +2,42 @@
 #include "home.h"
 
 
-/*static gboolean check_chat_id(gconstpointer a,
+static gboolean check_chat_id(gconstpointer a,
                                        gconstpointer b) {
     Chat *chat1 = (Chat *)a;
     Chat *chat2 = (Chat *)b;
     return chat1->id == chat2->id;
-}*/
+}
+
+void free_data(GObject *object) {
+    Chat *chat = (Chat *)object;
+    if(chat && !chat->searching){
+        if(chat->image_path){
+            free(chat->image_path);
+        }
+        if(chat->name){
+            free(chat->name);
+        }
+        if(chat->messages){
+            t_list *curr = chat->messages;
+            while (curr != NULL) {
+                Message * msg = curr->data;
+                if(msg->text)
+                    free(msg->text);
+                curr = curr->next;
+              //  free(msg);
+            }
+        }
+    }
+    
+}
+
+void clear_lists() {
+    list_store_for_each(all_chats_list_store, free_data);
+    list_store_for_each(visible_chats_list_store, free_data);
+    g_list_store_remove_all(visible_chats_list_store);
+    g_list_store_remove_all(visible_chats_list_store);
+}
 
 gboolean timer_callback() {
     if(Client->name != NULL){
@@ -26,7 +56,7 @@ gboolean timer_callback() {
                 join_thread(thread, NULL);*/
             } else {
                 show_internet_connection_status(AVAIBLE);
-           /    t_list *new_chats = get_chats();
+                t_list *new_chats = get_chats();
                 uint32_t chats_count = mx_list_size(new_chats);
                 for (uint32_t i = 0; i < chats_count; i++) {
                     guint index = 0;
@@ -36,21 +66,9 @@ gboolean timer_callback() {
                                 chat, check_chat_id, &index)){
                         Chat *my = get_list_store_item_by_index(all_chats_list_store,
                                                      index);
-                        remove_chat(my, all_chats_list_store);
-                    }
-                    if(g_list_store_find_with_equal_func(visible_chats_list_store,
-                                chat, check_chat_id, &index)){
-                        Chat *my = get_list_store_item_by_index(visible_chats_list_store,
-                                                     index);
-                        remove_chat(my, visible_chats_list_store);
-                    }
-                    add_chat_sorted(chat);
-                }
-                     /*   my->messages = chat->messages;
+                        my->messages = chat->messages;
                         clear_list_box(CHAT_MESSAGES_LIST_ID);
                         Message *previous_message = NULL;
-                        if (my->messages == NULL)
-                            continue;
                         int messages_count = mx_list_size(my->messages);
                         for (int i = 0; i < messages_count; i++) {
                             Message *message = mx_get_element_by_index(my->messages, i);
@@ -62,7 +80,8 @@ gboolean timer_callback() {
                     } else if (strlen(get_entry_text(SEARCH_CHAT_ENTRY_ID)) == 0) {
                         add_chat_sorted(chat);
                     } else
-                        add_chat_sorted_to_all_list_store(chat);*/
+                        add_chat_sorted_to_all_list_store(chat);
+                }
             }
         } else {
             show_internet_connection_status(UNAVAIBLE);

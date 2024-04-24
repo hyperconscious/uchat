@@ -11,7 +11,7 @@ void show_chats(t_list *chats) {
     }
 
     gtk_list_box_bind_model(
-            get_list_box(PERSONAL_CHAT_LIST_BOX_ID),
+            get_list_box(CHAT_LIST_BOX_ID),
             G_LIST_MODEL(visible_chats_list_store),
             create_chat_list_box_widget,
             NULL,
